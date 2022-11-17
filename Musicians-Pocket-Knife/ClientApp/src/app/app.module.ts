@@ -7,8 +7,6 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { Secret } from 'src/secret';
 import { HomepageComponent } from './homepage/homepage.component';
@@ -18,8 +16,6 @@ import { HomepageComponent } from './homepage/homepage.component';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     HomepageComponent
   ],
   imports: [
@@ -29,8 +25,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     SocialLoginModule,
     RouterModule.forRoot([
       { path: '', component: HomepageComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent }
+      //{ path: 'counter', component: CounterComponent },
+      //{ path: 'fetch-data', component: FetchDataComponent }
     ])
   ],
   providers: [

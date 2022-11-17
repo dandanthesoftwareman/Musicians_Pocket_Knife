@@ -32,6 +32,4 @@ export class NavMenuComponent {
   signOut(): void {
     this.authService.signOut();
   }
-  
-
 }
