@@ -1,0 +1,13 @@
+<h3>Song Lookup Page</h3>
+<div>
+  <form #searchSongForm="ngForm" (ngSubmit)="searchForSong(searchSongForm)">
+    <input
+      id="searchSongFormText"
+      type="text"
+      name="searchedSong"
+      placeholder="Look for a song"
+      ngModel
+    />
+    <input id="whateverIWant" type="submit" />
+  </form>
+</div>

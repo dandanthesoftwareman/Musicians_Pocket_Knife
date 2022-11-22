@@ -10,13 +10,15 @@ import { HomeComponent } from './home/home.component';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { Secret } from 'src/secret';
 import { HomepageComponent } from './homepage/homepage.component';
+import { FindsongComponent } from './findsong/findsong.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    HomepageComponent
+    HomepageComponent,
+    FindsongComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,6 +27,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     SocialLoginModule,
     RouterModule.forRoot([
       { path: '', component: HomepageComponent, pathMatch: 'full' },
+      {path: 'findsong', component: FindsongComponent}
       //{ path: 'counter', component: CounterComponent },
       //{ path: 'fetch-data', component: FetchDataComponent }
     ])

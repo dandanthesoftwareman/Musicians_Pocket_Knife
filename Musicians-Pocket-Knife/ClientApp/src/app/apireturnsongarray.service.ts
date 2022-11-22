@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Secret } from 'src/secret';
 
 @Injectable({
