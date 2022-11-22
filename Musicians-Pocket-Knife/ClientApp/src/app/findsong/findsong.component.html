@@ -8,6 +8,12 @@
       placeholder="Look for a song"
       ngModel
     />
-    <input id="whateverIWant" type="submit" />
+    <input id="searchSongButton" type="submit" />
   </form>
+</div>
+<div *ngFor="let s of songArray.search">
+  <div>
+    <p>{{ s.title }}</p>
+    <p>{{ s.artist.name }}</p>
+  </div>
 </div>

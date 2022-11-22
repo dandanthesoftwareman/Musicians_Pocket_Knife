@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApireturnsongarrayService } from '../apireturnsongarray.service';
 import { NgForm } from '@angular/forms';
+import { SongArray } from '../song-array';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { NgForm } from '@angular/forms';
 })
 export class FindsongComponent implements OnInit {
 
+  songArray:SongArray = {} as SongArray;
   constructor(private apisongservice: ApireturnsongarrayService) { }
 
   ngOnInit(): void {
@@ -21,6 +23,7 @@ export class FindsongComponent implements OnInit {
     let song = form.form.value.searchedSong.trim().replaceAll(' ', '+');
     this.apisongservice.getSongArray(song).subscribe((response:any) => {
       console.log(response);
+      this.songArray = response;
     });
   }
 }
