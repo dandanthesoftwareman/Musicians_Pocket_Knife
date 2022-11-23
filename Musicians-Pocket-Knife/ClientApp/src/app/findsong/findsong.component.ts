@@ -16,11 +16,10 @@ export class FindsongComponent implements OnInit {
 
   song:Song = {} as Song;
   songArray:SongArray = {} as SongArray;
-  displaySongInfo:boolean = false;
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
-  
+
   constructor(private apisongservice: ApireturnsongarrayService, private authService:SocialAuthService) { }
 
   ngOnInit(): void {
@@ -37,17 +36,25 @@ export class FindsongComponent implements OnInit {
     return this.apisongservice.getSongArray(song).subscribe((response:any) => {
       console.log(response);
       this.songArray = response;
+      this.songArray.search.forEach((s:any) => {
+        s.display = null;
+      })
     });
   }
 
   getSongInfo(songID:string):Song{
     return this.apisongservice.getSongInfo(songID).subscribe((response:any) => {
-      console.log(response);
       this.song = response;
     });
   }
 
-  toggleSongInfo():void{
-    this.displaySongInfo = !this.displaySongInfo;
+  toggleSongInfo(display:boolean):void{
+    if(display == null){
+      display = true;
+    }
+    else{
+      display = !display;
+      console.log(display);
+    }
   }
 }

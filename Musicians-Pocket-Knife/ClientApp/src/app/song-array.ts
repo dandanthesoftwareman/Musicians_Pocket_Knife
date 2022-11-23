@@ -7,6 +7,7 @@ export interface Search {
     title:  string;
     uri:    string;
     artist: Artist;
+    display:boolean;
 }
 
 export interface Artist {

@@ -11,7 +11,6 @@ export interface SongClass {
     time_sig: string;
     key_of:   string;
     open_key: null;
-    display?:boolean;
 }
 
 export interface Artist {
