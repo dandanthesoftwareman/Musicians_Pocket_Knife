@@ -18,12 +18,18 @@ export class FindsongComponent implements OnInit {
 
   }
   
-  //uses name=searched song of searchSongForm, trims and formats string for API call
+  //uses name=searched song of searchSongForm, trims and formats it to string for API call
   searchForSong(form:NgForm):any{
     let song = form.form.value.searchedSong.trim().replaceAll(' ', '+');
     this.apisongservice.getSongArray(song).subscribe((response:any) => {
       console.log(response);
       this.songArray = response;
     });
+  }
+
+  getSongInfo(songID:string):any{
+    this.apisongservice.getSongInfo(songID).subscribe((response:any) => {
+      console.log(response);
+    })
   }
 }
