@@ -22,7 +22,7 @@ export class NavMenuComponent {
       this.loggedIn = (user != null);
       if(this.loggedIn == true){
         this.userService.CreateNewUser(this.user.id).subscribe((response:any) => {
-          console.log(response);
+          // do nothing
         })
       }
     });
