@@ -1,22 +1,24 @@
-<h3>Song Lookup Page</h3>
-<div>
-  <form #searchSongForm="ngForm" (ngSubmit)="searchForSong(searchSongForm)">
-    <input
-      id="searchSongFormText"
-      type="text"
-      name="searchedSong"
-      placeholder="Look for a song"
-      ngModel
-    />
-    <input id="searchSongButton" type="submit" />
-  </form>
-</div>
-<div *ngFor="let s of songArray.search">
+<div *ngIf="loggedIn">
+  <h3>Song Lookup Page</h3>
   <div>
-    <p>{{ s.title }}</p>
-    <p>{{ s.artist.name }}</p>
+    <form #searchSongForm="ngForm" (ngSubmit)="searchForSong(searchSongForm)">
+      <input
+        id="searchSongFormText"
+        type="text"
+        name="searchedSong"
+        placeholder="Look for a song"
+        ngModel
+      />
+      <input id="searchSongButton" type="submit" />
+    </form>
   </div>
-  <button (click)="toggleSongInfo()" (click)="getSongInfo(s.id)">
-    Get Info
-  </button>
+  <div *ngFor="let s of songArray.search">
+    <div>
+      <p>{{ s.title }}</p>
+      <p>{{ s.artist.name }}</p>
+    </div>
+    <button (click)="toggleSongInfo()" (click)="getSongInfo(s.id)">
+      Get Info
+    </button>
+  </div>
 </div>
