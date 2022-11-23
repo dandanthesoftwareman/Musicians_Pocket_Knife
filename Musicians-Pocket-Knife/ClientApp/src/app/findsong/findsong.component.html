@@ -16,4 +16,7 @@
     <p>{{ s.title }}</p>
     <p>{{ s.artist.name }}</p>
   </div>
+  <button (click)="toggleSongInfo()" (click)="getSongInfo(s.id)">
+    Get Info
+  </button>
 </div>

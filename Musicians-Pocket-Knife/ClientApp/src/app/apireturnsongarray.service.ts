@@ -14,11 +14,11 @@ export class ApireturnsongarrayService {
   constructor(private http:HttpClient, @Inject("BASE_URL") private baseUrl:string) { }
 
   getSongArray(song:string):any{
-    return this.http.get(`${this.apiUrl}${this.search}?api_key=${Secret.apiKey}&type=song&lookup=${song}&limit=5`);
+    return this.http.get(`${this.apiUrl}${this.search}?api_key=${Secret.apiKey}&type=song&lookup=${song}`);
   }
 
   getSongInfo(songID:string):any{
-    return this.http.get(`${this.apiUrl}${this.song}?api_key=${Secret.apiKey}&song=${songID}`)
+    return this.http.get(`${this.apiUrl}${this.song}?api_key=${Secret.apiKey}&id=${songID}`)
   }
 
 }
