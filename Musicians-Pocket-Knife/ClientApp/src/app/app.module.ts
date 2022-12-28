@@ -29,9 +29,8 @@ import { SongDetailsComponent } from './song-details/song-details.component';
     SocialLoginModule,
     RouterModule.forRoot([
       { path: '', component: HomepageComponent, pathMatch: 'full' },
-      {path: 'findsong', component: FindsongComponent}
-      //{ path: 'counter', component: CounterComponent },
-      //{ path: 'fetch-data', component: FetchDataComponent }
+      { path: 'Findsong', component: FindsongComponent},
+      { path: 'Details/:id', component: SongDetailsComponent}
     ])
   ],
   providers: [

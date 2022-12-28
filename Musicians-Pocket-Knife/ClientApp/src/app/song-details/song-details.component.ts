@@ -1,6 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Song } from '../song';
 import { SongDetailService } from '../song-detail.service';
 import { UserService } from '../user.service';
 
@@ -15,6 +16,8 @@ export class SongDetailsComponent implements OnInit {
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
+  song:Song = {} as Song;
+  songId: string = "";
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -22,6 +25,12 @@ export class SongDetailsComponent implements OnInit {
       UserService.user.id = user.id;
       this.loggedIn = (user != null);
   })
+  let params = this.route.snapshot.paramMap;
+  this.songId = String(params.get("id"));
+  this.songDetailService.getSongInfo(this.songId).subscribe((response:Song) =>{
+    console.log(response);
+    this.song = response;
+  })
+  }
 
-}
 }
