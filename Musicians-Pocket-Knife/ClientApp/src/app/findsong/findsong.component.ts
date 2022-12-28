@@ -42,19 +42,4 @@ export class FindsongComponent implements OnInit {
     });
   }
 
-  getSongInfo(songID:string):Song{
-    return this.apisongservice.getSongInfo(songID).subscribe((response:any) => {
-      this.song = response;
-    });
-  }
-
-  toggleSongInfo(display:boolean):void{
-    if(display == null){
-      display = true;
-    }
-    else{
-      display = !display;
-      console.log(display);
-    }
-  }
 }

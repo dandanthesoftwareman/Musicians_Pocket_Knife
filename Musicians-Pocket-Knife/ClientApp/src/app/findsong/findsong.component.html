@@ -17,9 +17,6 @@
       <p>{{ s.title }}</p>
       <p>{{ s.artist.name }}</p>
     </div>
-    <button (click)="getSongInfo(s.id)">Get Info</button>
-    <div *ngIf="s.display == true">
-      <p>You song info here</p>
-    </div>
+    <button>Details</button>
   </div>
 </div>
