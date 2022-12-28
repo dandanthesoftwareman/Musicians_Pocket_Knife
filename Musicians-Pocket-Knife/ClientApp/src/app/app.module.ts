@@ -11,6 +11,7 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
 import { Secret } from 'src/secret';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FindsongComponent } from './findsong/findsong.component';
+import { SongDetailsComponent } from './song-details/song-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FindsongComponent } from './findsong/findsong.component';
     NavMenuComponent,
     HomeComponent,
     HomepageComponent,
-    FindsongComponent
+    FindsongComponent,
+    SongDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

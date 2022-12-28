@@ -10,15 +10,10 @@ export class ApireturnsongarrayService {
 
   apiUrl:string = "https://api.getsongbpm.com/";
   search:string = "search/";
-  song:string = "song/";
   constructor(private http:HttpClient, @Inject("BASE_URL") private baseUrl:string) { }
 
   getSongArray(song:string):any{
     return this.http.get(`${this.apiUrl}${this.search}?api_key=${Secret.apiKey}&type=song&lookup=${song}`);
-  }
-
-  getSongInfo(songID:string):any{
-    return this.http.get(`${this.apiUrl}${this.song}?api_key=${Secret.apiKey}&id=${songID}`)
   }
 
 }
