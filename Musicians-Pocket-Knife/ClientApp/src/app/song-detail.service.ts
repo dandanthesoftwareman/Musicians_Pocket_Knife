@@ -5,7 +5,7 @@ import { Secret } from 'src/secret';
 @Injectable({
   providedIn: 'root'
 })
-export class SongDetailServiceService {
+export class SongDetailService {
 
   constructor(private http:HttpClient, @Inject("BASE_URL") private baseUrl:string) { }
 
