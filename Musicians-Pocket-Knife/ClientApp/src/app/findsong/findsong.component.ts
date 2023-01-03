@@ -42,4 +42,7 @@ export class FindsongComponent implements OnInit {
     });
   }
 
+  AddToPlaylist(id:string):any {
+    return null;
+  }
 }
