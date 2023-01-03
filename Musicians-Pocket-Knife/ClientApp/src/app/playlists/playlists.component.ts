@@ -1,5 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { PlaylistService } from '../playlist.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { UserService } from '../user.service';
 })
 export class PlaylistsComponent implements OnInit {
 
-  constructor(private authService: SocialAuthService) { }
+  constructor(private authService: SocialAuthService, private playlistService: PlaylistService) { }
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
@@ -22,4 +24,9 @@ export class PlaylistsComponent implements OnInit {
     })
 
 }
+  CreatePlaylist(form:NgForm):any{
+    this.playlistService.CreatePlaylist(form.form.value.PlaylistTitle).subscribe((response:any) => {
+      console.log(response);
+    });
+  }
 }

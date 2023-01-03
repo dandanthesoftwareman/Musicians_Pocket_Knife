@@ -6,7 +6,7 @@ namespace Musicians_Pocket_Knife.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlaylistContollercs : ControllerBase
+    public class PlaylistController : ControllerBase
     {
         MpkdbContext context = new MpkdbContext();
 

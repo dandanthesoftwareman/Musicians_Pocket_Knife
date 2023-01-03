@@ -5,17 +5,21 @@
 --GoogleID NVARCHAR(255) NOT NULL
 --);
 
-
 --SELECT * FROM Users;
-
 --DELETE FROM Users
 --WHERE id = 1;
+
+
 
 --CREATE TABLE Playlists(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
 --ListTitle NVARCHAR(255),
 --UserId INT FOREIGN KEY REFERENCES Users(id)
 --);
+
+--SELECT * FROM Playlists;
+
+
 
 --CREATE TABLE Songs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,

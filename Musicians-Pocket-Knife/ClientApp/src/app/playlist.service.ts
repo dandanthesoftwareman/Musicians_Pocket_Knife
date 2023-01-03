@@ -1,5 +1,7 @@
+import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class PlaylistService {
 
   endpoint:string = "api/Playlist";
 
-  CreatePlaylist(title:string, id:string):any{
-    return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist?ListTitle=${title}?UserId=${id}`,{});
+  CreatePlaylist(title:string):any{
+    return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist?title=${title}&id=${UserService.user.id}`,{});
   }
 }

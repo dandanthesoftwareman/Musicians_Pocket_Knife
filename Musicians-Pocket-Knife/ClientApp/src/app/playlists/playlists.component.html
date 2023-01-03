@@ -1,1 +1,15 @@
-<p>playlists works!</p>
+<h2>Your Playlists</h2>
+
+<form
+  #CreatePlaylistForm="ngForm"
+  (ngSubmit)="CreatePlaylist(CreatePlaylistForm)"
+>
+  <input
+    id="CreatePlaylist"
+    type="text"
+    name="PlaylistTitle"
+    placeholder="Playlist Title"
+    ngModel
+  />
+  <input id="CreatePlaylistButton" type="submit" />
+</form>

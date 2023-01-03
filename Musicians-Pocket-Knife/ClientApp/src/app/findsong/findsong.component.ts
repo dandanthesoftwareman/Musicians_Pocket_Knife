@@ -34,11 +34,7 @@ export class FindsongComponent implements OnInit {
   searchForSong(form:NgForm):SongArray{
     let song = form.form.value.searchedSong.trim().replaceAll(' ', '+');
     return this.apisongservice.getSongArray(song).subscribe((response:any) => {
-      console.log(response);
       this.songArray = response;
-      this.songArray.search.forEach((s:any) => {
-        s.display = null;
-      })
     });
   }
 
