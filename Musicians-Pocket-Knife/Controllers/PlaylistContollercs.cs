@@ -10,5 +10,17 @@ namespace Musicians_Pocket_Knife.Controllers
     {
         MpkdbContext context = new MpkdbContext();
 
+        [HttpPost("CreatePlaylist")]
+        public void CreatePlaylist(string title, string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = new Playlist()
+            {
+                ListTitle = title,
+                UserId = user.Id
+            };
+            context.Add(playlist);
+            context.SaveChanges();
+        }
     }
 }
