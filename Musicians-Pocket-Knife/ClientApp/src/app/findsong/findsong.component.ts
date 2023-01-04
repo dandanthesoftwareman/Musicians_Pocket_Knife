@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApireturnsongarrayService } from '../apireturnsongarray.service';
 import { NgForm } from '@angular/forms';
 import { SongArray } from '../song-array';
 import { Song } from '../song';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserService } from '../user.service';
+import { ApiService } from '../api.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class FindsongComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
-  constructor(private apisongservice: ApireturnsongarrayService, private authService:SocialAuthService) { }
+  constructor(private apiService: ApiService, private authService:SocialAuthService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -33,7 +33,7 @@ export class FindsongComponent implements OnInit {
   //uses name=searched song of searchSongForm, trims and formats it to string for API call
   searchForSong(form:NgForm):SongArray{
     let song = form.form.value.searchedSong.trim().replaceAll(' ', '+');
-    return this.apisongservice.getSongArray(song).subscribe((response:any) => {
+    return this.apiService.getSongArray(song).subscribe((response:any) => {
       this.songArray = response;
     });
   }

@@ -1,8 +1,8 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../api.service';
 import { Song } from '../song';
-import { SongDetailService } from '../song-detail.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { UserService } from '../user.service';
 })
 export class SongDetailsComponent implements OnInit {
 
-  constructor(private authService:SocialAuthService, private songDetailService: SongDetailService, private route:ActivatedRoute) { }
+  constructor(private authService:SocialAuthService, private apiService: ApiService, private route:ActivatedRoute) { }
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
@@ -27,7 +27,7 @@ export class SongDetailsComponent implements OnInit {
   })
   let params = this.route.snapshot.paramMap;
   this.songId = String(params.get("id"));
-  this.songDetailService.getSongInfo(this.songId).subscribe((response:Song) =>{
+  this.apiService.getSongInfo(this.songId).subscribe((response:Song) =>{
     console.log(response);
     this.song = response;
   })
