@@ -13,3 +13,7 @@
   />
   <input id="CreatePlaylistButton" type="submit" />
 </form>
+
+<div *ngFor="let p of userPlaylists">
+  <a routerLink="/PlaylistDetails"> {{ p.listTitle }} </a>
+</div>

@@ -29,7 +29,15 @@ namespace Musicians_Pocket_Knife.Controllers
         public List<Playlist> GetUserPlaylists(string id)
         {
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            return context.Playlists.Include(u => u.User).Where(u => u.UserId == user.Id).ToList();
+            return context.Playlists.Where(u => u.UserId == user.Id).ToList();
+        }
+
+        [HttpGet("ViewPlaylistDetails")]
+        public List<Song> ViewPlaylistDetails(string title, string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == title && p.UserId == user.Id);
+            return context.Songs.Where(s => s.PlaylistId == playlist.Id).ToList();
         }
     }
 }
