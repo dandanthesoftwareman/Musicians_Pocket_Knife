@@ -21,8 +21,10 @@ export class PlaylistsComponent implements OnInit {
       this.user = user;
       UserService.user.id = user.id;
       this.loggedIn = (user != null);
+    });
+    this.playlistService.GetUserPlaylists().subscribe((response:any) => {
+      console.log(response);
     })
-
 }
   CreatePlaylist(form:NgForm):any{
     this.playlistService.CreatePlaylist(form.form.value.PlaylistTitle).subscribe((response:any) => {

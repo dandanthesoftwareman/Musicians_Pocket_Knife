@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Musicians_Pocket_Knife.Models;
 
 namespace Musicians_Pocket_Knife.Controllers
@@ -27,7 +28,8 @@ namespace Musicians_Pocket_Knife.Controllers
         [HttpGet("GetUserPlaylists")]
         public List<Playlist> GetUserPlaylists(string id)
         {
-            return null;
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            return context.Playlists.Include(u => u.User).Where(u => u.UserId == user.Id).ToList();
         }
     }
 }

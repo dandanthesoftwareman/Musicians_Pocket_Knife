@@ -16,7 +16,7 @@ export class PlaylistService {
     return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist?title=${title}&id=${UserService.user.id}`,{});
   }
 
-  GetUserPlaylists(id:string):any{
-    return this.http.get(`${this.baseUrl}${this.endpoint}/GetUserPlaylists?&id=${UserService.user.id}`,{})
+  GetUserPlaylists():any{
+    return this.http.get(`${this.baseUrl}${this.endpoint}/GetUserPlaylists?&id=${UserService.user.id}`);
   }
 }
