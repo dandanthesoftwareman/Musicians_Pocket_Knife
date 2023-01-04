@@ -23,5 +23,11 @@ namespace Musicians_Pocket_Knife.Controllers
             context.SaveChanges();
             return playlist;
         }
+
+        [HttpGet("GetUserPlaylists")]
+        public List<Playlist> GetUserPlaylists(string id)
+        {
+            return null;
+        }
     }
 }
