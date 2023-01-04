@@ -41,6 +41,7 @@
           <li class="nav-item">
             <button
               class="btn btn-outline-dark"
+              [routerLink]="['/']"
               *ngIf="loggedIn"
               (click)="signOut()"
             >
