@@ -16,9 +16,13 @@
     <div>
       <p>{{ s.title }}</p>
       <p>{{ s.artist.name }}</p>
-      <!-- <img src="{{ s.artist.img }}" /> -->
     </div>
     <button routerLink="/SongDetails/{{ s.id }}">Details</button>
-    <button (click)="AddToPlaylist(s.id)">Add to playlist</button>
+    <button (click)="ShowPlaylists(s.id)">Add to List</button>
+  </div>
+  <div [hidden]="!displayPlaylistForm">
+    <div *ngFor="let p of userPlaylists">
+      <div>{{ p.listTitle }}<button>Add to List</button></div>
+    </div>
   </div>
 </div>

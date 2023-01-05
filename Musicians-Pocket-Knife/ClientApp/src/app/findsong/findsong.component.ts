@@ -5,6 +5,8 @@ import { Song } from '../song';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserService } from '../user.service';
 import { ApiService } from '../api.service';
+import { PlaylistService } from '../playlist.service';
+import { Playlist } from '../playlist';
 
 
 @Component({
@@ -16,11 +18,14 @@ export class FindsongComponent implements OnInit {
 
   song:Song = {} as Song;
   songArray:SongArray = {} as SongArray;
+  array = {} as Song[];
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
+  userPlaylists:Playlist[] = {} as Playlist[];
+  displayPlaylistForm:Boolean = false;
 
-  constructor(private apiService: ApiService, private authService:SocialAuthService) { }
+  constructor(private apiService: ApiService, private authService:SocialAuthService, private playlistService:PlaylistService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -28,6 +33,8 @@ export class FindsongComponent implements OnInit {
       UserService.user.id = user.id;
       this.loggedIn = (user != null);
   })
+  this.playlistService.GetUserPlaylists().subscribe((response:any) => {
+    this.userPlaylists = response;})
 }
   
   //uses name=searched song of searchSongForm, trims and formats it to string for API call
@@ -38,7 +45,12 @@ export class FindsongComponent implements OnInit {
     });
   }
 
-  AddToPlaylist(id:string):any {
+  AddToPlaylist(id:number):any {
     return null;
+  }
+  
+  ShowPlaylists(id:string):void{
+    this.displayPlaylistForm = !this.displayPlaylistForm;
+    console.log("yuo clicked a button")
   }
 }

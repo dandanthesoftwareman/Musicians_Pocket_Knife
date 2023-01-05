@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Musicians_Pocket_Knife.Models;
+using Musicians_Pocket_Knife.Repositories;
 
 namespace Musicians_Pocket_Knife.Controllers
 {
@@ -10,6 +11,7 @@ namespace Musicians_Pocket_Knife.Controllers
     public class PlaylistController : ControllerBase
     {
         MpkdbContext context = new MpkdbContext();
+        DBRepository repository = new DBRepository();
 
         [HttpPost("CreatePlaylist")]
         public Playlist CreatePlaylist(string title, string id)
@@ -28,16 +30,13 @@ namespace Musicians_Pocket_Knife.Controllers
         [HttpGet("GetUserPlaylists")]
         public List<Playlist> GetUserPlaylists(string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            return context.Playlists.Where(u => u.UserId == user.Id).ToList();
+            return repository.GetUserPlaylists(id);
         }
 
         [HttpGet("ViewPlaylistDetails")]
         public List<Song> ViewPlaylistDetails(string title, string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == title && p.UserId == user.Id);
-            return context.Songs.Where(s => s.PlaylistId == playlist.Id).ToList();
+            return repository.ViewPlaylistDetails(title, id);
         }
     }
 }

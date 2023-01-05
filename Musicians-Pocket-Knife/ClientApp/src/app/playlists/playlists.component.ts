@@ -42,7 +42,7 @@ export class PlaylistsComponent implements OnInit {
   GetUserPlaylists():any{
     this.playlistService.GetUserPlaylists().subscribe((response:any) => {
       this.userPlaylists = response;
-  });
+    });
   }
 
 }

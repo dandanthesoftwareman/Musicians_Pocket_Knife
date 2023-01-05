@@ -17,8 +17,7 @@
 --UserId INT FOREIGN KEY REFERENCES Users(id)
 --);
 
-SELECT * FROM Playlists;
-
+--SELECT * FROM Playlists;
 
 
 --CREATE TABLE Songs(
@@ -31,3 +30,6 @@ SELECT * FROM Playlists;
 --OriginalKey NVARCHAR(15),
 --TransposedKey NVARCHAR(15),
 --);
+
+--DROP TABLE Songs;
+--DROP TABLE Playlists;
