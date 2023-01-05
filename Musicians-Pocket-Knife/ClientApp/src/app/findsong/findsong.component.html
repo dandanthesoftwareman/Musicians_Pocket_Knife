@@ -18,7 +18,7 @@
       <p>{{ s.artist.name }}</p>
       <!-- <img src="{{ s.artist.img }}" /> -->
     </div>
-    <button routerLink="/Details/{{ s.id }}">Details</button>
+    <button routerLink="/SongDetails/{{ s.id }}">Details</button>
     <button (click)="AddToPlaylist(s.id)">Add to playlist</button>
   </div>
 </div>

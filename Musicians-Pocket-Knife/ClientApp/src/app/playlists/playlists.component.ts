@@ -1,5 +1,5 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Playlist } from '../playlist';
 import { PlaylistService } from '../playlist.service';
@@ -12,12 +12,12 @@ import { UserService } from '../user.service';
 })
 export class PlaylistsComponent implements OnInit {
 
-  constructor(private authService: SocialAuthService, private playlistService: PlaylistService) { }
+  constructor(private authService: SocialAuthService, private playlistService: PlaylistService, private changeDetection: ChangeDetectorRef) { }
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
-  userPlaylists:Playlist[] = {} as Playlist[]; 
+  userPlaylists:Playlist[] = {} as Playlist[];
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -27,18 +27,22 @@ export class PlaylistsComponent implements OnInit {
     });
 
     this.playlistService.GetUserPlaylists().subscribe((response:any) => {
-      console.log(response);
       this.userPlaylists = response;
     });
-}
+  }
 
   CreatePlaylist(form:NgForm):any{
     this.playlistService.CreatePlaylist(form.form.value.PlaylistTitle).subscribe((response:any) => {
-      console.log(response);
+      this.userPlaylists = [];
+      this.GetUserPlaylists();
+      this.changeDetection.detectChanges();
     });
   }
 
-  ViewPlaylistDetails():any{
-    
+  GetUserPlaylists():any{
+    this.playlistService.GetUserPlaylists().subscribe((response:any) => {
+      this.userPlaylists = response;
+  });
   }
+
 }

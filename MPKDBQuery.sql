@@ -17,7 +17,7 @@
 --UserId INT FOREIGN KEY REFERENCES Users(id)
 --);
 
---SELECT * FROM Playlists;
+SELECT * FROM Playlists;
 
 
 

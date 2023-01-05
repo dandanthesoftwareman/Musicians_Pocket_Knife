@@ -23,4 +23,7 @@ export class PlaylistDetailsComponent implements OnInit {
       this.loggedIn = (user != null);
   })
 }
+
+  
+
 }
