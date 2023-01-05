@@ -13,6 +13,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { FindsongComponent } from './findsong/findsong.component';
 import { SongDetailsComponent } from './song-details/song-details.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
+import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PlaylistsComponent } from './playlists/playlists.component';
     HomepageComponent,
     FindsongComponent,
     SongDetailsComponent,
-    PlaylistsComponent
+    PlaylistsComponent,
+    PlaylistDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,8 +34,9 @@ import { PlaylistsComponent } from './playlists/playlists.component';
     RouterModule.forRoot([
       { path: '', component: HomepageComponent, pathMatch: 'full' },
       { path: 'Findsong', component: FindsongComponent},
-      { path: 'Details/:id', component: SongDetailsComponent},
-      { path: 'Playlists', component: PlaylistsComponent}
+      { path: 'SongDetails/:id', component: SongDetailsComponent},
+      { path: 'Playlists', component: PlaylistsComponent},
+      { path: 'PlaylistDetails/:id', component: PlaylistDetailsComponent},
     ])
   ],
   providers: [

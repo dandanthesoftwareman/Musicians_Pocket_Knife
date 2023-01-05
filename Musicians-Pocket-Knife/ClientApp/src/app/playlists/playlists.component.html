@@ -11,9 +11,10 @@
     placeholder="Playlist Title"
     ngModel
   />
-  <input id="CreatePlaylistButton" type="submit" />
+  <!-- <input id="CreatePlaylistButton" type="submit" /> -->
+  <button id="CreatePlaylistButton">Create Playlist</button>
 </form>
 
 <div *ngFor="let p of userPlaylists">
-  <a routerLink="/PlaylistDetails"> {{ p.listTitle }} </a>
+  <a routerLink="/PlaylistDetails/{{ p.listTitle }}"> {{ p.listTitle }} </a>
 </div>
