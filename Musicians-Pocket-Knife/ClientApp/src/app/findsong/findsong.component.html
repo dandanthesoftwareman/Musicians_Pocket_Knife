@@ -22,7 +22,10 @@
   </div>
   <div [hidden]="!displayPlaylistForm">
     <div *ngFor="let p of userPlaylists">
-      <div>{{ p.listTitle }}<button>Add to List</button></div>
+      <div>
+        {{ p.listTitle
+        }}<button (click)="AddToPlaylist(p.listTitle)">Add to List</button>
+      </div>
     </div>
   </div>
 </div>

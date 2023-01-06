@@ -23,4 +23,8 @@ export class PlaylistService {
   ViewPlaylistDetails(title:string):any{
     return this.http.get(`${this.baseUrl}${this.endpoint}/ViewPlaylistDetails?title=${title}&id=${UserService.user.id}`);
   }
+
+  AddSongToPlaylist(songID:string, listTitle:string):any{
+    return this.http.post(`${this.baseUrl}${this.endpoint}/AddSongToPlaylist?songID=${songID}&id=${UserService.user.id}&listTitle=${listTitle}`, {})
+  }
 }

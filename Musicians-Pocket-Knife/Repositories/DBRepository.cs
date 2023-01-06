@@ -43,5 +43,16 @@ namespace Musicians_Pocket_Knife.Repositories
                 }
             }
         }
+        public Song AddSongToPlaylist(string id, string songID, string listTitle)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            Song song = GetSongDetails(songID);
+            song.TransposedKey = song.OriginalKey;
+            song.PlaylistId = playlist.Id;
+            context.Songs.Add(song);
+            context.SaveChanges();
+            return song;
+        }
     }
 }
