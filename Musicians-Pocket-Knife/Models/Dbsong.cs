@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Musicians_Pocket_Knife.Models;
 
-public partial class Song
+public partial class Dbsong
 {
     public int Id { get; set; }
 
@@ -21,5 +21,6 @@ public partial class Song
 
     public string? TransposedKey { get; set; }
     [System.Text.Json.Serialization.JsonIgnore]
+
     public virtual Playlist? Playlist { get; set; }
 }

@@ -34,15 +34,15 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpGet("ViewPlaylistDetails")]
-        public List<Song> ViewPlaylistDetails(string title, string id)
+        public List<Dbsong> ViewPlaylistDetails(string title, string id)
         {
             return repository.ViewPlaylistDetails(title, id);
         }
 
-        [HttpPost("AddSongToPlaylist")]
-        public Song AddSongToPlaylist(string id, string songID, string listTitle)
-        {
-            return repository.AddSongToPlaylist(id,songID,listTitle);
-        }
+        //[HttpPost("AddSongToPlaylist")]
+        //public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
+        //{
+        //    return repository.AddSongToPlaylist(id,songID,listTitle);
+        //}
     }
 }

@@ -15,9 +15,9 @@ public partial class MpkdbContext : DbContext
     {
     }
 
-    public virtual DbSet<Playlist> Playlists { get; set; }
+    public virtual DbSet<Dbsong> Dbsongs { get; set; }
 
-    public virtual DbSet<Song> Songs { get; set; }
+    public virtual DbSet<Playlist> Playlists { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -27,21 +27,11 @@ public partial class MpkdbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Playlist>(entity =>
+        modelBuilder.Entity<Dbsong>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Playlist__3213E83F94CB2FE2");
+            entity.HasKey(e => e.Id).HasName("PK__DBSongs__3213E83F99E57C03");
 
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.ListTitle).HasMaxLength(255);
-
-            entity.HasOne(d => d.User).WithMany(p => p.Playlists)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Playlists__UserI__6FE99F9F");
-        });
-
-        modelBuilder.Entity<Song>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__Songs__3213E83FAEA3FBE7");
+            entity.ToTable("DBSongs");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Artist).HasMaxLength(255);
@@ -51,9 +41,21 @@ public partial class MpkdbContext : DbContext
             entity.Property(e => e.Title).HasMaxLength(255);
             entity.Property(e => e.TransposedKey).HasMaxLength(15);
 
-            entity.HasOne(d => d.Playlist).WithMany(p => p.Songs)
+            entity.HasOne(d => d.Playlist).WithMany(p => p.Dbsongs)
                 .HasForeignKey(d => d.PlaylistId)
-                .HasConstraintName("FK__Songs__PlaylistI__72C60C4A");
+                .HasConstraintName("FK__DBSongs__Playlis__7B5B524B");
+        });
+
+        modelBuilder.Entity<Playlist>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Playlist__3213E83FD9B550EA");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ListTitle).HasMaxLength(255);
+
+            entity.HasOne(d => d.User).WithMany(p => p.Playlists)
+                .HasForeignKey(d => d.UserId)
+                .HasConstraintName("FK__Playlists__UserI__75A278F5");
         });
 
         modelBuilder.Entity<User>(entity =>
