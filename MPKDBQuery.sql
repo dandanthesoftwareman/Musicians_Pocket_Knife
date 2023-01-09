@@ -20,7 +20,7 @@
 --SELECT * FROM Playlists;
 
 
---CREATE TABLE Songs(
+--CREATE TABLE DBSongs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
 --PlaylistId INT FOREIGN KEY REFERENCES Playlists(id),
 --Title NVARCHAR(255),
