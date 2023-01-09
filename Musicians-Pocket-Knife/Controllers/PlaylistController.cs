@@ -30,10 +30,10 @@ namespace Musicians_Pocket_Knife.Controllers
             return repository.ViewPlaylistDetails(title, id);
         }
 
-        //[HttpPost("AddSongToPlaylist")]
-        //public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
-        //{
-        //    return repository.AddSongToPlaylist(id,songID,listTitle);
-        //}
+        [HttpPost("AddSongToPlaylist")]
+        public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
+        {
+            return repository.AddSongToPlaylist(id, songID, listTitle);
+        }
     }
 }

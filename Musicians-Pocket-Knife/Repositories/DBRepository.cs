@@ -55,16 +55,24 @@ namespace Musicians_Pocket_Knife.Repositories
                 }
             }
         }
-        //public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
-        //{
-        //    User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-        //    Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
-        //    APISong song = GetSongDetails(songID);
-        //    song.TransposedKey = song.OriginalKey;
-        //    song.PlaylistId = playlist.Id;
-        //    context.Dbsongs.Add(song);
-        //    context.SaveChanges();
-        //    return song;
-        //}
+        public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            APISong song = GetSongDetails(songID);
+            Dbsong dbSong = new Dbsong()
+            {
+                PlaylistId = playlist.Id,
+                Title = song.song.title,
+                Artist = song.song.artist.name,
+                Tempo = song.song.tempo,
+                TimeSignature = song.song.time_sig,
+                OriginalKey = song.song.key_of,
+                TransposedKey = song.song.key_of
+            };
+            context.Dbsongs.Add(dbSong);
+            context.SaveChanges();
+            return dbSong;
+        }
     }
 }
