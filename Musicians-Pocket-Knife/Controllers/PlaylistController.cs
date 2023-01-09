@@ -10,21 +10,12 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class PlaylistController : ControllerBase
     {
-        MpkdbContext context = new MpkdbContext();
         DBRepository repository = new DBRepository();
 
         [HttpPost("CreatePlaylist")]
         public Playlist CreatePlaylist(string title, string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = new Playlist()
-            {
-                ListTitle = title,
-                UserId = user.Id
-            };
-            context.Add(playlist);
-            context.SaveChanges();
-            return playlist;
+            return repository.CreatePlaylist(title, id);
         }
 
         [HttpGet("GetUserPlaylists")]

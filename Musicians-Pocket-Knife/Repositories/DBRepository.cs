@@ -7,6 +7,18 @@ namespace Musicians_Pocket_Knife.Repositories
     public class DBRepository
     {
         MpkdbContext context = new MpkdbContext();
+        public Playlist CreatePlaylist(string title, string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = new Playlist()
+            {
+                ListTitle = title,
+                UserId = user.Id
+            };
+            context.Add(playlist);
+            context.SaveChanges();
+            return playlist;
+        }
         public List<Dbsong> ViewPlaylistDetails(string title, string id)
         {
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
