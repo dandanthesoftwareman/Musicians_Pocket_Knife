@@ -19,16 +19,16 @@ namespace Musicians_Pocket_Knife.Repositories
             context.SaveChanges();
             return playlist;
         }
+        public List<Playlist> GetUserPlaylists(string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            return context.Playlists.Where(u => u.UserId == user.Id).ToList();
+        }
         public List<Dbsong> ViewPlaylistDetails(string title, string id)
         {
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == title && p.UserId == user.Id);
             return context.Dbsongs.Where(s => s.PlaylistId == playlist.Id).ToList();
-        }
-        public List<Playlist> GetUserPlaylists(string id)
-        {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            return context.Playlists.Where(u => u.UserId == user.Id).ToList();
         }
         public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
         {

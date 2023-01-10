@@ -20,8 +20,8 @@ export class PlaylistService {
     return this.http.get(`${this.baseUrl}${this.endpoint}/GetUserPlaylists?&id=${UserService.user.id}`);
   }
 
-  ViewPlaylistDetails(title:string):any{
-    return this.http.get(`${this.baseUrl}${this.endpoint}/ViewPlaylistDetails?title=${title}&id=${UserService.user.id}`);
+  ViewPlaylistDetails(listTitle:string):any{
+    return this.http.get(`${this.baseUrl}${this.endpoint}/ViewPlaylistDetails?title=${listTitle}&id=${UserService.user.id}`);
   }
 
   AddSongToPlaylist(songID:string, listTitle:string):any{
