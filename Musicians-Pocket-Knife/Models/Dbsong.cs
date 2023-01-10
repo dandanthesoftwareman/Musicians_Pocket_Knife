@@ -9,6 +9,8 @@ public partial class Dbsong
 
     public int? PlaylistId { get; set; }
 
+    public string? Apiid { get; set; }
+
     public string? Title { get; set; }
 
     public string? Artist { get; set; }
@@ -21,6 +23,5 @@ public partial class Dbsong
 
     public string? TransposedKey { get; set; }
     [System.Text.Json.Serialization.JsonIgnore]
-
     public virtual Playlist? Playlist { get; set; }
 }

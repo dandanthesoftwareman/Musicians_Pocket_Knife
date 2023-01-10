@@ -48,15 +48,13 @@ export class FindsongComponent implements OnInit {
   AddToPlaylist(listTitle:string):any {
     let songID = this.song.song.id;
     this.playlistService.AddSongToPlaylist(songID, listTitle).subscribe((response:any)=> {
-      console.log("song 'should' be added");
     });
   }
   
   ShowPlaylists(id:string):void{
     this.displayPlaylistForm = !this.displayPlaylistForm;
-    this.apiService.getSongInfo(id).subscribe((response:Song) => {
+    this.apiService.getSongDetails(id).subscribe((response:Song) => {
       this.song = response;
     })
-    console.log("Button Clicked");
   }
 }

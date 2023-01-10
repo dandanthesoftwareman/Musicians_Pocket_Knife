@@ -11,7 +11,6 @@ public partial class Playlist
 
     public int? UserId { get; set; }
     [System.Text.Json.Serialization.JsonIgnore]
-
     public virtual ICollection<Dbsong> Dbsongs { get; } = new List<Dbsong>();
     [System.Text.Json.Serialization.JsonIgnore]
     public virtual User? User { get; set; }

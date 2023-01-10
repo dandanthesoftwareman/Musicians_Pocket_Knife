@@ -17,7 +17,7 @@ export class ApiService {
     return this.http.get(`${this.apiUrl}${this.search}?api_key=${Secret.apiKey}&type=song&lookup=${song}&limit=5`);
   }
 
-  getSongInfo(songID:string):any{
+  getSongDetails(songID:string):any{
     return this.http.get(`${this.apiUrl}${this.song}?api_key=${Secret.apiKey}&id=${songID}`);
   }
 }

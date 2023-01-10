@@ -18,11 +18,12 @@
 --);
 
 --SELECT * FROM Playlists;
-
+--SELECT * FROM DBSongs;
 
 --CREATE TABLE DBSongs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
 --PlaylistId INT FOREIGN KEY REFERENCES Playlists(id),
+--APIid NVARCHAR(15),
 --Title NVARCHAR(255),
 --Artist NVARCHAR(255),
 --Tempo NVARCHAR(15),
@@ -31,5 +32,5 @@
 --TransposedKey NVARCHAR(15),
 --);
 
---DROP TABLE Songs;
+--DROP TABLE DBSongs;
 --DROP TABLE Playlists;

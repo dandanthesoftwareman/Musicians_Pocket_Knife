@@ -27,8 +27,7 @@ export class SongDetailsComponent implements OnInit {
   })
   let params = this.route.snapshot.paramMap;
   this.songId = String(params.get("id"));
-  this.apiService.getSongInfo(this.songId).subscribe((response:Song) =>{
-    console.log(response);
+  this.apiService.getSongDetails(this.songId).subscribe((response:Song) =>{
     this.song = response;
   })
   }

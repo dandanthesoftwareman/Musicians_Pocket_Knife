@@ -31,9 +31,9 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpPost("AddSongToPlaylist")]
-        public Dbsong addsongtoplaylist(string id, string songid, string listtitle)
+        public Dbsong addsongtoplaylist(string id, string songID, string listTitle)
         {
-            return repository.AddSongToPlaylist(id, songid, listtitle);
+            return repository.AddSongToPlaylist(id, songID, listTitle);
         }
     }
 }

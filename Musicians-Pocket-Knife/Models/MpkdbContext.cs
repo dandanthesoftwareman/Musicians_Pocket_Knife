@@ -29,11 +29,14 @@ public partial class MpkdbContext : DbContext
     {
         modelBuilder.Entity<Dbsong>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DBSongs__3213E83F99E57C03");
+            entity.HasKey(e => e.Id).HasName("PK__DBSongs__3213E83FEDF60688");
 
             entity.ToTable("DBSongs");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Apiid)
+                .HasMaxLength(15)
+                .HasColumnName("APIid");
             entity.Property(e => e.Artist).HasMaxLength(255);
             entity.Property(e => e.OriginalKey).HasMaxLength(15);
             entity.Property(e => e.Tempo).HasMaxLength(15);
@@ -43,7 +46,7 @@ public partial class MpkdbContext : DbContext
 
             entity.HasOne(d => d.Playlist).WithMany(p => p.Dbsongs)
                 .HasForeignKey(d => d.PlaylistId)
-                .HasConstraintName("FK__DBSongs__Playlis__7B5B524B");
+                .HasConstraintName("FK__DBSongs__Playlis__7F2BE32F");
         });
 
         modelBuilder.Entity<Playlist>(entity =>
