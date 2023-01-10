@@ -37,17 +37,18 @@ namespace Musicians_Pocket_Knife.Repositories
             {
                 client.BaseAddress = new Uri("https://api.getsongbpm.com/");
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.TryAddWithoutValidation("Accept","application/json");
+                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
+                
 
                 string endpoint = "song/";
                 string key = Secret.apiKey;
                 string url = endpoint+$"?api_key={key}&id={id}";
                 //GET Method
                 HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
-                var JSONstring = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                 if (response.IsSuccessStatusCode)
                 {
-                    //var JSONstring = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                    var JSONstring = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
                     return JsonConvert.DeserializeObject<APISong>(JSONstring);
                 }
                 else
