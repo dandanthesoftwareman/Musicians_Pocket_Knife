@@ -31,48 +31,49 @@ namespace Musicians_Pocket_Knife.Repositories
             return context.Playlists.Where(u => u.UserId == user.Id).ToList();
         }
 
-        //public APISong GetSongDetails(string id)
-        //{
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = new Uri("https://api.getsongbpm.com/");
-        //        //client.DefaultRequestHeaders.Accept.Clear();
-        //        //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        public APISong GetSongDetails(string id)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://api.getsongbpm.com/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-        //        string endpoint = "song/";
-        //        string key = Secret.apiKey;
-        //        string url = endpoint+$"?api_key={key}&id={id}";
-        //        //GET Method
-        //        HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            var JSONstring = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-        //            return JsonConvert.DeserializeObject<APISong>(JSONstring);
-        //        }
-        //        else
-        //        {
-        //            return null;
-        //        }
-        //    }
-        //}
-        //public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
-        //{
-        //    User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-        //    Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
-        //    APISong song = GetSongDetails(songID);
-        //    Dbsong dbSong = new Dbsong()
-        //    {
-        //        PlaylistId = playlist.Id,
-        //        Title = song.song.title,
-        //        Artist = song.song.artist.name,
-        //        Tempo = song.song.tempo,
-        //        TimeSignature = song.song.time_sig,
-        //        OriginalKey = song.song.key_of,
-        //        TransposedKey = song.song.key_of
-        //    };
-        //    context.Dbsongs.Add(dbSong);
-        //    context.SaveChanges();
-        //    return dbSong;
-        //}
+                string endpoint = "song/";
+                string key = Secret.apiKey;
+                string url = endpoint+$"?api_key={key}&id={id}";
+                //GET Method
+                HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
+                var JSONstring = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                if (response.IsSuccessStatusCode)
+                {
+                    //var JSONstring = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                    return JsonConvert.DeserializeObject<APISong>(JSONstring);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+        public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            APISong song = GetSongDetails(songID);
+            Dbsong dbSong = new Dbsong()
+            {
+                PlaylistId = playlist.Id,
+                Title = song.song.title,
+                Artist = song.song.artist.name,
+                Tempo = song.song.tempo,
+                TimeSignature = song.song.time_sig,
+                OriginalKey = song.song.key_of,
+                TransposedKey = song.song.key_of
+            };
+            context.Dbsongs.Add(dbSong);
+            context.SaveChanges();
+            return dbSong;
+        }
     }
 }
