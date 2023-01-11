@@ -35,4 +35,8 @@ export class PlaylistDetailsComponent implements OnInit {
       })
 }
 
+RemoveFromPlaylist(songID:number):void{
+  this.playlistService.RemoveSongFromPlaylist(songID, this.listTitle).subscribe((response:any)=>{
+  })
+}
 }

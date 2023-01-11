@@ -4,5 +4,6 @@
       {{ song.title }} || {{ song.artist }} || Key:{{ song.originalkey }} ||
       {{ song.tempo }} BPM
     </p>
+    <button (click)="RemoveSongFromPlaylist(song.id)">Remove</button>
   </div>
 </div>

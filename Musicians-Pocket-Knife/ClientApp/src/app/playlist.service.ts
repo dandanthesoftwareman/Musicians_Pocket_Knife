@@ -27,4 +27,8 @@ export class PlaylistService {
   AddSongToPlaylist(songID:string, listTitle:string):any{
     return this.http.post(`${this.baseUrl}${this.endpoint}/AddSongToPlaylist?songID=${songID}&id=${UserService.user.id}&listTitle=${listTitle}`, {})
   }
+
+  RemoveSongFromPlaylist(songID:number, listTitle:string):any{
+    return this.http.delete(`${this.baseUrl}${this.endpoint}/RemoveSongFromPlaylist?songID=${songID}&id=${UserService.user.id}&listTitle=${listTitle}`)
+  }
 }
