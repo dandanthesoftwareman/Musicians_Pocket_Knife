@@ -1,5 +1,8 @@
 <div *ngIf="loggedIn">
   <div *ngFor="let song of listSongs">
-    <p>{{ song.Title }}</p>
+    <p>
+      {{ song.title }} || {{ song.artist }} || Key:{{ song.originalkey }} ||
+      {{ song.tempo }} BPM
+    </p>
   </div>
 </div>

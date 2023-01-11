@@ -26,13 +26,13 @@ export class PlaylistDetailsComponent implements OnInit {
       this.user = user;
       UserService.user.id = user.id;
       this.loggedIn = (user != null);
-      let params = this.route.snapshot.paramMap;
+  })
+  let params = this.route.snapshot.paramMap;
       this.listTitle = String(params.get("listTitle"));
       this.playlistService.ViewPlaylistDetails(this.listTitle).subscribe((response:DbSong[])=>{
         this.listSongs = response;
         console.log(this.listSongs);
       })
-  })
 }
 
 }
