@@ -15,6 +15,10 @@ namespace Musicians_Pocket_Knife.Repositories
                 ListTitle = title,
                 UserId = user.Id
             };
+            if(context.Playlists.Any(x => x.ListTitle == title))
+            {
+                return null;
+            }
             context.Add(playlist);
             context.SaveChanges();
             return playlist;
@@ -46,6 +50,10 @@ namespace Musicians_Pocket_Knife.Repositories
                 OriginalKey = song.song.key_of,
                 TransposedKey = song.song.key_of
             };
+            if(context.Dbsongs.Any(x => x.Apiid == song.song.id))
+            {
+                return null;
+            }
             context.Dbsongs.Add(dbSong);
             context.SaveChanges();
             return dbSong;

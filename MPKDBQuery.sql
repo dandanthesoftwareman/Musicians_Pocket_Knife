@@ -32,5 +32,5 @@
 --TransposedKey NVARCHAR(15),
 --);
 
-DROP TABLE DBSongs;
-DROP TABLE Playlists;
+--DROP TABLE DBSongs;
+--DROP TABLE Playlists;
