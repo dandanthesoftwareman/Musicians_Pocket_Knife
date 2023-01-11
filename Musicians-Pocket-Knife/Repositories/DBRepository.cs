@@ -1,6 +1,6 @@
-﻿using Musicians_Pocket_Knife.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Musicians_Pocket_Knife.Models;
 using Newtonsoft.Json;
-using System.Net.Http.Headers;
 
 namespace Musicians_Pocket_Knife.Repositories
 {

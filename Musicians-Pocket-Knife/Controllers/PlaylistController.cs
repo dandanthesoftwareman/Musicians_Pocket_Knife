@@ -27,11 +27,11 @@ namespace Musicians_Pocket_Knife.Controllers
         [HttpGet("ViewPlaylistDetails")]
         public List<Dbsong> ViewPlaylistDetails(string title, string id)
         {
-            return repository.ViewPlaylistDetails(title, id);
+            return repository.ViewPlaylistDetails(title, id).ToList();
         }
 
         [HttpPost("AddSongToPlaylist")]
-        public Dbsong addsongtoplaylist(string id, string songID, string listTitle)
+        public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
         {
             return repository.AddSongToPlaylist(id, songID, listTitle);
         }

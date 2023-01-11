@@ -18,7 +18,7 @@
 --);
 
 --SELECT * FROM Playlists;
-SELECT * FROM DBSongs;
+--SELECT * FROM DBSongs;
 
 --CREATE TABLE DBSongs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
@@ -32,5 +32,5 @@ SELECT * FROM DBSongs;
 --TransposedKey NVARCHAR(15),
 --);
 
---DROP TABLE DBSongs;
---DROP TABLE Playlists;
+DROP TABLE DBSongs;
+DROP TABLE Playlists;
