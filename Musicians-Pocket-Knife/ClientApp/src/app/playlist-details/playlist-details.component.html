@@ -1,2 +1,5 @@
-<p>playlist-details works!</p>
-<h2></h2>
+<div *ngIf="loggedIn">
+  <div *ngFor="let song of listSongs">
+    <p>{{ song.Title }}</p>
+  </div>
+</div>

@@ -6,6 +6,6 @@ export interface DbSong {
     Artist:         string;
     Tempo:          string;
     TimeSignature:  string;
-    OriginalKey:   string;
+    OriginalKey:    string;
     TransposedKey:  string;
 }

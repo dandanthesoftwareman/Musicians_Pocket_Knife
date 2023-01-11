@@ -17,7 +17,7 @@ export class PlaylistsComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
-  userPlaylists:Playlist[] = {} as Playlist[];
+  userPlaylists:any;
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
