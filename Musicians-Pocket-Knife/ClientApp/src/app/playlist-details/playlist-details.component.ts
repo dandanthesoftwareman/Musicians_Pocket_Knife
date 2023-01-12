@@ -1,6 +1,6 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DbSong } from '../db-song';
 import { PlaylistService } from '../playlist.service';
@@ -13,7 +13,8 @@ import { UserService } from '../user.service';
 })
 export class PlaylistDetailsComponent implements OnInit {
 
-  constructor(private http:HttpClient, private authService:SocialAuthService, private playlistService: PlaylistService, private route: ActivatedRoute) { }
+  constructor(private http:HttpClient, private authService:SocialAuthService, private playlistService: PlaylistService,
+    private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
@@ -37,6 +38,11 @@ export class PlaylistDetailsComponent implements OnInit {
 
 RemoveSongFromPlaylist(songID:number):void{
   this.playlistService.RemoveSongFromPlaylist(songID, this.listTitle).subscribe((response:any)=>{
-  })
+    this.listSongs = [];
+    this.playlistService.ViewPlaylistDetails(this.listTitle).subscribe((response:any)=>{
+      this.listSongs = response;
+    });
+    this.changeDetection.detectChanges();
+  });
 }
 }
