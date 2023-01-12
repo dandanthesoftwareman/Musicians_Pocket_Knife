@@ -20,7 +20,7 @@ namespace Musicians_Pocket_Knife.Controllers
         [HttpDelete("DeletePlaylist")]
         public Playlist DeletePlaylist(string listTitle, string id)
         {
-            return null;
+            return repository.DeletePlaylist(listTitle, id);
         }
 
         [HttpGet("GetUserPlaylists")]

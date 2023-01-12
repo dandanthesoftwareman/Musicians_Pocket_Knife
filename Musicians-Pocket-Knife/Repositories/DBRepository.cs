@@ -32,9 +32,12 @@ namespace Musicians_Pocket_Knife.Repositories
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = context.Playlists.FirstOrDefault(x => x.ListTitle == listTitle && x.UserId == user.Id);
             List<Dbsong> songs = context.Dbsongs.Where(x => x.PlaylistId == playlist.Id).ToList();
-            foreach(Dbsong s in songs)
+            if(songs != null)
             {
-                context.Remove(s);
+                foreach (Dbsong s in songs)
+                {
+                    context.Remove(s);
+                }
             }
             context.Remove(playlist);
             context.SaveChanges();

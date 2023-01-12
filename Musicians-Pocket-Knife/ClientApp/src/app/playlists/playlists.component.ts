@@ -46,4 +46,12 @@ export class PlaylistsComponent implements OnInit {
     });
   }
 
+  DeletePlaylist(listTitle:string):any{
+    this.playlistService.DeletePlaylist(listTitle).subscribe((resppnse:any) =>{
+      this.userPlaylists = [];
+      this.GetUserPlaylists();
+      this.changeDetection.detectChanges();
+    });
+  }
+
 }

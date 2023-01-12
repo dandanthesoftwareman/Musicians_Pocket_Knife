@@ -21,4 +21,5 @@
   <a routerLink="/PlaylistDetails/{{ p.listTitle }}">
     {{ p.listTitle }}
   </a>
+  <button (click)="DeletePlaylist(p.listTitle)">Delete</button>
 </div>
