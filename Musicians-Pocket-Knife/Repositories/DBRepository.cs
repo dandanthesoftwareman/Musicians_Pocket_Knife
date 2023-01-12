@@ -99,9 +99,16 @@ namespace Musicians_Pocket_Knife.Repositories
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
             Dbsong song = context.Dbsongs.FirstOrDefault(s => s.Id == songID);
-            context.Remove(song);
-            context.SaveChanges();
-            return song;
+            if(song != null)
+            {
+                context.Remove(song);
+                context.SaveChanges();
+                return song;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
