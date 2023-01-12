@@ -35,5 +35,11 @@ namespace Musicians_Pocket_Knife.Controllers
         {
             return repository.AddSongToPlaylist(id, songID, listTitle);
         }
+
+        [HttpDelete("RemoveSongFromPlaylist")]
+        public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
+        {
+            return repository.RemoveSongFromPlaylist(id, songID, listTitle);
+        }
     }
 }

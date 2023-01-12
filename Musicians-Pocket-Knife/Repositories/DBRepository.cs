@@ -19,9 +19,13 @@ namespace Musicians_Pocket_Knife.Repositories
             {
                 return null;
             }
-            context.Add(playlist);
-            context.SaveChanges();
-            return playlist;
+            else
+            {
+                context.Add(playlist);
+                context.SaveChanges();
+                return playlist;
+            }
+            
         }
         public List<Playlist> GetUserPlaylists(string id)
         {
@@ -50,7 +54,7 @@ namespace Musicians_Pocket_Knife.Repositories
                 OriginalKey = song.song.key_of,
                 TransposedKey = song.song.key_of
             };
-            if(context.Dbsongs.Any(x => x.Apiid == song.song.id))
+            if(context.Dbsongs.Any(x => x.Apiid == song.song.id && x.PlaylistId == dbSong.PlaylistId))
             {
                 return null;
             }
@@ -89,6 +93,15 @@ namespace Musicians_Pocket_Knife.Repositories
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
             return context.Dbsongs.FirstOrDefault(s => s.Apiid == songID);
+        }
+        public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            Dbsong song = context.Dbsongs.FirstOrDefault(s => s.Id == songID);
+            context.Remove(song);
+            context.SaveChanges();
+            return song;
         }
     }
 }

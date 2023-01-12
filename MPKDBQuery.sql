@@ -10,15 +10,14 @@
 --WHERE id = 1;
 
 
-
 --CREATE TABLE Playlists(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
 --ListTitle NVARCHAR(255),
 --UserId INT FOREIGN KEY REFERENCES Users(id)
 --);
 
---SELECT * FROM Playlists;
---SELECT * FROM DBSongs;
+SELECT * FROM Playlists;
+SELECT * FROM DBSongs;
 
 --CREATE TABLE DBSongs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
