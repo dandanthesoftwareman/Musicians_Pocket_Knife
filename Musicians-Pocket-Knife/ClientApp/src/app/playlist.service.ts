@@ -13,7 +13,7 @@ export class PlaylistService {
   endpoint:string = "api/Playlist";
 
   CreatePlaylist(title:string):any{
-    return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist?title=${title}&id=${UserService.user.id}`,{});
+    return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist?listTitle=${title}&id=${UserService.user.id}`,{});
   }
 
   GetUserPlaylists():any{

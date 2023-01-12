@@ -7,15 +7,15 @@ namespace Musicians_Pocket_Knife.Repositories
     public class DBRepository
     {
         MpkdbContext context = new MpkdbContext();
-        public Playlist CreatePlaylist(string title, string id)
+        public Playlist CreatePlaylist(string listTitle, string id)
         {
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = new Playlist()
             {
-                ListTitle = title,
+                ListTitle = listTitle,
                 UserId = user.Id
             };
-            if(context.Playlists.Any(x => x.ListTitle == title))
+            if(context.Playlists.Any(x => x.ListTitle == listTitle))
             {
                 return null;
             }
@@ -26,6 +26,19 @@ namespace Musicians_Pocket_Knife.Repositories
                 return playlist;
             }
             
+        }
+        public Playlist DeletePlaylist(string listTitle, string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(x => x.ListTitle == listTitle && x.UserId == user.Id);
+            List<Dbsong> songs = context.Dbsongs.Where(x => x.PlaylistId == playlist.Id).ToList();
+            foreach(Dbsong s in songs)
+            {
+                context.Remove(s);
+            }
+            context.Remove(playlist);
+            context.SaveChanges();
+            return playlist;
         }
         public List<Playlist> GetUserPlaylists(string id)
         {

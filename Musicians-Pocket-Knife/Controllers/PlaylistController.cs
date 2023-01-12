@@ -13,9 +13,14 @@ namespace Musicians_Pocket_Knife.Controllers
         DBRepository repository = new DBRepository();
 
         [HttpPost("CreatePlaylist")]
-        public Playlist CreatePlaylist(string title, string id)
+        public Playlist CreatePlaylist(string listTitle, string id)
         {
-            return repository.CreatePlaylist(title, id);
+            return repository.CreatePlaylist(listTitle, id);
+        }
+        [HttpDelete("DeletePlaylist")]
+        public Playlist DeletePlaylist(string listTitle, string id)
+        {
+            return null;
         }
 
         [HttpGet("GetUserPlaylists")]
