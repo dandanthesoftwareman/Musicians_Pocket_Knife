@@ -1,11 +1,11 @@
 export interface DbSong {
     id:             number;
-    playlistid:     number;
+    playlistId:     number;
     apiid:          string;
     title:          string;
     artist:         string;
     tempo:          string;
-    timesignature:  string;
-    originalkey:    string;
-    transposedkey:  string;
+    timeSignature:  string;
+    originalKey:    string;
+    transposedKey:  string;
 }

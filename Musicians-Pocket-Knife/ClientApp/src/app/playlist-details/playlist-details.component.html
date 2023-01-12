@@ -1,7 +1,7 @@
 <div *ngIf="loggedIn">
   <div *ngFor="let song of listSongs">
     <p>
-      {{ song.title }} || {{ song.artist }} || Key:{{ song.originalkey }} ||
+      {{ song.title }} || {{ song.artist }} || Key:{{ song.originalKey }} ||
       {{ song.tempo }} BPM
     </p>
     <button (click)="RemoveSongFromPlaylist(song.id)">Remove</button>
