@@ -5,7 +5,7 @@
 --GoogleID NVARCHAR(255) NOT NULL
 --);
 
---SELECT * FROM Users;
+SELECT * FROM Users;
 --DELETE FROM Users
 --WHERE id = 1;
 
