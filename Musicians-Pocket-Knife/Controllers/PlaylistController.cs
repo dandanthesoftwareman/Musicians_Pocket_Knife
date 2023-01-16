@@ -36,9 +36,20 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpPost("AddSongToPlaylist")]
-        public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
+        public Dbsong AddSongToPlaylist([FromBody]APISong song, string id, string listTitle)
         {
-            return repository.AddSongToPlaylist(id, songID, listTitle);
+            try
+            {
+                return repository.AddSongToPlaylist(id, song, listTitle);
+            }
+            catch(Exception ex)
+            {
+                return new Dbsong
+                {
+                    Title = ex.Message,
+                };
+            }
+            
         }
 
         [HttpDelete("RemoveSongFromPlaylist")]

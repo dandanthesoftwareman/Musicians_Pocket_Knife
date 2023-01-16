@@ -1,6 +1,7 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Song } from './song';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -28,8 +29,10 @@ export class PlaylistService {
     return this.http.get(`${this.baseUrl}${this.endpoint}/ViewPlaylistDetails?title=${listTitle}&id=${UserService.user.id}`);
   }
 
-  AddSongToPlaylist(songID:string, listTitle:string):any{
-    return this.http.post(`${this.baseUrl}${this.endpoint}/AddSongToPlaylist?songID=${songID}&id=${UserService.user.id}&listTitle=${listTitle}`, {})
+  AddSongToPlaylist(song:Song, listTitle:string):any{
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(song);
+    return this.http.post(`${this.baseUrl}${this.endpoint}/AddSongToPlaylist?id=${UserService.user.id}&listTitle=${listTitle}`, body, {'headers': headers})
   }
 
   RemoveSongFromPlaylist(songID:number, listTitle:string):any{

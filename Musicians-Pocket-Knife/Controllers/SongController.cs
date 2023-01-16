@@ -11,12 +11,6 @@ namespace Musicians_Pocket_Knife.Controllers
     {
         DBRepository repository = new DBRepository();
 
-        [HttpGet("GetSongDetails")]
-        public APISong GetSongDetails(string SongID)
-        {
-            return repository.GetSongDetails(SongID);
-        }
-
         [HttpGet("GetDBSongDetails")]
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
         {

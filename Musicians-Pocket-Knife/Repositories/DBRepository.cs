@@ -54,11 +54,10 @@ namespace Musicians_Pocket_Knife.Repositories
             Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == title && p.UserId == user.Id);
             return context.Dbsongs.Where(s => s.PlaylistId == playlist.Id).ToList();
         }
-        public Dbsong AddSongToPlaylist(string id, string songID, string listTitle)
+        public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle)
         {
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
-            APISong song = GetSongDetails(songID);
             Dbsong dbSong = new Dbsong()
             {
                 PlaylistId = playlist.Id,
@@ -77,32 +76,6 @@ namespace Musicians_Pocket_Knife.Repositories
             context.Dbsongs.Add(dbSong);
             context.SaveChanges();
             return dbSong;
-        }
-        public APISong GetSongDetails(string SongId)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://api.getsongbpm.com/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
-                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
-
-
-                string endpoint = "song/";
-                string key = Secret.apiKey;
-                string url = endpoint+$"?api_key={key}&id={SongId}";
-                //GET Method
-                HttpResponseMessage response = client.GetAsync(url).GetAwaiter().GetResult();
-                if (response.IsSuccessStatusCode)
-                {
-                    var JSONstring = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-                    return JsonConvert.DeserializeObject<APISong>(JSONstring);
-                }
-                else
-                {
-                    return null;
-                }
-            }
         }
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
         {
