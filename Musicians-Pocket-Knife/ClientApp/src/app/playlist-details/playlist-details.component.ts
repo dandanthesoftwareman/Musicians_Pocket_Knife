@@ -22,6 +22,10 @@ export class PlaylistDetailsComponent implements OnInit {
   listTitle: string =  "";
   listSongs: DbSong[] = {} as DbSong[];
 
+  sharpKeys: string[] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+  //so far API only uses sharp keys, leaving flat keys array here for later use if need be
+  //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
+
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.user = user;
@@ -44,5 +48,31 @@ RemoveSongFromPlaylist(songID:number):void{
     });
     this.changeDetection.detectChanges();
   });
+}
+
+TransposeDown(transposedKey:string):void{
+  let key:string = "";
+  let keyIndex:number;
+  if(transposedKey.includes("m")){
+    key = transposedKey.substring(0,transposedKey.indexOf("m"));
+    keyIndex = this.sharpKeys.indexOf(key);
+  }
+  else{
+    key = transposedKey.substring(0,1);
+    keyIndex = this.sharpKeys.indexOf(key);
+  }
+}
+
+TransposeUp(transposedKey:string):void{
+  let key:string = "";
+  let keyIndex:number;
+  if(transposedKey.includes("m")){
+    key = transposedKey.substring(0,transposedKey.indexOf("m"));
+    keyIndex = this.sharpKeys.indexOf(key);
+  }
+  else{
+    key = transposedKey.substring(0,1);
+    keyIndex = this.sharpKeys.indexOf(key);
+  }
 }
 }

@@ -1,7 +1,12 @@
 <div *ngIf="loggedIn">
   <div *ngFor="let song of listSongs">
     <p>
-      {{ song.title }} || {{ song.artist }} || Key:{{ song.originalKey }} ||
+      {{ song.title }} || {{ song.artist }} ||
+      <button (click)="TransposeDown(song.transposedKey)">
+        Transpose Down
+      </button>
+      Key:{{ song.originalKey }}
+      <button (click)="TransposeUp(song.transposedKey)">Transpose Up</button>||
       {{ song.tempo }} BPM
     </p>
     <button (click)="RemoveSongFromPlaylist(song.id)">Remove</button>

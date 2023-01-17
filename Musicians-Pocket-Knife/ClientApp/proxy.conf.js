@@ -7,7 +7,8 @@ const PROXY_CONFIG = [
   {
     context: [
       "/api/Users",
-      "/api/Playlist"
+      "/api/Playlist",
+      "/api/Song"
    ],
     target: target,
     secure: false,
