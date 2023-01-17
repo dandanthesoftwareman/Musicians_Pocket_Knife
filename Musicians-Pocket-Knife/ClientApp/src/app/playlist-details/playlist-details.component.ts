@@ -50,29 +50,61 @@ RemoveSongFromPlaylist(songID:number):void{
   });
 }
 
-TransposeDown(transposedKey:string):void{
+TransposeDown(transposedKey:string, songID:string):void{
   let key:string = "";
   let keyIndex:number;
   if(transposedKey.includes("m")){
     key = transposedKey.substring(0,transposedKey.indexOf("m"));
-    keyIndex = this.sharpKeys.indexOf(key);
+    keyIndex = this.sharpKeys.indexOf(key)-1;
+    if(keyIndex < 0){
+      keyIndex += 12;
+    }
+    if(keyIndex > 12){
+      keyIndex -= 12;
+    }
+    key = this.sharpKeys[keyIndex] + "m";
+    console.log(key);
   }
   else{
-    key = transposedKey.substring(0,1);
-    keyIndex = this.sharpKeys.indexOf(key);
+    key = transposedKey;
+    keyIndex = this.sharpKeys.indexOf(key)-1;
+    if(keyIndex < 0){
+      keyIndex += 12;
+    }
+    if(keyIndex > 12){
+      keyIndex -= 12;
+    }
+    key = this.sharpKeys[keyIndex];
+    console.log(key);
   }
 }
 
-TransposeUp(transposedKey:string):void{
+TransposeUp(transposedKey:string, songID:string):void{
   let key:string = "";
   let keyIndex:number;
   if(transposedKey.includes("m")){
     key = transposedKey.substring(0,transposedKey.indexOf("m"));
-    keyIndex = this.sharpKeys.indexOf(key);
+    keyIndex = this.sharpKeys.indexOf(key) +1;
+    if(keyIndex < 0){
+      keyIndex += 12;
+    }
+    if(keyIndex > 12){
+      keyIndex -= 12;
+    }
+    key = this.sharpKeys[keyIndex] + "m";
+    console.log(key);
   }
   else{
-    key = transposedKey.substring(0,1);
-    keyIndex = this.sharpKeys.indexOf(key);
+    key = transposedKey;
+    keyIndex = this.sharpKeys.indexOf(key)+1;
+    if(keyIndex < 0){
+      keyIndex += 12;
+    }
+    if(keyIndex > 12){
+      keyIndex -= 12;
+    }
+    key = this.sharpKeys[keyIndex];
+    console.log(key);
   }
 }
 }
