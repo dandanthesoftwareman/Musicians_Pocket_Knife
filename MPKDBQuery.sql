@@ -5,7 +5,7 @@
 --GoogleID NVARCHAR(255) NOT NULL
 --);
 
-SELECT * FROM Users;
+--SELECT * FROM Users;
 --DELETE FROM Users
 --WHERE id = 1;
 
@@ -16,8 +16,8 @@ SELECT * FROM Users;
 --UserId INT FOREIGN KEY REFERENCES Users(id)
 --);
 
-SELECT * FROM Playlists;
-SELECT * FROM DBSongs;
+--SELECT * FROM Playlists WHERE Id = 7;
+--SELECT * FROM DBSongs WHERE PlaylistId = 7;
 
 --CREATE TABLE DBSongs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,

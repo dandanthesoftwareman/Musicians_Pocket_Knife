@@ -4,6 +4,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DbSong } from '../db-song';
 import { PlaylistService } from '../playlist.service';
+import { SongService } from '../song.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { UserService } from '../user.service';
 })
 export class PlaylistDetailsComponent implements OnInit {
 
-  constructor(private http:HttpClient, private authService:SocialAuthService, private playlistService: PlaylistService,
+  constructor(private http:HttpClient, private authService:SocialAuthService, private playlistService: PlaylistService, private songService:SongService,
     private route: ActivatedRoute, private changeDetection: ChangeDetectorRef) { }
 
   user: SocialUser = {} as SocialUser;
@@ -22,7 +23,7 @@ export class PlaylistDetailsComponent implements OnInit {
   listTitle: string =  "";
   listSongs: DbSong[] = {} as DbSong[];
 
-  sharpKeys: string[] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+  sharpKeys: string[] = ["A", "A\#", "B", "C", "C\#", "D", "D\#", "E", "F", "F\#", "G", "G\#"];
   //so far API only uses sharp keys, leaving flat keys array here for later use if need be
   //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
 
@@ -50,7 +51,9 @@ RemoveSongFromPlaylist(songID:number):void{
   });
 }
 
-TransposeDown(transposedKey:string, songID:string):void{
+//Transpose methods remove transposedKey's tonality, find transposedKey's index within the sharp/flat keys array, increment by one index
+//then passes new the new key "key" back to the DB to patch
+TransposeDown(transposedKey:string, apiid:string):void{
   let key:string = "";
   let keyIndex:number;
   if(transposedKey.includes("m")){
@@ -77,9 +80,15 @@ TransposeDown(transposedKey:string, songID:string):void{
     key = this.sharpKeys[keyIndex];
     console.log(key);
   }
+  this.songService.TransposeDown(apiid, this.listTitle, key).subscribe((response:any) => {
+    console.log(response);
+  })
+  this.changeDetection.detectChanges();
 }
 
-TransposeUp(transposedKey:string, songID:string):void{
+//Transpose methods remove transposedKey's tonality, find transposedKey's index within the sharp/flat keys array, increment by one index
+//then passes new the new key "key" back to the DB to patch
+TransposeUp(transposedKey:string, apiid:string):void{
   let key:string = "";
   let keyIndex:number;
   if(transposedKey.includes("m")){
@@ -105,6 +114,9 @@ TransposeUp(transposedKey:string, songID:string):void{
     }
     key = this.sharpKeys[keyIndex];
     console.log(key);
+    this.songService.TransposeUp(apiid, this.listTitle, key).subscribe((response:any) => {
+      console.log(response);
+    })
   }
 }
 }

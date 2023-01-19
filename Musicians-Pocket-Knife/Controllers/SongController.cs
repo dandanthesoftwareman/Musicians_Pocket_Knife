@@ -16,5 +16,15 @@ namespace Musicians_Pocket_Knife.Controllers
         {
             return repository.GetDBSongDetails(id, songID, listTitle);
         }
+        [HttpPatch("TransposeDown")]
+        public Dbsong TransposeDown(string apiid, string listTitle, string newKey, string id)
+        {
+            return repository.TransposeDown(apiid, listTitle, newKey, id);
+        }
+        [HttpPatch("TransposeUp")]
+        public Dbsong TransposeUp(string apiid, string listTitle, string newKey, string id)
+        {
+            return repository.TransposeUp(apiid, listTitle, newKey, id);
+        }
     }
 }

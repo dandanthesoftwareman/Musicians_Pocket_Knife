@@ -7,6 +7,8 @@ namespace Musicians_Pocket_Knife.Repositories
     public class DBRepository
     {
         MpkdbContext context = new MpkdbContext();
+
+        //PLAYLIST Methods
         public Playlist CreatePlaylist(string listTitle, string id)
         {
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
@@ -77,13 +79,8 @@ namespace Musicians_Pocket_Knife.Repositories
             context.SaveChanges();
             return dbSong;
         }
-        public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
-        {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
-            return context.Dbsongs.FirstOrDefault(s => s.Apiid == songID);
-        }
         public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
+
         {
             User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
@@ -91,6 +88,41 @@ namespace Musicians_Pocket_Knife.Repositories
             if(song != null)
             {
                 context.Remove(song);
+                context.SaveChanges();
+                return song;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        //SONG Methods
+        public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            return context.Dbsongs.FirstOrDefault(s => s.Apiid == songID);
+        }
+        public Dbsong TransposeUp(string apiid, string listTitle, string newKey, string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            Dbsong song = context.Dbsongs.FirstOrDefault(s => s.Apiid==apiid && s.PlaylistId==playlist.Id);
+            song.TransposedKey = newKey;
+            context.Dbsongs.Update(song);
+            context.SaveChanges();
+            return song;
+
+        }
+        public Dbsong TransposeDown(string apiid, string listTitle, string newKey, string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            Dbsong song = context.Dbsongs.FirstOrDefault(s => s.Apiid==apiid && s.PlaylistId==playlist.Id);
+            if (song != null)
+            {
+                song.TransposedKey = newKey;
                 context.SaveChanges();
                 return song;
             }
