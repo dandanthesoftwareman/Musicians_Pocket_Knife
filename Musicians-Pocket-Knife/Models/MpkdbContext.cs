@@ -23,7 +23,7 @@ public partial class MpkdbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=mpkserver.database.windows.net;Initial Catalog=MPKDB; User Id=mpkdbadmin; Password=#mpklogin633;");
+        => optionsBuilder.UseSqlServer($"Data Source={Secret.server};Initial Catalog=MPKDB; User Id={Secret.username}; Password={Secret.password};");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -19,6 +19,8 @@
 --SELECT * FROM Playlists WHERE Id = 7;
 --SELECT * FROM DBSongs WHERE PlaylistId = 7;
 
+--DELETE FROM DBSongs WHERE PlaylistId = 7;
+
 --CREATE TABLE DBSongs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
 --PlaylistId INT FOREIGN KEY REFERENCES Playlists(id),
