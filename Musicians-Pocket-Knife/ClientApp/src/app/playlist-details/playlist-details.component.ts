@@ -109,4 +109,9 @@ DiscardChanges(){
 EnableTranspose(){
   this.TransposeEnabled = !this.TransposeEnabled;
 }
+RestoreOriginalKeys(){
+  this.listSongs.forEach((song) => {
+    song.transposedKey = song.originalKey;
+  });
+}
 }

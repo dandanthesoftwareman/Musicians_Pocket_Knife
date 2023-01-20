@@ -5,6 +5,7 @@
   <div [hidden]="!TransposeEnabled">
     <button (click)="SaveTransposeChanges()">Save Changes</button>
     <button (click)="DiscardChanges()">Discard Changes</button>
+    <button (click)="RestoreOriginalKeys()">Revert All To Original</button>
   </div>
   <div *ngFor="let song of listSongs">
     <p>
@@ -15,12 +16,7 @@
       >
         Transpose Down
       </button>
-      <span *ngIf="song.originalKey == song.transposedKey"
-        >Key:{{ song.originalKey }}</span
-      >
-      <span *ngIf="song.originalKey != song.transposedKey"
-        >Key:{{ song.transposedKey }}</span
-      >
+      <span>Key:{{ song.transposedKey }}</span>
       <button
         [hidden]="!TransposeEnabled"
         (click)="TransposeUp(song.transposedKey, song.apiid)"
