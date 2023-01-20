@@ -105,4 +105,7 @@ SaveTransposeChanges(){
   this.songService.SaveTransposeChanges(this.listSongs, this.listTitle).subscribe((response:void)=>{
   });
 }
+DiscardChanges(){
+  this.ngOnInit();
+}
 }
