@@ -1,6 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DbSong } from '../db-song';
 import { PlaylistService } from '../playlist.service';
@@ -42,6 +43,10 @@ export class PlaylistDetailsComponent implements OnInit {
       })
 }
 
+RenamePlaylist(form:NgForm):any{
+  return this.playlistService.RenamePlaylist(this.listTitle, form.form.value.newListTitle).subscribe((response:any) => {
+  })
+}
 RemoveSongFromPlaylist(songID:number):void{
   this.playlistService.RemoveSongFromPlaylist(songID, this.listTitle).subscribe((response:any)=>{
     this.listSongs = [];

@@ -38,4 +38,8 @@ export class PlaylistService {
   RemoveSongFromPlaylist(songID:number, listTitle:string):any{
     return this.http.delete(`${this.baseUrl}${this.endpoint}/RemoveSongFromPlaylist?songID=${songID}&id=${UserService.user.id}&listTitle=${listTitle}`)
   }
+
+  RenamePlaylist(oldTitle:string, newtitle:string):any{
+    this.http.patch(`${this.baseUrl}${this.endpoint}/RenamePlaylist?listid=${oldTitle}&newTitle=${newtitle}&id=${UserService.user.id}`, {})
+  }
 }
