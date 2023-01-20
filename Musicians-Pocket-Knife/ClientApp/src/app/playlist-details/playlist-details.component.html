@@ -1,6 +1,6 @@
 <div *ngIf="loggedIn">
   <h1>{{ listTitle }}</h1>
-  <div>
+  <div [hidden]="!toggleRenamePlaylist">
     <form
       #renamePlaylistForm="ngForm"
       (ngSubmit)="RenamePlaylist(renamePlaylistForm)"
@@ -14,6 +14,9 @@
       />
       <input id="RenamePlaylistButton" type="submit" />
     </form>
+  </div>
+  <div [hidden]="toggleRenamePlaylist">
+    <button (click)="ToggleRenamePlaylist()">Rename</button>
   </div>
   <div [hidden]="TransposeEnabled">
     <button (click)="EnableTranspose()">Transpose</button>

@@ -40,6 +40,6 @@ export class PlaylistService {
   }
 
   RenamePlaylist(oldTitle:string, newtitle:string):any{
-    this.http.patch(`${this.baseUrl}${this.endpoint}/RenamePlaylist?listid=${oldTitle}&newTitle=${newtitle}&id=${UserService.user.id}`, {})
+    return this.http.patch(`${this.baseUrl}${this.endpoint}/RenamePlaylist?oldTitle=${oldTitle}&newTitle=${newtitle}&id=${UserService.user.id}`, {})
   }
 }

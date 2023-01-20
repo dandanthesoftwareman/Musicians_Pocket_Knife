@@ -16,6 +16,11 @@ namespace Musicians_Pocket_Knife.Controllers
         {
             return repository.CreatePlaylist(listTitle, id);
         }
+        [HttpPatch("RenamePlaylist")]
+        public Playlist RenamePlaylist(string oldTitle, string newTitle, string id)
+        {
+            return repository.RenamePlaylist(oldTitle, newTitle, id);
+        }
         [HttpDelete("DeletePlaylist")]
         public Playlist DeletePlaylist(string listTitle, string id)
         {
@@ -50,7 +55,6 @@ namespace Musicians_Pocket_Knife.Controllers
             }
             
         }
-
         [HttpDelete("RemoveSongFromPlaylist")]
         public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
         {

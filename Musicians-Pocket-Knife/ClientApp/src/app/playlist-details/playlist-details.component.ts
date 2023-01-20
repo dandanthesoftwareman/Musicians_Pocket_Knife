@@ -23,6 +23,7 @@ export class PlaylistDetailsComponent implements OnInit {
 
   listTitle: string =  "";
   TransposeEnabled:boolean = false;
+  toggleRenamePlaylist:boolean = false;
 
   listSongs: DbSong[] = {} as DbSong[];
   sharpKeys: string[] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
@@ -44,8 +45,16 @@ export class PlaylistDetailsComponent implements OnInit {
 }
 
 RenamePlaylist(form:NgForm):any{
-  return this.playlistService.RenamePlaylist(this.listTitle, form.form.value.newListTitle).subscribe((response:any) => {
+  this.ToggleRenamePlaylist();
+  let newTitle = form.form.value.newListTitle;
+  return this.playlistService.RenamePlaylist(this.listTitle, newTitle).subscribe((response:any) => {
+    this.listTitle = newTitle;
+    this.changeDetection.detectChanges();
   })
+}
+ToggleRenamePlaylist():any{
+  this.toggleRenamePlaylist = !this.toggleRenamePlaylist;
+  // this.changeDetection.detectChanges();
 }
 RemoveSongFromPlaylist(songID:number):void{
   this.playlistService.RemoveSongFromPlaylist(songID, this.listTitle).subscribe((response:any)=>{
