@@ -1,10 +1,18 @@
 <div *ngIf="loggedIn">
-  <button (click)="SaveTransposeChanges()">Save Transpose Changes</button>
-  <button (click)="DiscardChanges()">Discard Changes</button>
+  <div [hidden]="TransposeEnabled">
+    <button (click)="EnableTranspose()">Transpose</button>
+  </div>
+  <div [hidden]="!TransposeEnabled">
+    <button (click)="SaveTransposeChanges()">Save Changes</button>
+    <button (click)="DiscardChanges()">Discard Changes</button>
+  </div>
   <div *ngFor="let song of listSongs">
     <p>
       {{ song.title }} || {{ song.artist }} ||
-      <button (click)="TransposeDown(song.transposedKey, song.apiid)">
+      <button
+        [hidden]="!TransposeEnabled"
+        (click)="TransposeDown(song.transposedKey, song.apiid)"
+      >
         Transpose Down
       </button>
       <span *ngIf="song.originalKey == song.transposedKey"
@@ -13,7 +21,10 @@
       <span *ngIf="song.originalKey != song.transposedKey"
         >Key:{{ song.transposedKey }}</span
       >
-      <button (click)="TransposeUp(song.transposedKey, song.apiid)">
+      <button
+        [hidden]="!TransposeEnabled"
+        (click)="TransposeUp(song.transposedKey, song.apiid)"
+      >
         Transpose Up</button
       >|| {{ song.tempo }} BPM
     </p>

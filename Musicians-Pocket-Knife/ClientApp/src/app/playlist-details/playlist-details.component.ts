@@ -21,8 +21,9 @@ export class PlaylistDetailsComponent implements OnInit {
   loggedIn: boolean = false;
 
   listTitle: string =  "";
-  listSongs: DbSong[] = {} as DbSong[];
+  TransposeEnabled:boolean = false;
 
+  listSongs: DbSong[] = {} as DbSong[];
   sharpKeys: string[] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
   //so far API only uses sharp keys, leaving flat keys array here for later use if need be
   //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
@@ -51,8 +52,7 @@ RemoveSongFromPlaylist(songID:number):void{
   });
 }
 
-//Transpose methods remove transposedKey's tonality, find transposedKey's index within the sharp/flat keys array, increment by one index
-//then passes new the new key "key" back to the DB to patch
+//TRANSPOSE METHODS
 TransposeDown(transposedKey:string, apiid:string):void{
   let key:string = "";
   let keyIndex:number;
@@ -75,9 +75,6 @@ TransposeDown(transposedKey:string, apiid:string):void{
   }
   this.listSongs[songIndex].transposedKey = key;
 }
-
-//Transpose methods remove transposedKey's tonality, find transposedKey's index within the sharp/flat keys array, increment by one index
-//then passes new the new key "key" back to the DB to patch
 TransposeUp(transposedKey:string, apiid:string):void{
   let key:string = "";
   let keyIndex:number;
@@ -100,12 +97,16 @@ TransposeUp(transposedKey:string, apiid:string):void{
   }
   this.listSongs[songIndex].transposedKey = key;
 }
-
 SaveTransposeChanges(){
   this.songService.SaveTransposeChanges(this.listSongs, this.listTitle).subscribe((response:void)=>{
   });
+  this.EnableTranspose();
 }
 DiscardChanges(){
   this.ngOnInit();
+  this.EnableTranspose();
+}
+EnableTranspose(){
+  this.TransposeEnabled = !this.TransposeEnabled;
 }
 }
