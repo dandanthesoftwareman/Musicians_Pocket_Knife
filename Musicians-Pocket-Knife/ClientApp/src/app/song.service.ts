@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { DbSong } from './db-song';
 import { UserService } from './user.service';
 
 
@@ -12,10 +13,9 @@ export class SongService {
 
   endpoint:string = "api/Song"
 
-  TransposeUp(apiid:string, listTitle:string, newKey:string):any{
-    return this.http.patch(`${this.baseUrl}${this.endpoint}/TransposeUp?apiid=${apiid}&listTitle=${listTitle}&newKey=${newKey}&id=${UserService.user.id}`, {});
-  }
-  TransposeDown(apiid:string, listTitle:string, newKey:string):any{
-    return this.http.patch(`${this.baseUrl}${this.endpoint}/TransposeDown?apiid=${apiid}&listTitle=${listTitle}&newKey=${newKey}&id=${UserService.user.id}`, {});
+  SaveTransposeChanges(songs:DbSong[], listTitle:string):any{
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(songs);
+    return this.http.patch(`${this.baseUrl}${this.endpoint}/SaveTransposeChanges?listTitle=${listTitle}&id=${UserService.user.id}`, body, {'headers': headers})
   }
 }

@@ -5,7 +5,7 @@
 --GoogleID NVARCHAR(255) NOT NULL
 --);
 
---SELECT * FROM Users;
+SELECT * FROM Users;
 --DELETE FROM Users
 --WHERE id = 1;
 
@@ -16,8 +16,8 @@
 --UserId INT FOREIGN KEY REFERENCES Users(id)
 --);
 
---SELECT * FROM Playlists WHERE Id = 7;
---SELECT * FROM DBSongs WHERE PlaylistId = 7;
+SELECT * FROM Playlists WHERE Id = 7;
+SELECT * FROM DBSongs WHERE PlaylistId = 7;
 
 --DELETE FROM DBSongs WHERE PlaylistId = 7;
 

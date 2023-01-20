@@ -26,5 +26,10 @@ namespace Musicians_Pocket_Knife.Controllers
         {
             return repository.TransposeUp(apiid, listTitle, newKey, id);
         }
+        [HttpPatch("SaveTransposeChanges")]
+        public void SaveTransposeChanges([FromBody]List<Dbsong> songs, string listTitle, string id)
+        {
+            repository.SaveTransposeChanges(songs, listTitle, id);
+        }
     }
 }

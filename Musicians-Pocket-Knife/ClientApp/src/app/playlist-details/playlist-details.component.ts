@@ -2,7 +2,6 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Console } from 'console';
 import { DbSong } from '../db-song';
 import { PlaylistService } from '../playlist.service';
 import { SongService } from '../song.service';
@@ -24,7 +23,7 @@ export class PlaylistDetailsComponent implements OnInit {
   listTitle: string =  "";
   listSongs: DbSong[] = {} as DbSong[];
 
-  sharpKeys: string[] = ["A", "As", "B", "C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs"];
+  sharpKeys: string[] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
   //so far API only uses sharp keys, leaving flat keys array here for later use if need be
   //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
 
@@ -73,8 +72,8 @@ TransposeDown(transposedKey:string, apiid:string):void{
       keyIndex += 12;
     }
     key = this.sharpKeys[keyIndex];
-    this.listSongs[songIndex].transposedKey = key;
   }
+  this.listSongs[songIndex].transposedKey = key;
 }
 
 //Transpose methods remove transposedKey's tonality, find transposedKey's index within the sharp/flat keys array, increment by one index
@@ -90,7 +89,6 @@ TransposeUp(transposedKey:string, apiid:string):void{
       keyIndex -= 12;
     }
     key = this.sharpKeys[keyIndex] + "m";
-    this.listSongs[songIndex].transposedKey = key;
   }
   else{
     key = transposedKey;
@@ -99,7 +97,12 @@ TransposeUp(transposedKey:string, apiid:string):void{
       keyIndex -= 12;
     }
     key = this.sharpKeys[keyIndex];
-    this.listSongs[songIndex].transposedKey = key;
   }
+  this.listSongs[songIndex].transposedKey = key;
+}
+
+SaveTransposeChanges(){
+  this.songService.SaveTransposeChanges(this.listSongs, this.listTitle).subscribe((response:void)=>{
+  });
 }
 }

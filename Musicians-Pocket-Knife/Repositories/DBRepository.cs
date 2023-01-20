@@ -131,5 +131,20 @@ namespace Musicians_Pocket_Knife.Repositories
                 return null;
             }
         }
+        public void SaveTransposeChanges(List<Dbsong> songs, string listTitle, string id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            foreach(Dbsong s in songs)
+            {
+                Dbsong dbsong = context.Dbsongs.FirstOrDefault(x => x.Apiid == s.Apiid && x.PlaylistId == s.PlaylistId);
+                if(dbsong.TransposedKey != s.TransposedKey)
+                {
+                    dbsong.TransposedKey = s.TransposedKey;
+                    context.Update(dbsong);
+                    context.SaveChanges();
+                }
+            }
+        }
     }
 }

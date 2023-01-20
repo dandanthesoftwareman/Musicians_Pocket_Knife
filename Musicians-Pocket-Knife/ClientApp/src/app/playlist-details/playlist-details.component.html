@@ -1,4 +1,5 @@
 <div *ngIf="loggedIn">
+  <button (click)="SaveTransposeChanges()">Save Transpose Changes</button>
   <div *ngFor="let song of listSongs">
     <p>
       {{ song.title }} || {{ song.artist }} ||
