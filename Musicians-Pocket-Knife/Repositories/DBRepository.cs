@@ -61,9 +61,7 @@ namespace Musicians_Pocket_Knife.Repositories
         }
         public List<Dbsong> ViewPlaylistDetails(string title, string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == title && p.UserId == user.Id);
-            return context.Dbsongs.Where(s => s.PlaylistId == playlist.Id).ToList();
+            return context.Dbsongs.Where(s => s.Playlist.ListTitle == title && s.Playlist.User.GoogleId == id).ToList();
         }
         public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle)
         {
