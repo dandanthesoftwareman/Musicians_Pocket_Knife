@@ -17,9 +17,9 @@ namespace Musicians_Pocket_Knife.Controllers
             return repository.GetDBSongDetails(id, songID, listTitle);
         }
         [HttpPatch("SaveTransposeChanges")]
-        public void SaveTransposeChanges([FromBody]List<Dbsong> songs, string listTitle, string id)
+        public void SaveTransposeChanges([FromBody]List<Dbsong> songs)
         {
-            repository.SaveTransposeChanges(songs, listTitle, id);
+            repository.SaveTransposeChanges(songs);
         }
     }
 }

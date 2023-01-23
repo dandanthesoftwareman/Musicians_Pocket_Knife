@@ -16,6 +16,6 @@ export class SongService {
   SaveTransposeChanges(songs:DbSong[], listTitle:string):any{
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(songs);
-    return this.http.patch(`${this.baseUrl}${this.endpoint}/SaveTransposeChanges?listTitle=${listTitle}&id=${UserService.user.id}`, body, {'headers': headers})
+    return this.http.patch(`${this.baseUrl}${this.endpoint}/SaveTransposeChanges`, body, {'headers': headers})
   }
 }
