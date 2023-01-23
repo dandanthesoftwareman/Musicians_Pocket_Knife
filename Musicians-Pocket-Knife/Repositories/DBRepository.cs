@@ -109,9 +109,7 @@ namespace Musicians_Pocket_Knife.Repositories
         //SONG Methods
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
-            return context.Dbsongs.FirstOrDefault(s => s.Apiid == songID);
+            return context.Dbsongs.FirstOrDefault(s => s.Apiid == songID && s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
         }
         public void SaveTransposeChanges(List<Dbsong> songs)
         {
