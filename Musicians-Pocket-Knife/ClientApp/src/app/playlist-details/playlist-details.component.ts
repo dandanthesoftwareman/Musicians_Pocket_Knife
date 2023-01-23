@@ -26,7 +26,7 @@ export class PlaylistDetailsComponent implements OnInit {
   toggleRenamePlaylist:boolean = false;
 
   listSongs: DbSong[] = {} as DbSong[];
-  sharpKeys: string[] = ["A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"];
+  sharpKeys: string[] = ["A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯"];
   //so far API only uses sharp keys, leaving flat keys array here for later use if need be
   //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
 
