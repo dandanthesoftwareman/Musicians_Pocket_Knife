@@ -56,8 +56,7 @@ namespace Musicians_Pocket_Knife.Repositories
         }
         public List<Playlist> GetUserPlaylists(string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            return context.Playlists.Where(u => u.UserId == user.Id).ToList();
+            return context.Playlists.Where(u => u.User.GoogleId == id).ToList();
         }
         public List<Dbsong> ViewPlaylistDetails(string title, string id)
         {
