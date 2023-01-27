@@ -89,9 +89,8 @@ namespace Musicians_Pocket_Knife.Repositories
         public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
 
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
-            Dbsong song = context.Dbsongs.FirstOrDefault(s => s.Id == songID);
+            Dbsong song = context.Dbsongs.FirstOrDefault(s => s.Id == songID &&
+            s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
             if (song != null)
             {
                 context.Remove(song);
