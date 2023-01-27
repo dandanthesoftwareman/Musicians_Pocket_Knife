@@ -38,10 +38,9 @@ namespace Musicians_Pocket_Knife.Repositories
             context.SaveChanges();
             return playlist;
         }
-        public Playlist DeletePlaylist(string listTitle, string id)
+        public void DeletePlaylist(string listTitle, string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(x => x.ListTitle == listTitle && x.UserId == user.Id);
+            Playlist playlist = context.Playlists.FirstOrDefault(x => x.ListTitle == listTitle && x.User.GoogleId == id);
             List<Dbsong> songs = context.Dbsongs.Where(x => x.PlaylistId == playlist.Id).ToList();
             if (songs != null)
             {
@@ -52,7 +51,6 @@ namespace Musicians_Pocket_Knife.Repositories
             }
             context.Remove(playlist);
             context.SaveChanges();
-            return playlist;
         }
         public List<Playlist> GetUserPlaylists(string id)
         {

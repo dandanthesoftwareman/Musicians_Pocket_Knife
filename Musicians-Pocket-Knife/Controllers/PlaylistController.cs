@@ -22,9 +22,9 @@ namespace Musicians_Pocket_Knife.Controllers
             return repository.RenamePlaylist(oldTitle, newTitle, id);
         }
         [HttpDelete("DeletePlaylist")]
-        public Playlist DeletePlaylist(string listTitle, string id)
+        public void DeletePlaylist(string listTitle, string id)
         {
-            return repository.DeletePlaylist(listTitle, id);
+            repository.DeletePlaylist(listTitle, id);
         }
 
         [HttpGet("GetUserPlaylists")]
