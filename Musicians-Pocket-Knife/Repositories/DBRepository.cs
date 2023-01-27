@@ -65,8 +65,7 @@ namespace Musicians_Pocket_Knife.Repositories
         }
         public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.UserId == user.Id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.User.GoogleId == id);
             Dbsong dbSong = new Dbsong()
             {
                 PlaylistId = playlist.Id,
