@@ -31,8 +31,7 @@ namespace Musicians_Pocket_Knife.Repositories
         }
         public Playlist RenamePlaylist(string oldTitle, string newTitle, string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == oldTitle && p.UserId == user.Id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == oldTitle && p.User.GoogleId == id);
             playlist.ListTitle = newTitle;
             context.Update(playlist);
             context.SaveChanges();
