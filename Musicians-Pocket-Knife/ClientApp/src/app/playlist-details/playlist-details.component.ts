@@ -117,7 +117,7 @@ TransposeUp(transposedKey:string, apiid:string):void{
   this.listSongs[songIndex].transposedKey = key;
 }
 SaveTransposeChanges(){
-  this.songService.SaveTransposeChanges(this.listSongs, this.listTitle).subscribe((response:void)=>{
+  this.songService.SaveTransposeChanges(this.listSongs).subscribe((response:void)=>{
   });
   this.EnableTranspose();
 }
