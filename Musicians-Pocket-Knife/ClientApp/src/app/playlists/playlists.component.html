@@ -18,7 +18,7 @@
 </form>
 
 <div *ngFor="let p of userPlaylists">
-  <a routerLink="/PlaylistDetails/{{ p.listTitle }}">
+  <a routerLink="/PlaylistDetails/{{ p.id }}">
     {{ p.listTitle }}
   </a>
   <button (click)="DeletePlaylist(p.listTitle)">Delete</button>

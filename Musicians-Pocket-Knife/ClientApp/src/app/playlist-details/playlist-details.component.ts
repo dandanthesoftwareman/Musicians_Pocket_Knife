@@ -21,6 +21,7 @@ export class PlaylistDetailsComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
+  listId:number = {} as number;
   listTitle: string =  "";
   TransposeEnabled:boolean = false;
   toggleRenamePlaylist:boolean = false;
@@ -37,8 +38,12 @@ export class PlaylistDetailsComponent implements OnInit {
       this.loggedIn = (user != null);
   })
   let params = this.route.snapshot.paramMap;
-      this.listTitle = String(params.get("listTitle"));
-      this.playlistService.ViewPlaylistDetails(this.listTitle).subscribe((response:DbSong[])=>{
+      let listId = Number(params.get("listId"));
+      this.listId = listId;
+      this.playlistService.GetListTitle(listId).subscribe((response:any) => {
+        this.listTitle = response.listTitle;
+      })
+      this.playlistService.ViewPlaylistDetails(listId).subscribe((response:DbSong[])=>{
         this.listSongs = response;
         console.log(this.listSongs);
       })
@@ -47,7 +52,7 @@ export class PlaylistDetailsComponent implements OnInit {
 RenamePlaylist(form:NgForm):any{
   this.ToggleRenamePlaylist();
   let newTitle = form.form.value.newListTitle;
-  return this.playlistService.RenamePlaylist(this.listTitle, newTitle).subscribe((response:any) => {
+  return this.playlistService.RenamePlaylist(this.listId, newTitle).subscribe((response:any) => {
     this.listTitle = newTitle;
     this.changeDetection.detectChanges();
   })
@@ -59,7 +64,7 @@ ToggleRenamePlaylist():any{
 RemoveSongFromPlaylist(songID:number):void{
   this.playlistService.RemoveSongFromPlaylist(songID, this.listTitle).subscribe((response:any)=>{
     this.listSongs = [];
-    this.playlistService.ViewPlaylistDetails(this.listTitle).subscribe((response:any)=>{
+    this.playlistService.ViewPlaylistDetails(this.listId).subscribe((response:any)=>{
       this.listSongs = response;
     });
     this.changeDetection.detectChanges();

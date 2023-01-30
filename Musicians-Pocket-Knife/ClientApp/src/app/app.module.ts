@@ -36,7 +36,7 @@ import { PlaylistDetailsComponent } from './playlist-details/playlist-details.co
       { path: 'Findsong', component: FindsongComponent},
       { path: 'SongDetails/:id', component: SongDetailsComponent},
       { path: 'Playlists', component: PlaylistsComponent},
-      { path: 'PlaylistDetails/:listTitle', component: PlaylistDetailsComponent}
+      { path: 'PlaylistDetails/:listId', component: PlaylistDetailsComponent}
     ])
   ],
   providers: [

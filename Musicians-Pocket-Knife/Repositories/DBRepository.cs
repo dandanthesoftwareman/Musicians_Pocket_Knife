@@ -29,9 +29,9 @@ namespace Musicians_Pocket_Knife.Repositories
             }
 
         }
-        public Playlist RenamePlaylist(string oldTitle, string newTitle, string id)
+        public Playlist RenamePlaylist(int listId, string newTitle, string id)
         {
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == oldTitle && p.User.GoogleId == id);
+            Playlist playlist = context.Playlists.FirstOrDefault(p => p.Id == listId && p.User.GoogleId == id);
             playlist.ListTitle = newTitle;
             context.Update(playlist);
             context.SaveChanges();
@@ -55,9 +55,13 @@ namespace Musicians_Pocket_Knife.Repositories
         {
             return context.Playlists.Where(u => u.User.GoogleId == id).ToList();
         }
-        public List<Dbsong> ViewPlaylistDetails(string title, string id)
+        public Playlist GetListTitle(int listId, string id)
         {
-            return context.Dbsongs.Where(s => s.Playlist.ListTitle == title && s.Playlist.User.GoogleId == id).ToList();
+            return context.Playlists.FirstOrDefault(p => p.Id==listId && p.User.GoogleId == id);
+        }
+        public List<Dbsong> ViewPlaylistDetails(int listId, string id)
+        {
+            return context.Dbsongs.Where(s => s.Playlist.Id == listId && s.Playlist.User.GoogleId == id).ToList();
         }
         public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle)
         {

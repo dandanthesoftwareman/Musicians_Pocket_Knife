@@ -25,8 +25,12 @@ export class PlaylistService {
     return this.http.get(`${this.baseUrl}${this.endpoint}/GetUserPlaylists?&id=${UserService.user.id}`);
   }
 
-  ViewPlaylistDetails(listTitle:string):any{
-    return this.http.get(`${this.baseUrl}${this.endpoint}/ViewPlaylistDetails?title=${listTitle}&id=${UserService.user.id}`);
+  GetListTitle(listId:number):any{
+    return this.http.get(`${this.baseUrl}${this.endpoint}/GetListTitle?listId=${listId}&id=${UserService.user.id}`);
+  }
+
+  ViewPlaylistDetails(listId:number):any{
+    return this.http.get(`${this.baseUrl}${this.endpoint}/ViewPlaylistDetails?listId=${listId}&id=${UserService.user.id}`);
   }
 
   AddSongToPlaylist(song:Song, listTitle:string):any{
@@ -39,7 +43,7 @@ export class PlaylistService {
     return this.http.delete(`${this.baseUrl}${this.endpoint}/RemoveSongFromPlaylist?songID=${songID}&id=${UserService.user.id}&listTitle=${listTitle}`)
   }
 
-  RenamePlaylist(oldTitle:string, newtitle:string):any{
-    return this.http.patch(`${this.baseUrl}${this.endpoint}/RenamePlaylist?oldTitle=${oldTitle}&newTitle=${newtitle}&id=${UserService.user.id}`, {})
+  RenamePlaylist(listId:number, newtitle:string):any{
+    return this.http.patch(`${this.baseUrl}${this.endpoint}/RenamePlaylist?listId=${listId}&newTitle=${newtitle}&id=${UserService.user.id}`, {})
   }
 }

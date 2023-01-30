@@ -17,16 +17,20 @@ namespace Musicians_Pocket_Knife.Controllers
             return repository.CreatePlaylist(listTitle, id);
         }
         [HttpPatch("RenamePlaylist")]
-        public Playlist RenamePlaylist(string oldTitle, string newTitle, string id)
+        public Playlist RenamePlaylist(int listId, string newTitle, string id)
         {
-            return repository.RenamePlaylist(oldTitle, newTitle, id);
+            return repository.RenamePlaylist(listId, newTitle, id);
         }
         [HttpDelete("DeletePlaylist")]
         public void DeletePlaylist(string listTitle, string id)
         {
             repository.DeletePlaylist(listTitle, id);
         }
-
+        [HttpGet("GetListTitle")]
+        public Playlist GetListTitle(int listId, string id)
+        {
+            return repository.GetListTitle(listId, id);
+        }
         [HttpGet("GetUserPlaylists")]
         public List<Playlist> GetUserPlaylists(string id)
         {
@@ -34,9 +38,9 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpGet("ViewPlaylistDetails")]
-        public List<Dbsong> ViewPlaylistDetails(string title, string id)
+        public List<Dbsong> ViewPlaylistDetails(int listId, string id)
         {
-            return repository.ViewPlaylistDetails(title, id);
+            return repository.ViewPlaylistDetails(listId, id);
         }
 
         [HttpPost("AddSongToPlaylist")]
