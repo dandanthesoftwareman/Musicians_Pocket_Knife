@@ -13,7 +13,7 @@ export class SongService {
 
   endpoint:string = "api/Song"
 
-  SaveTransposeChanges(songs:DbSong[], listTitle:string):any{
+  SaveTransposeChanges(songs:DbSong[]):any{
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(songs);
     return this.http.patch(`${this.baseUrl}${this.endpoint}/SaveTransposeChanges`, body, {'headers': headers})
