@@ -1,8 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Musicians_Pocket_Knife.Models;
+using Musicians_Pocket_Knife.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+string connectionString = builder.Configuration["ConnectionStringMpkdb"];
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<DBRepository>();
+builder.Services.AddDbContext<MpkdbContext>(x => x.UseSqlServer(connectionString));
 
 var app = builder.Build();
 

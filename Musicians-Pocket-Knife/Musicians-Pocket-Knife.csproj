@@ -9,6 +9,7 @@
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <RootNamespace>Musicians_Pocket_Knife</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>836ef23d-8d19-43e7-953a-65f1c9cfa2ee</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

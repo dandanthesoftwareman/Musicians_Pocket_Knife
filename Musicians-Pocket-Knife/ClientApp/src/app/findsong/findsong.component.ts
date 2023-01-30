@@ -42,6 +42,7 @@ export class FindsongComponent implements OnInit {
     let song = form.form.value.searchedSong.trim().replaceAll(' ', '+');
     return this.apiService.getSongArray(song).subscribe((response:any) => {
       this.songArray = response;
+      console.log(response);
     });
   }
 

@@ -9,17 +9,21 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class SongController : ControllerBase
     {
-        DBRepository repository = new DBRepository();
+        public SongController(DBRepository repository)
+        {
+            _repository = repository;
+        }
+        DBRepository _repository;
 
         [HttpGet("GetDBSongDetails")]
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
         {
-            return repository.GetDBSongDetails(id, songID, listTitle);
+            return _repository.GetDBSongDetails(id, songID, listTitle);
         }
         [HttpPatch("SaveTransposeChanges")]
         public void SaveTransposeChanges([FromBody]List<Dbsong> songs)
         {
-            repository.SaveTransposeChanges(songs);
+            _repository.SaveTransposeChanges(songs);
         }
     }
 }

@@ -8,12 +8,16 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        MpkdbContext context = new MpkdbContext();
+        public UsersController(MpkdbContext context)
+        {
+            _context = context;
+        }
+        MpkdbContext _context;
 
         [HttpPost("CreateNewUser")]
         public User CreateNewUser(string googleId, string name)
         {
-            if (context.Users.Any(x => x.GoogleId == googleId))
+            if (_context.Users.Any(x => x.GoogleId == googleId))
             {
                 return null;
             }
@@ -25,8 +29,8 @@ namespace Musicians_Pocket_Knife.Controllers
                     LastName = name.Split('_')[1].ToString(),
                     GoogleId = googleId
                 };
-                context.Users.Add(newUser);
-                context.SaveChanges();
+                _context.Users.Add(newUser);
+                _context.SaveChanges();
                 return newUser;
             }
         }

@@ -12,9 +12,9 @@
       <input id="searchSongButton" type="submit" />
     </form>
   </div>
-  <div *ngFor="let s of songArray.search">
+  <div *ngFor="let s of songArray.search; index as i">
     <div>
-      <p>{{ s.title }}</p>
+      <p>{{ i }}: {{ s.title }}</p>
       <p>{{ s.artist.name }}</p>
     </div>
     <button routerLink="/SongDetails/{{ s.id }}">Details</button>

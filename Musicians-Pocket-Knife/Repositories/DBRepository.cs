@@ -6,66 +6,70 @@ namespace Musicians_Pocket_Knife.Repositories
 {
     public class DBRepository
     {
-        MpkdbContext context = new MpkdbContext();
+        public DBRepository(MpkdbContext context)
+        {
+            _context = context;
+        }
+        MpkdbContext _context;
 
         //PLAYLIST Methods
         public Playlist CreatePlaylist(string listTitle, string id)
         {
-            User user = context.Users.FirstOrDefault(u => u.GoogleId == id);
+            User user = _context.Users.FirstOrDefault(u => u.GoogleId == id);
             Playlist playlist = new Playlist()
             {
                 ListTitle = listTitle,
                 UserId = user.Id
             };
-            if (context.Playlists.Any(x => x.ListTitle == listTitle))
+            if (_context.Playlists.Any(x => x.ListTitle == listTitle))
             {
                 return null;
             }
             else
             {
-                context.Add(playlist);
-                context.SaveChanges();
+                _context.Add(playlist);
+                _context.SaveChanges();
                 return playlist;
             }
 
         }
         public Playlist RenamePlaylist(int listId, string newTitle, string id)
         {
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.Id == listId && p.User.GoogleId == id);
+            Playlist playlist = _context.Playlists.FirstOrDefault(p => p.Id == listId && p.User.GoogleId == id);
             playlist.ListTitle = newTitle;
-            context.Update(playlist);
-            context.SaveChanges();
+            _context.Update(playlist);
+            _context.SaveChanges();
             return playlist;
         }
-        public void DeletePlaylist(string listTitle, string id)
+        public void DeletePlaylist(int listId, string id)
         {
-            Playlist playlist = context.Playlists.FirstOrDefault(x => x.ListTitle == listTitle && x.User.GoogleId == id);
-            List<Dbsong> songs = context.Dbsongs.Where(x => x.PlaylistId == playlist.Id).ToList();
+            Playlist playlist = _context.Playlists.FirstOrDefault(x => x.Id == listId && x.User.GoogleId == id);
+            List<Dbsong> songs = _context.Dbsongs.Where(x => x.PlaylistId == playlist.Id).ToList();
             if (songs != null)
             {
                 foreach (Dbsong s in songs)
                 {
-                    context.Remove(s);
+                    _context.Remove(s);
                 }
             }
-            context.Remove(playlist);
-            context.SaveChanges();
+            _context.Remove(playlist);
+            _context.SaveChanges();
         }
         public List<Playlist> GetUserPlaylists(string id)
         {
-            return context.Playlists.Where(u => u.User.GoogleId == id).ToList();
+            return _context.Playlists.Where(u => u.User.GoogleId == id).ToList();
         }
         public Playlist GetListTitle(int listId, string id)
         {
-            return context.Playlists.FirstOrDefault(p => p.Id==listId && p.User.GoogleId == id);
+            return _context.Playlists.FirstOrDefault(p => p.Id==listId && p.User.GoogleId == id);
         }
         public List<Dbsong> ViewPlaylistDetails(int listId, string id)
         {
-            return context.Dbsongs.Where(s => s.Playlist.Id == listId && s.Playlist.User.GoogleId == id).ToList();
+            return _context.Dbsongs.Where(s => s.Playlist.Id == listId && s.Playlist.User.GoogleId == id).ToList();
         }
         public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle)
         {
-            Playlist playlist = context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.User.GoogleId == id);
+            Playlist playlist = _context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.User.GoogleId == id);
             Dbsong dbSong = new Dbsong()
             {
                 PlaylistId = playlist.Id,
@@ -77,23 +81,23 @@ namespace Musicians_Pocket_Knife.Repositories
                 OriginalKey = song.song.key_of,
                 TransposedKey = song.song.key_of
             };
-            if (context.Dbsongs.Any(x => x.Apiid == song.song.id && x.PlaylistId == dbSong.PlaylistId))
+            if (_context.Dbsongs.Any(x => x.Apiid == song.song.id && x.PlaylistId == dbSong.PlaylistId))
             {
                 return null;
             }
-            context.Dbsongs.Add(dbSong);
-            context.SaveChanges();
+            _context.Dbsongs.Add(dbSong);
+            _context.SaveChanges();
             return dbSong;
         }
         public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
 
         {
-            Dbsong song = context.Dbsongs.FirstOrDefault(s => s.Id == songID &&
+            Dbsong song = _context.Dbsongs.FirstOrDefault(s => s.Id == songID &&
             s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
             if (song != null)
             {
-                context.Remove(song);
-                context.SaveChanges();
+                _context.Remove(song);
+                _context.SaveChanges();
                 return song;
             }
             else
@@ -105,20 +109,20 @@ namespace Musicians_Pocket_Knife.Repositories
         //SONG Methods
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
         {
-            return context.Dbsongs.FirstOrDefault(s => s.Apiid == songID && s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
+            return _context.Dbsongs.FirstOrDefault(s => s.Apiid == songID && s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
         }
         public void SaveTransposeChanges(List<Dbsong> songs)
         {
             foreach (Dbsong s in songs)
             {
-                Dbsong dbsong = context.Dbsongs.FirstOrDefault(x => x.Apiid == s.Apiid && x.PlaylistId == s.PlaylistId);
+                Dbsong dbsong = _context.Dbsongs.FirstOrDefault(x => x.Apiid == s.Apiid && x.PlaylistId == s.PlaylistId);
                 if (dbsong.TransposedKey != s.TransposedKey)
                 {
                     dbsong.TransposedKey = s.TransposedKey;
-                    context.Update(dbsong);
+                    _context.Update(dbsong);
                 }
             }
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

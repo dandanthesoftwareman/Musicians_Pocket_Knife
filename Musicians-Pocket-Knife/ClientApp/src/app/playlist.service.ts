@@ -17,8 +17,8 @@ export class PlaylistService {
     return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist?listTitle=${title}&id=${UserService.user.id}`,{});
   }
 
-  DeletePlaylist(title:string):any{
-    return this.http.delete(`${this.baseUrl}${this.endpoint}/DeletePlaylist?listTitle=${title}&id=${UserService.user.id}`);
+  DeletePlaylist(listId:number):any{
+    return this.http.delete(`${this.baseUrl}${this.endpoint}/DeletePlaylist?listId=${listId}&id=${UserService.user.id}`);
   }
 
   GetUserPlaylists():any{

@@ -9,38 +9,41 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class PlaylistController : ControllerBase
     {
-        DBRepository repository = new DBRepository();
-
+        public PlaylistController(DBRepository repository)
+        {
+            _repository = repository;
+        }
+        DBRepository _repository;
         [HttpPost("CreatePlaylist")]
         public Playlist CreatePlaylist(string listTitle, string id)
         {
-            return repository.CreatePlaylist(listTitle, id);
+            return _repository.CreatePlaylist(listTitle, id);
         }
         [HttpPatch("RenamePlaylist")]
         public Playlist RenamePlaylist(int listId, string newTitle, string id)
         {
-            return repository.RenamePlaylist(listId, newTitle, id);
+            return _repository.RenamePlaylist(listId, newTitle, id);
         }
         [HttpDelete("DeletePlaylist")]
-        public void DeletePlaylist(string listTitle, string id)
+        public void DeletePlaylist(int listId, string id)
         {
-            repository.DeletePlaylist(listTitle, id);
+            _repository.DeletePlaylist(listId, id);
         }
         [HttpGet("GetListTitle")]
         public Playlist GetListTitle(int listId, string id)
         {
-            return repository.GetListTitle(listId, id);
+            return _repository.GetListTitle(listId, id);
         }
         [HttpGet("GetUserPlaylists")]
         public List<Playlist> GetUserPlaylists(string id)
         {
-            return repository.GetUserPlaylists(id);
+            return _repository.GetUserPlaylists(id);
         }
 
         [HttpGet("ViewPlaylistDetails")]
         public List<Dbsong> ViewPlaylistDetails(int listId, string id)
         {
-            return repository.ViewPlaylistDetails(listId, id);
+            return _repository.ViewPlaylistDetails(listId, id);
         }
 
         [HttpPost("AddSongToPlaylist")]
@@ -48,7 +51,7 @@ namespace Musicians_Pocket_Knife.Controllers
         {
             try
             {
-                return repository.AddSongToPlaylist(id, song, listTitle);
+                return _repository.AddSongToPlaylist(id, song, listTitle);
             }
             catch(Exception ex)
             {
@@ -62,7 +65,7 @@ namespace Musicians_Pocket_Knife.Controllers
         [HttpDelete("RemoveSongFromPlaylist")]
         public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
         {
-            return repository.RemoveSongFromPlaylist(id, songID, listTitle);
+            return _repository.RemoveSongFromPlaylist(id, songID, listTitle);
         }
     }
 }
