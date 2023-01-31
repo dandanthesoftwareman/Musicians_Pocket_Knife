@@ -31,7 +31,6 @@ namespace Musicians_Pocket_Knife.Repositories
                 _context.SaveChanges();
                 return playlist;
             }
-
         }
         public Playlist RenamePlaylist(int listId, string newTitle, string id)
         {

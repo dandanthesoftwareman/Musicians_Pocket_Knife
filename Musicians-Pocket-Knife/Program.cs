@@ -5,7 +5,7 @@ using Musicians_Pocket_Knife.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-string connectionString = builder.Configuration["ConnectionStringMpkdb"];
+string connectionString = builder.Configuration["ConnectionStrings:ConnectionStringMpkdb"];
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<DBRepository>();
 builder.Services.AddDbContext<MpkdbContext>(x => x.UseSqlServer(connectionString));
