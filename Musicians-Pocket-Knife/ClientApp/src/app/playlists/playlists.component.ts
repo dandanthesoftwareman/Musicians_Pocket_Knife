@@ -18,6 +18,7 @@ export class PlaylistsComponent implements OnInit {
   loggedIn: boolean = false;
 
   userPlaylists:any;
+  toggleDeletePlaylist:boolean = false;
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -54,4 +55,7 @@ export class PlaylistsComponent implements OnInit {
     });
   }
 
+  ToggleDeletePlaylist():any{
+    this.toggleDeletePlaylist = !this.toggleDeletePlaylist;
+  }
 }

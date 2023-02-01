@@ -13,9 +13,11 @@
         ngModel
       />
       <input id="RenamePlaylistButton" type="submit" />
-      <button onclick="ToggleRenamePlaylist()">Cancel</button>
     </form>
   </div>
+  <button [hidden]="!toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">
+    Cancel
+  </button>
   <div [hidden]="toggleRenamePlaylist">
     <button (click)="ToggleRenamePlaylist()">Rename</button>
   </div>

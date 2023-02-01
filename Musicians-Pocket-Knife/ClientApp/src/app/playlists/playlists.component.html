@@ -1,25 +1,35 @@
 <h2>Your Playlists</h2>
 
-<form
-  #CreatePlaylistForm="ngForm"
-  (ngSubmit)="CreatePlaylist(CreatePlaylistForm)"
->
-  <input
-    id="CreatePlaylist"
-    type="text"
-    name="PlaylistTitle"
-    placeholder="Playlist Title"
-    ngModel
-  />
-  <!-- <input id="CreatePlaylistButton" type="submit" /> -->
-  <button id="CreatePlaylistButton" (click)="GetUserPlaylists()">
-    Create Playlist
-  </button>
-</form>
+<div>
+  <form
+    #CreatePlaylistForm="ngForm"
+    (ngSubmit)="CreatePlaylist(CreatePlaylistForm)"
+  >
+    <input
+      id="CreatePlaylist"
+      type="text"
+      name="PlaylistTitle"
+      placeholder="Playlist Title"
+      ngModel
+    />
+    <!-- <input id="CreatePlaylistButton" type="submit" /> -->
+    <button id="CreatePlaylistButton" (click)="GetUserPlaylists()">
+      Create Playlist
+    </button>
+  </form>
+</div>
+<button [hidden]="toggleDeletePlaylist" (click)="ToggleDeletePlaylist()">
+  Delete Playlist
+</button>
+<button [hidden]="!toggleDeletePlaylist" (click)="ToggleDeletePlaylist()">
+  Cancel
+</button>
 
 <div *ngFor="let p of userPlaylists">
   <a routerLink="/PlaylistDetails/{{ p.id }}">
     {{ p.listTitle }}
   </a>
-  <button (click)="DeletePlaylist(p.id)">Delete</button>
+  <button [hidden]="!toggleDeletePlaylist" (click)="DeletePlaylist(p.id)">
+    Delete
+  </button>
 </div>
