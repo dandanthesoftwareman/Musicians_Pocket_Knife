@@ -18,20 +18,28 @@
   <button [hidden]="!toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">
     Cancel
   </button>
-  <div [hidden]="toggleRenamePlaylist">
-    <button (click)="ToggleRenamePlaylist()">Rename</button>
-  </div>
-  <div [hidden]="TransposeEnabled">
-    <button (click)="EnableTranspose()">Transpose</button>
+  <button [hidden]="!toggleRemoveSong" (click)="ToggleRemoveSong()">
+    Cancel
+  </button>
+  <div class="playlistDetailsOptions">
+    <button [hidden]="toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">
+      Rename
+    </button>
+    <button [hidden]="toggleRemoveSong" (click)="ToggleRemoveSong()">
+      Remove Song
+    </button>
+    <button [hidden]="TransposeEnabled" (click)="EnableTranspose()">
+      Transpose
+    </button>
   </div>
   <div [hidden]="!TransposeEnabled">
     <button (click)="SaveTransposeChanges()">Save Changes</button>
     <button (click)="DiscardChanges()">Discard Changes</button>
     <button (click)="RestoreOriginalKeys()">Revert All To Original</button>
   </div>
-  <div *ngFor="let song of listSongs">
+  <div *ngFor="let song of listSongs; index as i">
     <p>
-      {{ song.title }} || {{ song.artist }} ||
+      {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
       <button
         [hidden]="!TransposeEnabled"
         (click)="TransposeDown(song.transposedKey, song.apiid)"
@@ -46,6 +54,11 @@
         Transpose Up</button
       >|| {{ song.tempo }} BPM
     </p>
-    <button (click)="RemoveSongFromPlaylist(song.id)">Remove</button>
+    <button
+      [hidden]="!toggleRemoveSong"
+      (click)="RemoveSongFromPlaylist(song.id)"
+    >
+      Remove
+    </button>
   </div>
 </div>

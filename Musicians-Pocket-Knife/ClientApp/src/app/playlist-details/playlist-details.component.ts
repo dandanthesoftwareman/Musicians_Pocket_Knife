@@ -25,6 +25,7 @@ export class PlaylistDetailsComponent implements OnInit {
   listTitle: string =  "";
   TransposeEnabled:boolean = false;
   toggleRenamePlaylist:boolean = false;
+  toggleRemoveSong:boolean = false;
 
   listSongs: DbSong[] = {} as DbSong[];
   sharpKeys: string[] = ["A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯"];
@@ -69,6 +70,9 @@ RemoveSongFromPlaylist(songID:number):void{
     });
     this.changeDetection.detectChanges();
   });
+}
+ToggleRemoveSong():any{
+  this.toggleRemoveSong = !this.toggleRemoveSong;
 }
 
 //TRANSPOSE METHODS
