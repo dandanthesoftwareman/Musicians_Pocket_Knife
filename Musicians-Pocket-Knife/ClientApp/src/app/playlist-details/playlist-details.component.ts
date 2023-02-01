@@ -26,6 +26,7 @@ export class PlaylistDetailsComponent implements OnInit {
   TransposeEnabled:boolean = false;
   toggleRenamePlaylist:boolean = false;
   toggleRemoveSong:boolean = false;
+  hideOptions:boolean = false;
 
   listSongs: DbSong[] = {} as DbSong[];
   sharpKeys: string[] = ["A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯"];
@@ -58,10 +59,6 @@ RenamePlaylist(form:NgForm):any{
     this.changeDetection.detectChanges();
   })
 }
-ToggleRenamePlaylist():any{
-  this.toggleRenamePlaylist = !this.toggleRenamePlaylist;
-  // this.changeDetection.detectChanges();
-}
 RemoveSongFromPlaylist(songID:number):void{
   this.playlistService.RemoveSongFromPlaylist(songID, this.listTitle).subscribe((response:any)=>{
     this.listSongs = [];
@@ -71,8 +68,17 @@ RemoveSongFromPlaylist(songID:number):void{
     this.changeDetection.detectChanges();
   });
 }
-ToggleRemoveSong():any{
+ToggleRenamePlaylist(){
+  this.toggleRenamePlaylist = !this.toggleRenamePlaylist;
+  this.hideOptions = !this.hideOptions;
+}
+EnableTranspose(){
+  this.TransposeEnabled = !this.TransposeEnabled;
+  this.hideOptions = !this.hideOptions;
+}
+ToggleRemoveSong(){
   this.toggleRemoveSong = !this.toggleRemoveSong;
+  this.hideOptions = !this.hideOptions;
 }
 
 //TRANSPOSE METHODS
@@ -128,9 +134,6 @@ SaveTransposeChanges(){
 DiscardChanges(){
   this.ngOnInit();
   this.EnableTranspose();
-}
-EnableTranspose(){
-  this.TransposeEnabled = !this.TransposeEnabled;
 }
 RestoreOriginalKeys(){
   this.listSongs.forEach((song) => {

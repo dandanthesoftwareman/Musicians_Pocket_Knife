@@ -21,16 +21,10 @@
   <button [hidden]="!toggleRemoveSong" (click)="ToggleRemoveSong()">
     Cancel
   </button>
-  <div class="playlistDetailsOptions">
-    <button [hidden]="toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">
-      Rename
-    </button>
-    <button [hidden]="toggleRemoveSong" (click)="ToggleRemoveSong()">
-      Remove Song
-    </button>
-    <button [hidden]="TransposeEnabled" (click)="EnableTranspose()">
-      Transpose
-    </button>
+  <div class="playlistDetailsOptions" [hidden]="hideOptions">
+    <button (click)="ToggleRenamePlaylist()">Rename</button>
+    <button (click)="ToggleRemoveSong()">Remove Song</button>
+    <button (click)="EnableTranspose()">Transpose</button>
   </div>
   <div [hidden]="!TransposeEnabled">
     <button (click)="SaveTransposeChanges()">Save Changes</button>
