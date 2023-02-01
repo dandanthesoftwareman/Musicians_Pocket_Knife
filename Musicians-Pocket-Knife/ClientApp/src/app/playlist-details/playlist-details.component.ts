@@ -47,7 +47,6 @@ export class PlaylistDetailsComponent implements OnInit {
       })
       this.playlistService.ViewPlaylistDetails(listId).subscribe((response:DbSong[])=>{
         this.listSongs = response;
-        console.log(this.listSongs);
       })
 }
 

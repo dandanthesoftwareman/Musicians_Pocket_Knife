@@ -31,6 +31,7 @@
     <button (click)="DiscardChanges()">Discard Changes</button>
     <button (click)="RestoreOriginalKeys()">Revert All To Original</button>
   </div>
+  <br />
   <div *ngFor="let song of listSongs; index as i">
     <p>
       {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
