@@ -1,6 +1,6 @@
 <h2>Your Playlists</h2>
 
-<div>
+<div [hidden]="!toggleCreatePlaylist">
   <form
     #CreatePlaylistForm="ngForm"
     (ngSubmit)="CreatePlaylist(CreatePlaylistForm)"
@@ -14,12 +14,20 @@
     />
     <!-- <input id="CreatePlaylistButton" type="submit" /> -->
     <button id="CreatePlaylistButton" (click)="GetUserPlaylists()">
-      Create Playlist
+      Create
     </button>
   </form>
 </div>
-<button [hidden]="toggleDeletePlaylist" (click)="ToggleDeletePlaylist()">
-  Delete Playlist
+<div class="playlistOptions" [hidden]="togglePlaylistOptions">
+  <button [hidden]="toggleCreatePlaylist" (click)="ToggleCreatePlaylist()">
+    New Playlist
+  </button>
+  <button [hidden]="toggleDeletePlaylist" (click)="ToggleDeletePlaylist()">
+    Delete Playlist
+  </button>
+</div>
+<button [hidden]="!toggleCreatePlaylist" (click)="ToggleCreatePlaylist()">
+  Cancel
 </button>
 <button [hidden]="!toggleDeletePlaylist" (click)="ToggleDeletePlaylist()">
   Cancel
