@@ -23,18 +23,22 @@
   <!-- Cancel Buttons for Playlist Details Options -->
   <div>
     <button [hidden]="!toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">
-      Cancel
+      Cancel Rename
     </button>
     <button [hidden]="!toggleRemoveSong" (click)="ToggleRemoveSong()">
-      Cancel
+      Done
+    </button>
+    <button [hidden]="!toggleReOrderList" (click)="ToggleReOrderList()">
+      Done
     </button>
   </div>
 
-  <!-- Playlist Details Options-->
+  <!-- Playlist Options-->
   <div class="playlistDetailsOptions" [hidden]="hideOptions">
-    <button (click)="ToggleRenamePlaylist()">Rename</button>
+    <button (click)="ToggleRenamePlaylist()">Rename List</button>
     <button (click)="ToggleRemoveSong()">Remove Song</button>
     <button (click)="EnableTranspose()">Transpose</button>
+    <button (click)="ToggleReOrderList()">Order List</button>
   </div>
 
   <!-- Transpose Options Menu -->
@@ -46,9 +50,15 @@
   <br />
 
   <!-- List Of Songs on Playlist -->
-  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let song of listSongs; index as i" cdkDrag>
+  <div *ngIf="!toggleReOrderList">
+    <div *ngFor="let song of listSongs; index as i">
       <p>
+        <button
+          [hidden]="!toggleRemoveSong"
+          (click)="RemoveSongFromPlaylist(song.id)"
+        >
+          Remove
+        </button>
         {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
         <button
           [hidden]="!TransposeEnabled"
@@ -63,12 +73,22 @@
         >
           Transpose Up</button
         >|| {{ song.tempo }} BPM
-        <button
-          [hidden]="!toggleRemoveSong"
-          (click)="RemoveSongFromPlaylist(song.id)"
-        >
-          Remove
-        </button>
+      </p>
+    </div>
+  </div>
+
+  <!-- WHEN REORDER LIST IS TOGGLED -->
+  <div
+    *ngIf="toggleReOrderList"
+    cdkDropList
+    class="example-list"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div class="example-box" *ngFor="let song of listSongs; index as i" cdkDrag>
+      <p>
+        {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
+        <span>Key:{{ song.transposedKey }}</span>
+        || {{ song.tempo }} BPM
       </p>
     </div>
   </div>

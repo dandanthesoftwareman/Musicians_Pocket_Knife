@@ -22,17 +22,20 @@ export class PlaylistDetailsComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
-  listId:number = {} as number;
-  listTitle: string =  "";
+  //
   TransposeEnabled:boolean = false;
   toggleRenamePlaylist:boolean = false;
   toggleRemoveSong:boolean = false;
   hideOptions:boolean = false;
+  toggleReOrderList:boolean = false;
 
+  //LIST PROPERTIES
+  listId:number = {} as number;
+  listTitle: string =  "";
   listSongs: DbSong[] = {} as DbSong[];
   sharpKeys: string[] = ["A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯"];
-  //so far API only uses sharp keys, leaving flat keys array here for later use if need be
-  //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
+    //so far the API only uses sharp keys, leaving flat keys array here for later use if need be
+    //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -80,6 +83,10 @@ EnableTranspose(){
 }
 ToggleRemoveSong(){
   this.toggleRemoveSong = !this.toggleRemoveSong;
+  this.hideOptions = !this.hideOptions;
+}
+ToggleReOrderList(){
+  this.toggleReOrderList = !this.toggleReOrderList;
   this.hideOptions = !this.hideOptions;
 }
 
@@ -143,6 +150,7 @@ RestoreOriginalKeys(){
   });
 }
 
+//DRAG AND DROP FOR REORDING LIST
 drop(event: CdkDragDrop<string[]>) {
   moveItemInArray(this.listSongs, event.previousIndex, event.currentIndex);
 }
