@@ -51,7 +51,7 @@ export class PlaylistsComponent implements OnInit {
   }
 
   DeletePlaylist(listId:number):any{
-    this.playlistService.DeletePlaylist(listId).subscribe((resppnse:any) =>{
+    this.playlistService.DeletePlaylist(listId).subscribe((response:any) =>{
       this.userPlaylists = [];
       this.GetUserPlaylists();
       this.changeDetection.detectChanges();
@@ -66,5 +66,10 @@ export class PlaylistsComponent implements OnInit {
   ToggleDeletePlaylist(){
     this.toggleDeletePlaylist = !this.toggleDeletePlaylist;
     this.togglePlaylistOptions = !this.togglePlaylistOptions;
+  }
+
+  UpdateDateViewed(listId:number){
+    this.playlistService.UpdateDateViewed(listId).subscribe((response:any)=>{
+    });
   }
 }

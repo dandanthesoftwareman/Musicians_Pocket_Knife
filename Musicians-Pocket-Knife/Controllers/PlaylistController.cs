@@ -14,6 +14,7 @@ namespace Musicians_Pocket_Knife.Controllers
             _repository = repository;
         }
         DBRepository _repository;
+
         [HttpPost("CreatePlaylist")]
         public Playlist CreatePlaylist(string listTitle, string id)
         {
@@ -66,6 +67,11 @@ namespace Musicians_Pocket_Knife.Controllers
         public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
         {
             return _repository.RemoveSongFromPlaylist(id, songID, listTitle);
+        }
+        [HttpPatch("UpdateDateViewed")]
+        public void UpdateDateViewed(int listId, string id)
+        {
+            _repository.UpdateDateViewed(listId, id);
         }
     }
 }

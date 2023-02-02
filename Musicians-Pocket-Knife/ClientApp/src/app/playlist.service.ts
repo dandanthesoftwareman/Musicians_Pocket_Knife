@@ -46,4 +46,9 @@ export class PlaylistService {
   RenamePlaylist(listId:number, newtitle:string):any{
     return this.http.patch(`${this.baseUrl}${this.endpoint}/RenamePlaylist?listId=${listId}&newTitle=${newtitle}&id=${UserService.user.id}`, {})
   }
+
+  UpdateDateViewed(listId:number):any{
+    return this.http.patch(`${this.baseUrl}${this.endpoint}/UpdateDateViewed?listId=${listId}&id=${UserService.user.id}`, {})
+  }
 }
+

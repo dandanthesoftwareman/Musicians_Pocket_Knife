@@ -52,6 +52,8 @@ export class PlaylistDetailsComponent implements OnInit {
       this.playlistService.ViewPlaylistDetails(listId).subscribe((response:DbSong[])=>{
         this.listSongs = response;
       })
+      this.playlistService.UpdateDateViewed(listId).subscribe((response:any)=>{
+      })
 }
 
 RenamePlaylist(form:NgForm):any{

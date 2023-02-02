@@ -39,7 +39,7 @@
   </button>
 </div>
 
-<!-- User Playlist Router Links -->
+<!-- User Playlists -->
 <div [hidden]="toggleDeletePlaylist" *ngFor="let p of userPlaylists">
   <a routerLink="/PlaylistDetails/{{ p.id }}">
     {{ p.listTitle }}

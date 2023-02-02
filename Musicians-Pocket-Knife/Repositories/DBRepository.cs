@@ -106,6 +106,11 @@ namespace Musicians_Pocket_Knife.Repositories
                 return null;
             }
         }
+        public void UpdateDateViewed(int listId, string id)
+        {
+            _context.Playlists.FirstOrDefault(p => p.Id == listId && p.User.GoogleId == id).LastDateViewed = DateTime.Now;
+            _context.SaveChanges();
+        }
 
         //SONG Methods
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
