@@ -9,9 +9,10 @@
         placeholder="Look for a song"
         ngModel
       />
-      <input id="searchSongButton" type="submit" />
+      <button id="searchSongButton">Search</button>
     </form>
   </div>
+  <button (click)="ClearSearch()">Clear</button>
   <div *ngFor="let s of songArray.search; index as i">
     <div>
       <p>{{ i }}: {{ s.title }}</p>

@@ -17,7 +17,7 @@ import { Playlist } from '../playlist';
 export class FindsongComponent implements OnInit {
 
   song:Song = {} as Song;
-  songArray:SongArray = {} as SongArray;
+  songArray:any;
   array = {} as Song[];
 
   user: SocialUser = {} as SocialUser;
@@ -42,7 +42,7 @@ export class FindsongComponent implements OnInit {
     let song = form.form.value.searchedSong.trim().replaceAll(' ', '+');
     return this.apiService.getSongArray(song).subscribe((response:any) => {
       this.songArray = response;
-      console.log(response);
+      form.form.reset();
     });
   }
 
@@ -58,5 +58,9 @@ export class FindsongComponent implements OnInit {
     this.apiService.getSongDetails(id).subscribe((response:Song) => {
       this.song = response;
     })
+  }
+
+  ClearSearch(){
+    this.songArray = [];
   }
 }
