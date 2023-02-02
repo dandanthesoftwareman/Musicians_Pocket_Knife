@@ -1,5 +1,7 @@
 <div *ngIf="loggedIn">
   <h2>Song Lookup</h2>
+
+  <!-- Song Search Form -->
   <div>
     <form #searchSongForm="ngForm" (ngSubmit)="searchForSong(searchSongForm)">
       <input
@@ -16,8 +18,10 @@
         Search
       </button>
     </form>
+    <button (click)="ClearSearch()">Clear</button>
   </div>
-  <button (click)="ClearSearch()">Clear</button>
+
+  <!-- List of Songs on form submission -->
   <div *ngFor="let s of songArray.search; index as i">
     <div>
       <p>{{ i }}: {{ s.title }}</p>
@@ -26,6 +30,8 @@
     <button routerLink="/SongDetails/{{ s.id }}">Details</button>
     <button (click)="ShowPlaylists(s.id)">Add to List</button>
   </div>
+
+  <!-- User Playlist Modal -->
   <div [hidden]="!displayPlaylistForm">
     <div *ngFor="let p of userPlaylists">
       <div>

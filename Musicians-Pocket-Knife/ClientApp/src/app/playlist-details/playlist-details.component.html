@@ -1,5 +1,7 @@
 <div *ngIf="loggedIn">
   <h1>{{ listTitle }}</h1>
+
+  <!-- Rename Playlist Form -->
   <div [hidden]="!toggleRenamePlaylist">
     <form
       #renamePlaylistForm="ngForm"
@@ -17,23 +19,33 @@
       </button>
     </form>
   </div>
-  <button [hidden]="!toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">
-    Cancel
-  </button>
-  <button [hidden]="!toggleRemoveSong" (click)="ToggleRemoveSong()">
-    Cancel
-  </button>
+
+  <!-- Cancel Buttons for Playlist Details Options -->
+  <div>
+    <button [hidden]="!toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">
+      Cancel
+    </button>
+    <button [hidden]="!toggleRemoveSong" (click)="ToggleRemoveSong()">
+      Cancel
+    </button>
+  </div>
+
+  <!-- Playlist Details Options-->
   <div class="playlistDetailsOptions" [hidden]="hideOptions">
     <button (click)="ToggleRenamePlaylist()">Rename</button>
     <button (click)="ToggleRemoveSong()">Remove Song</button>
     <button (click)="EnableTranspose()">Transpose</button>
   </div>
+
+  <!-- Transpose Options Menu -->
   <div [hidden]="!TransposeEnabled">
     <button (click)="SaveTransposeChanges()">Save Changes</button>
     <button (click)="DiscardChanges()">Discard Changes</button>
     <button (click)="RestoreOriginalKeys()">Revert All To Original</button>
   </div>
   <br />
+
+  <!-- List Of Songs on Playlist -->
   <div *ngFor="let song of listSongs; index as i">
     <p>
       {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||

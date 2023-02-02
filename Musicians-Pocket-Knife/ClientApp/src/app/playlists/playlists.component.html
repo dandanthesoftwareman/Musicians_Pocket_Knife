@@ -1,5 +1,6 @@
 <h2>Your Playlists</h2>
 
+<!-- Create Playlist Form -->
 <div [hidden]="!toggleCreatePlaylist">
   <form
     #CreatePlaylistForm="ngForm"
@@ -12,12 +13,13 @@
       placeholder="Playlist Title"
       ngModel
     />
-    <!-- <input id="CreatePlaylistButton" type="submit" /> -->
     <button id="CreatePlaylistButton" (keydown.enter)="GetUserPlaylists()">
       Create
     </button>
   </form>
 </div>
+
+<!-- Playlist Options -->
 <div class="playlistOptions" [hidden]="togglePlaylistOptions">
   <button [hidden]="toggleCreatePlaylist" (click)="ToggleCreatePlaylist()">
     New Playlist
@@ -26,24 +28,28 @@
     Delete Playlist
   </button>
 </div>
-<button [hidden]="!toggleCreatePlaylist" (click)="ToggleCreatePlaylist()">
-  Cancel
-</button>
-<button [hidden]="!toggleDeletePlaylist" (click)="ToggleDeletePlaylist()">
-  Cancel
-</button>
 
+<!-- Cancel Buttons For Playlist Options -->
+<div [hidden]="!togglePlaylistOptions">
+  <button [hidden]="!toggleCreatePlaylist" (click)="ToggleCreatePlaylist()">
+    Cancel
+  </button>
+  <button [hidden]="!toggleDeletePlaylist" (click)="ToggleDeletePlaylist()">
+    Cancel
+  </button>
+</div>
+
+<!-- User Playlist Router Links -->
 <div [hidden]="toggleDeletePlaylist" *ngFor="let p of userPlaylists">
   <a routerLink="/PlaylistDetails/{{ p.id }}">
     {{ p.listTitle }}
   </a>
 </div>
+
+<!-- Delete Playlist View -->
 <div [hidden]="!toggleDeletePlaylist" *ngFor="let p of userPlaylists">
   <p>
     {{ p.listTitle }}
     <button (click)="DeletePlaylist(p.id)">Delete</button>
   </p>
 </div>
-<!-- <button [hidden]="!toggleDeletePlaylist" (click)="DeletePlaylist(p.id)">
-    Delete
-  </button> -->

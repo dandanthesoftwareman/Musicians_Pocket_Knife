@@ -67,6 +67,8 @@ RemoveSongFromPlaylist(songID:number):void{
     this.changeDetection.detectChanges();
   });
 }
+
+//DISPLAY OPTIONS METHODS
 ToggleRenamePlaylist(){
   this.toggleRenamePlaylist = !this.toggleRenamePlaylist;
   this.hideOptions = !this.hideOptions;
