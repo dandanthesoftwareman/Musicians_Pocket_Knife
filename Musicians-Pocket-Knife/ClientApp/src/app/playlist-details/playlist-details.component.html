@@ -46,28 +46,30 @@
   <br />
 
   <!-- List Of Songs on Playlist -->
-  <div *ngFor="let song of listSongs; index as i">
-    <p>
-      {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
-      <button
-        [hidden]="!TransposeEnabled"
-        (click)="TransposeDown(song.transposedKey, song.apiid)"
-      >
-        Transpose Down
-      </button>
-      <span>Key:{{ song.transposedKey }}</span>
-      <button
-        [hidden]="!TransposeEnabled"
-        (click)="TransposeUp(song.transposedKey, song.apiid)"
-      >
-        Transpose Up</button
-      >|| {{ song.tempo }} BPM
-      <button
-        [hidden]="!toggleRemoveSong"
-        (click)="RemoveSongFromPlaylist(song.id)"
-      >
-        Remove
-      </button>
-    </p>
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let song of listSongs; index as i" cdkDrag>
+      <p>
+        {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
+        <button
+          [hidden]="!TransposeEnabled"
+          (click)="TransposeDown(song.transposedKey, song.apiid)"
+        >
+          Transpose Down
+        </button>
+        <span>Key:{{ song.transposedKey }}</span>
+        <button
+          [hidden]="!TransposeEnabled"
+          (click)="TransposeUp(song.transposedKey, song.apiid)"
+        >
+          Transpose Up</button
+        >|| {{ song.tempo }} BPM
+        <button
+          [hidden]="!toggleRemoveSong"
+          (click)="RemoveSongFromPlaylist(song.id)"
+        >
+          Remove
+        </button>
+      </p>
+    </div>
   </div>
 </div>

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -31,6 +31,7 @@ import { PlaylistDetailsComponent } from './playlist-details/playlist-details.co
     HttpClientModule,
     FormsModule,
     SocialLoginModule,
+    DragDropModule,
     RouterModule.forRoot([
       { path: '', component: HomepageComponent, pathMatch: 'full' },
       { path: 'Findsong', component: FindsongComponent},

@@ -7,6 +7,7 @@ import { DbSong } from '../db-song';
 import { PlaylistService } from '../playlist.service';
 import { SongService } from '../song.service';
 import { UserService } from '../user.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-playlist-details',
@@ -140,5 +141,9 @@ RestoreOriginalKeys(){
   this.listSongs.forEach((song) => {
     song.transposedKey = song.originalKey;
   });
+}
+
+drop(event: CdkDragDrop<string[]>) {
+  moveItemInArray(this.listSongs, event.previousIndex, event.currentIndex);
 }
 }
