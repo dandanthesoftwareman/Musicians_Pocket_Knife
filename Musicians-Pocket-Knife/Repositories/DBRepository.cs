@@ -19,7 +19,9 @@ namespace Musicians_Pocket_Knife.Repositories
             Playlist playlist = new Playlist()
             {
                 ListTitle = listTitle,
-                UserId = user.Id
+                UserId = user.Id,
+                DateCreated = DateTime.Now,
+                LastDateViewed = DateTime.Now
             };
             if (_context.Playlists.Any(x => x.ListTitle == listTitle))
             {

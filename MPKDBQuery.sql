@@ -13,11 +13,13 @@
 --CREATE TABLE Playlists(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
 --ListTitle NVARCHAR(255),
---UserId INT FOREIGN KEY REFERENCES Users(id)
+--UserId INT FOREIGN KEY REFERENCES Users(id),
+--DateCreated DATETIME,
+--LastDateViewed DATETIME
 --);
 
-SELECT * FROM Playlists;
-SELECT * FROM DBSongs;
+--SELECT * FROM Playlists;
+--SELECT * FROM DBSongs;
 
 --DELETE FROM DBSongs WHERE PlaylistId = 7;
 --DELETE FROM Playlists WHERE Id = 7;

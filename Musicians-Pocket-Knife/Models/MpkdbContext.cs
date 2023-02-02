@@ -6,6 +6,10 @@ namespace Musicians_Pocket_Knife.Models;
 
 public partial class MpkdbContext : DbContext
 {
+    public MpkdbContext()
+    {
+    }
+
     public MpkdbContext(DbContextOptions<MpkdbContext> options)
         : base(options)
     {
@@ -21,7 +25,7 @@ public partial class MpkdbContext : DbContext
     {
         modelBuilder.Entity<Dbsong>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DBSongs__3213E83FEDF60688");
+            entity.HasKey(e => e.Id).HasName("PK__DBSongs__3213E83FB0A1AA73");
 
             entity.ToTable("DBSongs");
 
@@ -38,19 +42,21 @@ public partial class MpkdbContext : DbContext
 
             entity.HasOne(d => d.Playlist).WithMany(p => p.Dbsongs)
                 .HasForeignKey(d => d.PlaylistId)
-                .HasConstraintName("FK__DBSongs__Playlis__7F2BE32F");
+                .HasConstraintName("FK__DBSongs__Playlis__18EBB532");
         });
 
         modelBuilder.Entity<Playlist>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Playlist__3213E83FD9B550EA");
+            entity.HasKey(e => e.Id).HasName("PK__Playlist__3213E83F93567F1A");
 
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.DateCreated).HasColumnType("datetime");
+            entity.Property(e => e.LastDateViewed).HasColumnType("datetime");
             entity.Property(e => e.ListTitle).HasMaxLength(255);
 
             entity.HasOne(d => d.User).WithMany(p => p.Playlists)
                 .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Playlists__UserI__75A278F5");
+                .HasConstraintName("FK__Playlists__UserI__160F4887");
         });
 
         modelBuilder.Entity<User>(entity =>
