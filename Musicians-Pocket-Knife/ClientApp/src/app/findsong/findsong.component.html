@@ -9,7 +9,12 @@
         placeholder="Look for a song"
         ngModel
       />
-      <button id="searchSongButton">Search</button>
+      <button
+        id="searchSongButton"
+        (keydown.enter)="searchForSong(searchSongForm)"
+      >
+        Search
+      </button>
     </form>
   </div>
   <button (click)="ClearSearch()">Clear</button>

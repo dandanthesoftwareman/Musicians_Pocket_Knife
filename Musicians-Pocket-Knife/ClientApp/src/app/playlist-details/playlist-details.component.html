@@ -12,7 +12,9 @@
         placeholder="New Title"
         ngModel
       />
-      <input id="RenamePlaylistButton" type="submit" />
+      <button (keydown.enter)="RenamePlaylist(renamePlaylistForm)">
+        Rename
+      </button>
     </form>
   </div>
   <button [hidden]="!toggleRenamePlaylist" (click)="ToggleRenamePlaylist()">

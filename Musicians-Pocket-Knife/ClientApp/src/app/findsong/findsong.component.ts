@@ -62,5 +62,8 @@ export class FindsongComponent implements OnInit {
 
   ClearSearch(){
     this.songArray = [];
+    if(this.displayPlaylistForm == true){
+      this.displayPlaylistForm = false;
+    }
   }
 }

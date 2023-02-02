@@ -39,6 +39,7 @@ export class PlaylistsComponent implements OnInit {
       this.userPlaylists = [];
       this.GetUserPlaylists();
       this.changeDetection.detectChanges();
+      form.form.reset();
     });
   }
 

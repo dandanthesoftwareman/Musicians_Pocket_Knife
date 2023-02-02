@@ -13,7 +13,7 @@
       ngModel
     />
     <!-- <input id="CreatePlaylistButton" type="submit" /> -->
-    <button id="CreatePlaylistButton" (click)="GetUserPlaylists()">
+    <button id="CreatePlaylistButton" (keydown.enter)="GetUserPlaylists()">
       Create
     </button>
   </form>
@@ -33,11 +33,17 @@
   Cancel
 </button>
 
-<div *ngFor="let p of userPlaylists">
+<div [hidden]="toggleDeletePlaylist" *ngFor="let p of userPlaylists">
   <a routerLink="/PlaylistDetails/{{ p.id }}">
     {{ p.listTitle }}
   </a>
-  <button [hidden]="!toggleDeletePlaylist" (click)="DeletePlaylist(p.id)">
-    Delete
-  </button>
 </div>
+<div [hidden]="!toggleDeletePlaylist" *ngFor="let p of userPlaylists">
+  <p>
+    {{ p.listTitle }}
+    <button (click)="DeletePlaylist(p.id)">Delete</button>
+  </p>
+</div>
+<!-- <button [hidden]="!toggleDeletePlaylist" (click)="DeletePlaylist(p.id)">
+    Delete
+  </button> -->
