@@ -17,7 +17,7 @@ export class PlaylistsComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
-  userPlaylists:any;
+  userPlaylists:Playlist[] = {} as Playlist[];
   toggleCreatePlaylist:boolean = false;
   toggleDeletePlaylist:boolean = false;
   togglePlaylistOptions:boolean = false;
@@ -31,6 +31,8 @@ export class PlaylistsComponent implements OnInit {
 
     this.playlistService.GetUserPlaylists().subscribe((response:any) => {
       this.userPlaylists = response;
+      this.userPlaylists.sort((a,b) => (a.lastDateViewed > b.lastDateViewed) ? -1: 1);
+      console.log(response);
     });
   }
 
