@@ -66,13 +66,13 @@
         >
           Transpose Down
         </button>
-        <span>Key:{{ song.transposedKey }}</span>
+        <span>Key: {{ song.transposedKey }} </span>
         <button
           [hidden]="!TransposeEnabled"
           (click)="TransposeUp(song.transposedKey, song.apiid)"
         >
           Transpose Up</button
-        >|| {{ song.tempo }} BPM
+        ><span *ngIf="!TransposeEnabled"> || {{ song.tempo }} BPM</span>
       </p>
     </div>
   </div>
@@ -84,12 +84,19 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
-    <div class="example-box" *ngFor="let song of listSongs; index as i" cdkDrag>
-      <p>
-        {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
-        <span>Key:{{ song.transposedKey }}</span>
-        || {{ song.tempo }} BPM
-      </p>
+    <div class="example-boundary">
+      <div
+        class="example-box"
+        cdkDragBoundary=".example-list"
+        *ngFor="let song of listSongs; index as i"
+        cdkDrag
+      >
+        <p>
+          {{ i + 1 }}: {{ song.title }} || {{ song.artist }} ||
+          <span>Key: {{ song.transposedKey }}</span>
+          || {{ song.tempo }} BPM
+        </p>
+      </div>
     </div>
   </div>
 </div>
