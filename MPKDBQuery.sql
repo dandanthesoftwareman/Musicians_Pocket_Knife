@@ -18,8 +18,8 @@
 --LastDateViewed DATETIME
 --);
 
---SELECT * FROM Playlists;
---SELECT * FROM DBSongs;
+SELECT * FROM Playlists;
+SELECT * FROM DBSongs;
 
 --DELETE FROM DBSongs WHERE PlaylistId = 7;
 --DELETE FROM Playlists WHERE Id = 7;

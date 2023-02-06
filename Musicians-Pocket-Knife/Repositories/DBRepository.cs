@@ -70,6 +70,10 @@ namespace Musicians_Pocket_Knife.Repositories
         }
         public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle)
         {
+            return AddSongToPlaylist(id, song, listTitle, false);
+        }
+        public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle, bool addDuplicate)
+        {
             Playlist playlist = _context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.User.GoogleId == id);
             Dbsong dbSong = new Dbsong()
             {
@@ -82,7 +86,7 @@ namespace Musicians_Pocket_Knife.Repositories
                 OriginalKey = song.song.key_of,
                 TransposedKey = song.song.key_of
             };
-            if (_context.Dbsongs.Any(x => x.Apiid == song.song.id && x.PlaylistId == dbSong.PlaylistId))
+            if (addDuplicate == false && _context.Dbsongs.Any(x => x.Apiid == song.song.id && x.PlaylistId == dbSong.PlaylistId))
             {
                 return null;
             }
