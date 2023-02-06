@@ -7,7 +7,6 @@ import { UserService } from '../user.service';
 import { ApiService } from '../api.service';
 import { PlaylistService } from '../playlist.service';
 import { Playlist } from '../playlist';
-import {Dialog, DialogRef, DIALOG_DATA} from '@angular/cdk/dialog';
 
 
 @Component({
@@ -26,7 +25,7 @@ export class FindsongComponent implements OnInit {
   userPlaylists:Playlist[] = {} as Playlist[];
   displayPlaylistForm:Boolean = false;
 
-  constructor(private apiService: ApiService, private authService:SocialAuthService, private playlistService:PlaylistService, public dialog: Dialog) { }
+  constructor(private apiService: ApiService, private authService:SocialAuthService, private playlistService:PlaylistService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
