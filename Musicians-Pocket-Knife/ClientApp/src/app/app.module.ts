@@ -14,6 +14,7 @@ import { FindsongComponent } from './findsong/findsong.component';
 import { SongDetailsComponent } from './song-details/song-details.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PlaylistDetailsComponent } from './playlist-details/playlist-details.co
       { path: 'SongDetails/:id', component: SongDetailsComponent},
       { path: 'Playlists', component: PlaylistsComponent},
       { path: 'PlaylistDetails/:listId', component: PlaylistDetailsComponent}
-    ])
+    ]),
+    MatIconModule
   ],
   providers: [
     {
