@@ -15,6 +15,8 @@ import { SongDetailsComponent } from './song-details/song-details.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,10 +31,14 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserModule,
     HttpClientModule,
     FormsModule,
     SocialLoginModule,
     DragDropModule,
+    MatIconModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', component: HomepageComponent, pathMatch: 'full' },
       { path: 'Findsong', component: FindsongComponent},
@@ -40,7 +46,6 @@ import { MatIconModule } from '@angular/material/icon';
       { path: 'Playlists', component: PlaylistsComponent},
       { path: 'PlaylistDetails/:listId', component: PlaylistDetailsComponent}
     ]),
-    MatIconModule
   ],
   providers: [
     {

@@ -34,8 +34,14 @@
   <div [hidden]="!displayPlaylistForm">
     <div *ngFor="let p of userPlaylists">
       <div>
-        {{ p.listTitle
-        }}<button (click)="AddToPlaylist(p.listTitle)">Add to List</button>
+        {{ p.listTitle }}
+        <button
+          mat-mini-fab
+          class="mat-icon-button"
+          (click)="AddToPlaylist(p.listTitle)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
       </div>
     </div>
   </div>
