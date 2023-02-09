@@ -4,6 +4,17 @@
   <!-- User Playlist Modal -->
   <div [hidden]="!displayPlaylistForm">
     <div class="card" style="width: 20rem">
+      <div class="card-body p-1">
+        <div class="d-flex flex-row align-items-center justify-content-end">
+          <button
+            mat-mini-fab
+            class="playlist-modal-exit-button"
+            (click)="ToggleDisplayPlaylistForm()"
+          >
+            <mat-icon class="playlist-modal-exit-icon">clear</mat-icon>
+          </button>
+        </div>
+      </div>
       <ul class="list-group list-group-flush">
         <div *ngFor="let p of userPlaylists">
           <div class="list-group-item p-1">

@@ -33,7 +33,8 @@ export class FindsongComponent implements OnInit {
       this.loggedIn = (user != null);
   })
   this.playlistService.GetUserPlaylists().subscribe((response:any) => {
-    this.userPlaylists = response;})
+    this.userPlaylists = response;
+    this.userPlaylists.sort((a,b) => (a.lastDateViewed > b.lastDateViewed) ? -1: 1);})
 }
   
   //uses name=searched song of searchSongForm, trims and formats it to string for API call
@@ -49,11 +50,11 @@ export class FindsongComponent implements OnInit {
     this.playlistService.AddSongToPlaylist(this.song, listTitle).subscribe((response:any)=> {
       console.log(response);
     });
-    this.displayPlaylistForm = !this.displayPlaylistForm;
+    this.ToggleDisplayPlaylistForm();
   }
   
   ShowPlaylists(id:string):void{
-    this.displayPlaylistForm = !this.displayPlaylistForm;
+    this.ToggleDisplayPlaylistForm();
     this.apiService.getSongDetails(id).subscribe((response:Song) => {
       this.song = response;
     })
@@ -64,5 +65,9 @@ export class FindsongComponent implements OnInit {
     if(this.displayPlaylistForm == true){
       this.displayPlaylistForm = false;
     }
+  }
+
+  ToggleDisplayPlaylistForm(){
+    this.displayPlaylistForm = !this.displayPlaylistForm;
   }
 }
