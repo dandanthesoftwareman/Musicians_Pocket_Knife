@@ -70,4 +70,10 @@ export class FindsongComponent implements OnInit {
   ToggleDisplayPlaylistForm(){
     this.displayPlaylistForm = !this.displayPlaylistForm;
   }
+
+  GetSongDetails(id:string){
+    this.apiService.getSongDetails(id).subscribe((response:Song) => {
+      this.song = response;
+    })
+  }
 }
