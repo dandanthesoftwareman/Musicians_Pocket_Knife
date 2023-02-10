@@ -18,7 +18,6 @@ export class HomepageComponent implements OnInit {
       this.loggedIn = (user != null);
     });
   }
-
   
 
 }

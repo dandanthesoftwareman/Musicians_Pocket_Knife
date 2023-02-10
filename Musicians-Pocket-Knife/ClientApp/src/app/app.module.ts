@@ -17,6 +17,10 @@ import { PlaylistDetailsComponent } from './playlist-details/playlist-details.co
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AlertModule } from '@coreui/angular';
+import { IconModule, IconSetService } from '@coreui/icons-angular';
+import { CollapseModule } from '@coreui/angular';
+import { AccordionModule, SharedModule } from '@coreui/angular';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SocialLoginModule,
     DragDropModule,
     MatIconModule,
+    AlertModule,
+    AccordionModule,
+    SharedModule,
+    CollapseModule,
+    IconModule,
     MatButtonModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
@@ -61,7 +70,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
           }
         ]
       } as SocialAuthServiceConfig,
-    }  
+    },
+    IconSetService  
   ],
   bootstrap: [AppComponent]
 })

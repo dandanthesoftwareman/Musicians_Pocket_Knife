@@ -80,10 +80,19 @@
               </div>
               <div class="col-6">
                 <div class="d-flex justify-content-end">
-                  <button routerLink="/SongDetails/{{ s.id }}">Details</button>
+                  <button (click)="GetSongDetails(s.id)">Details</button>
                   <button (click)="ShowPlaylists(s.id)">Add to List</button>
                 </div>
               </div>
+            </div>
+          </div>
+          <div
+            *ngIf="songId != '' && s.id == song.song.id"
+            [visible]="visible"
+            cCollapse
+          >
+            <div class="card-footer">
+              <p>{{ s.artist.name }}</p>
             </div>
           </div>
         </div>

@@ -16,6 +16,7 @@ import { Playlist } from '../playlist';
 export class FindsongComponent implements OnInit {
 
   song:Song = {} as Song;
+  songId:string = "";
   songArray:any;
   array = {} as Song[];
 
@@ -23,7 +24,7 @@ export class FindsongComponent implements OnInit {
   loggedIn: boolean = false;
   userPlaylists:Playlist[] = {} as Playlist[];
   displayPlaylistForm:Boolean = false;
-
+  visible = false;
   constructor(private apiService: ApiService, private authService:SocialAuthService, private playlistService:PlaylistService) { }
 
   ngOnInit(): void {
@@ -57,14 +58,8 @@ export class FindsongComponent implements OnInit {
     this.ToggleDisplayPlaylistForm();
     this.apiService.getSongDetails(id).subscribe((response:Song) => {
       this.song = response;
+      this.songId = this.song.song.id;
     })
-  }
-
-  ClearSearch(){
-    this.songArray = [];
-    if(this.displayPlaylistForm == true){
-      this.displayPlaylistForm = false;
-    }
   }
 
   ToggleDisplayPlaylistForm(){
@@ -72,8 +67,26 @@ export class FindsongComponent implements OnInit {
   }
 
   GetSongDetails(id:string){
-    this.apiService.getSongDetails(id).subscribe((response:Song) => {
-      this.song = response;
-    })
+    if(this.songId != id){
+      if(this.visible == true){
+        this.toggleCollapse();
+      }
+      setTimeout(() => this.apiService.getSongDetails(id).subscribe((response:Song) => {
+        this.song = response;
+        this.songId = this.song.song.id;
+      }),250);
+    }
+    this.toggleCollapse();
+  }
+
+  toggleCollapse(): void {
+    this.visible = !this.visible;
+  }
+
+  ClearSearch(){
+    this.songArray = [];
+    if(this.displayPlaylistForm == true){
+      this.displayPlaylistForm = false;
+    }
   }
 }
