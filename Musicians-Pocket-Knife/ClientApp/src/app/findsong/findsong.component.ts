@@ -69,14 +69,21 @@ export class FindsongComponent implements OnInit {
   GetSongDetails(id:string){
     if(this.songId != id){
       if(this.visible == true){
+        this.songId = "";
         this.toggleCollapse();
       }
-      setTimeout(() => this.apiService.getSongDetails(id).subscribe((response:Song) => {
-        this.song = response;
-        this.songId = this.song.song.id;
-      }),250);
+      if(this.visible == false){
+        this.apiService.getSongDetails(id).subscribe((response:Song) => {
+          this.song = response;
+          this.songId = this.song.song.id;
+          this.toggleCollapse();
+        });
+      }
     }
-    this.toggleCollapse();
+    if(this.songId == id){
+      this.toggleCollapse();
+      this.songId = "";
+    }
   }
 
   toggleCollapse(): void {

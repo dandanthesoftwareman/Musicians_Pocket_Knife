@@ -86,11 +86,7 @@
               </div>
             </div>
           </div>
-          <div
-            *ngIf="songId != '' && s.id == song.song.id"
-            [visible]="visible"
-            cCollapse
-          >
+          <div [visible]="visible && s.id == songId" cCollapse>
             <div class="card-footer">
               <p>{{ s.artist.name }}</p>
             </div>
