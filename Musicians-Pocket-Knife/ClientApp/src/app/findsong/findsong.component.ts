@@ -56,10 +56,12 @@ export class FindsongComponent implements OnInit {
   
   ShowPlaylists(id:string):void{
     this.ToggleDisplayPlaylistForm();
-    this.apiService.getSongDetails(id).subscribe((response:Song) => {
-      this.song = response;
-      this.songId = this.song.song.id;
-    })
+    if(this.songId != id){
+      this.apiService.getSongDetails(id).subscribe((response:Song) => {
+        this.song = response;
+        this.songId = this.song.song.id;
+      })
+    }
   }
 
   ToggleDisplayPlaylistForm(){
@@ -82,7 +84,6 @@ export class FindsongComponent implements OnInit {
     }
     if(this.songId == id){
       this.toggleCollapse();
-      this.songId = "";
     }
   }
 

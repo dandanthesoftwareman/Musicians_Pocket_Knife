@@ -11,7 +11,6 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
 import { Secret } from 'src/secret';
 import { HomepageComponent } from './homepage/homepage.component';
 import { FindsongComponent } from './findsong/findsong.component';
-import { SongDetailsComponent } from './song-details/song-details.component';
 import { PlaylistsComponent } from './playlists/playlists.component';
 import { PlaylistDetailsComponent } from './playlist-details/playlist-details.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,7 +28,6 @@ import { AccordionModule, SharedModule } from '@coreui/angular';
     HomeComponent,
     HomepageComponent,
     FindsongComponent,
-    SongDetailsComponent,
     PlaylistsComponent,
     PlaylistDetailsComponent
   ],
@@ -51,7 +49,6 @@ import { AccordionModule, SharedModule } from '@coreui/angular';
     RouterModule.forRoot([
       { path: '', component: HomepageComponent, pathMatch: 'full' },
       { path: 'Findsong', component: FindsongComponent},
-      { path: 'SongDetails/:id', component: SongDetailsComponent},
       { path: 'Playlists', component: PlaylistsComponent},
       { path: 'PlaylistDetails/:listId', component: PlaylistDetailsComponent}
     ]),
