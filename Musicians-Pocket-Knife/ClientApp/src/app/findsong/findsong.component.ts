@@ -56,6 +56,9 @@ export class FindsongComponent implements OnInit {
   
   ShowPlaylists(id:string):void{
     this.ToggleDisplayPlaylistForm();
+    if(this.visible == true){
+      this.visible = false;
+    }
     if(this.songId != id){
       this.apiService.getSongDetails(id).subscribe((response:Song) => {
         this.song = response;
@@ -93,6 +96,7 @@ export class FindsongComponent implements OnInit {
 
   ClearSearch(){
     this.songArray = [];
+    this.visible = false;
     if(this.displayPlaylistForm == true){
       this.displayPlaylistForm = false;
     }
