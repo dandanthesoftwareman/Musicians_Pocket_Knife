@@ -121,18 +121,20 @@ namespace Musicians_Pocket_Knife.Repositories
         {
             return _context.Dbsongs.FirstOrDefault(s => s.Apiid == songID && s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
         }
-        public void SaveTransposeChanges(List<Dbsong> songs)
+        public async Task SaveTransposeChanges(List<Dbsong> songs)
         {
-            foreach (Dbsong s in songs)
-            {
-                Dbsong dbsong = _context.Dbsongs.FirstOrDefault(x => x.Apiid == s.Apiid && x.PlaylistId == s.PlaylistId);
-                if (dbsong.TransposedKey != s.TransposedKey)
-                {
-                    dbsong.TransposedKey = s.TransposedKey;
-                    _context.Update(dbsong);
-                }
-            }
+            var tasks = songs.Select(s => UpdateDbSong(s));
+            await Task.WhenAll(tasks);
             _context.SaveChanges();
+        }
+        private async Task UpdateDbSong(Dbsong s)
+        {
+            Dbsong dbsong = await _context.Dbsongs.FirstOrDefaultAsync(x => x.Apiid == s.Apiid && x.PlaylistId == s.PlaylistId);
+            if (dbsong.TransposedKey != s.TransposedKey)
+            {
+                dbsong.TransposedKey = s.TransposedKey;
+                _context.Update(dbsong);
+            }
         }
     }
 }
