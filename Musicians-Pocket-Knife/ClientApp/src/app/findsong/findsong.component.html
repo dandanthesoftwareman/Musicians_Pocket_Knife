@@ -37,28 +37,32 @@
       </ul>
     </div>
   </div>
-  <div>
-    <form #searchSongForm="ngForm" (ngSubmit)="searchForSong(searchSongForm)">
-      <input
-        id="searchSongFormText"
-        type="text"
-        name="searchedSong"
-        placeholder="Look for a song"
-        ngModel
-      />
-      <button
-        id="searchSongButton"
-        (keydown.enter)="searchForSong(searchSongForm)"
-      >
-        Search
-      </button>
-    </form>
-    <span><button (click)="ClearSearch()">Clear</button></span>
+  <div class="d-flex flex-row mb-3">
+    <div class="p-0">
+      <form #searchSongForm="ngForm" (ngSubmit)="searchForSong(searchSongForm)">
+        <input
+          id="searchSongFormText"
+          type="text"
+          name="searchedSong"
+          placeholder="Look for a song"
+          ngModel
+        />
+        <button
+          id="searchSongButton"
+          (keydown.enter)="searchForSong(searchSongForm)"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+    <div class="p-0">
+      <button (click)="ClearSearch()">Clear</button>
+    </div>
   </div>
 
   <!-- List of Songs on form submission -->
   <div class="row">
-    <div class="col-5">
+    <div class="col-lg-5 col-md-8 col-sm-10">
       <div *ngFor="let s of songArray.search; index as i">
         <div class="card">
           <div class="card-body p-2">
@@ -69,20 +73,24 @@
                   {{ s.artist.name }}
                 </h6>
               </div>
-              <div class="col-6">
+              <div class="col-6 align-self-center">
                 <div class="d-flex justify-content-end">
-                  <button (click)="GetSongDetails(s.id)">Details</button>
-                  <button (click)="ShowPlaylists(s.id)">Add to List</button>
+                  <button mat-mini-fab (click)="GetSongDetails(s.id)">
+                    <mat-icon>help_outline</mat-icon>
+                  </button>
+                  <button mat-mini-fab (click)="ShowPlaylists(s.id)">
+                    <mat-icon>add</mat-icon>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-          <div [visible]="visible && s.id == songId" cCollapse>
-            <div class="card-footer">
-              <p *ngIf="songId != ''">
-                <span>Key: {{ song.song.key_of }}</span> ||
-                <span>BPM: {{ song.song.tempo }}</span>
-              </p>
+        </div>
+        <div [visible]="visible && s.id == songId" cCollapse>
+          <div class="card-footer offset-sm-6">
+            <div *ngIf="songId != ''" class="d-flex justify-content-around">
+              <span>Key: {{ song.song.key_of }}</span> ||
+              <span>BPM: {{ song.song.tempo }}</span>
             </div>
           </div>
         </div>

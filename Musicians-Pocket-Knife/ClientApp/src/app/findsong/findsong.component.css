@@ -11,3 +11,14 @@
     width: 24px;
     height: 24px;
 }
+.mat-icon-button {
+    vertical-align: middle;
+  }
+.mat-icon-button:hover {
+    vertical-align: middle;
+    background-color: rgb(216, 226, 238);
+  }
+.mat-icon-button:active {
+    vertical-align: middle;
+    background-color: rgb(101, 114, 103);
+  }

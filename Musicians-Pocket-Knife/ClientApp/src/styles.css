@@ -14,11 +14,3 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
-
-.mat-icon-button {
-  vertical-align: middle;
-}
-.mat-icon-button:hover {
-  vertical-align: middle;
-  background-color: rgb(216, 226, 238);
-}
