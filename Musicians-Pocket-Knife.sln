@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Musicians-Pocket-Knife", "Musicians-Pocket-Knife\Musicians-Pocket-Knife.csproj", "{60517C2B-EE1E-44F3-8568-C6762627A8C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MPKUnitTests", "MPKUnitTests\MPKUnitTests.csproj", "{FD0FFD05-D8D5-4EDB-B3CC-4C39BFDD9DAA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{60517C2B-EE1E-44F3-8568-C6762627A8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60517C2B-EE1E-44F3-8568-C6762627A8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60517C2B-EE1E-44F3-8568-C6762627A8C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD0FFD05-D8D5-4EDB-B3CC-4C39BFDD9DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD0FFD05-D8D5-4EDB-B3CC-4C39BFDD9DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD0FFD05-D8D5-4EDB-B3CC-4C39BFDD9DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD0FFD05-D8D5-4EDB-B3CC-4C39BFDD9DAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

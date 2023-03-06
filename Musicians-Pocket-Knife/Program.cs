@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 string connectionString = builder.Configuration["ConnectionStrings:ConnectionStringMpkdb"];
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<DBRepository>();
+builder.Services.AddScoped<IDBRepository, DBRepository>();
 builder.Services.AddDbContext<MpkdbContext>(x => x.UseSqlServer(connectionString));
 
 var app = builder.Build();

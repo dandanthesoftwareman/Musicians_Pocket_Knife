@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace Musicians_Pocket_Knife.Repositories
 {
-    public class DBRepository
+    public class DBRepository : IDBRepository
     {
         public DBRepository(MpkdbContext context)
         {

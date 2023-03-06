@@ -9,11 +9,11 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class PlaylistController : ControllerBase
     {
-        public PlaylistController(DBRepository repository)
+        public PlaylistController(IDBRepository repository)
         {
             _repository = repository;
         }
-        DBRepository _repository;
+        IDBRepository _repository;
 
         [HttpPost("CreatePlaylist")]
         public Playlist CreatePlaylist(string listTitle, string id)
