@@ -71,8 +71,8 @@ RemoveSongFromPlaylist(songID:number):void{
     this.playlistService.ViewPlaylistDetails(this.listId).subscribe((response:any)=>{
       this.listSongs = response;
     });
-    this.changeDetection.detectChanges();
   });
+  this.changeDetection.detectChanges();
 }
 
 //DISPLAY OPTIONS METHODS
@@ -157,4 +157,11 @@ RestoreOriginalKeys(){
 drop(event: CdkDragDrop<string[]>) {
   moveItemInArray(this.listSongs, event.previousIndex, event.currentIndex);
 }
+
+UpdateSongIndexes(){
+  for(let i = 0; i < this.listSongs.length; i++){
+    this.listSongs[i].SongIndex = i;
+  }
+}
+
 }

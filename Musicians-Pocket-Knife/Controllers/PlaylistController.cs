@@ -48,11 +48,11 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpPost("AddSongToPlaylist")]
-        public Dbsong AddSongToPlaylist([FromBody]APISong song, string id, string listTitle)
+        public Dbsong AddSongToPlaylist([FromBody]APISong song, string id, int listId)
         {
             try
             {
-                return _repository.AddSongToPlaylist(id, song, listTitle);
+                return _repository.AddSongToPlaylist(id, song, listId);
             }
             catch(Exception ex)
             {

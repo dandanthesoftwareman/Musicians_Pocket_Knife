@@ -22,15 +22,15 @@ namespace MPKUnitTests
         {
             string id = "Jazz Man";
             APISong song = new APISong();
-            string listTitle = "Jazz Man's Jams";
+            int listId = 1;
             Dbsong expected = new Dbsong()
             {
                 Id = 5,
                 Title = "Jazzy Jazz"
             };
 
-            _repository.AddSongToPlaylist(id, song, listTitle).Returns(expected);
-            var result = _controller.AddSongToPlaylist(song, id, listTitle);
+            _repository.AddSongToPlaylist(id, song, listId).Returns(expected);
+            var result = _controller.AddSongToPlaylist(song, id, listId);
             Assert.AreEqual(expected, result);
         }
     }

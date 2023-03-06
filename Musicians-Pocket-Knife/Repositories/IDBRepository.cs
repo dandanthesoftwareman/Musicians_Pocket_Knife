@@ -4,8 +4,8 @@ namespace Musicians_Pocket_Knife.Repositories
 {
     public interface IDBRepository
     {
-        Dbsong AddSongToPlaylist(string id, APISong song, string listTitle);
-        Dbsong AddSongToPlaylist(string id, APISong song, string listTitle, bool addDuplicate);
+        Dbsong AddSongToPlaylist(string id, APISong song, int listId);
+        Dbsong AddSongToPlaylist(string id, APISong song, int listId, bool addDuplicate);
         Playlist CreatePlaylist(string listTitle, string id);
         void DeletePlaylist(int listId, string id);
         Dbsong GetDBSongDetails(string id, string songID, string listTitle);

@@ -33,10 +33,10 @@ export class PlaylistService {
     return this.http.get(`${this.baseUrl}${this.endpoint}/ViewPlaylistDetails?listId=${listId}&id=${UserService.user.id}`);
   }
 
-  AddSongToPlaylist(song:Song, listTitle:string):any{
+  AddSongToPlaylist(song:Song, listId:number):any{
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(song);
-    return this.http.post(`${this.baseUrl}${this.endpoint}/AddSongToPlaylist?id=${UserService.user.id}&listTitle=${listTitle}`, body, {'headers': headers})
+    return this.http.post(`${this.baseUrl}${this.endpoint}/AddSongToPlaylist?id=${UserService.user.id}&listId=${listId}`, body, {'headers': headers})
   }
 
   RemoveSongFromPlaylist(songID:number, listTitle:string):any{

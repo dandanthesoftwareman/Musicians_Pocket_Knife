@@ -66,17 +66,19 @@ namespace Musicians_Pocket_Knife.Repositories
         }
         public List<Dbsong> ViewPlaylistDetails(int listId, string id)
         {
-            return _context.Dbsongs.Where(s => s.Playlist.Id == listId && s.Playlist.User.GoogleId == id).ToList();
+            return _context.Dbsongs.Where(s => s.Playlist.Id == listId && s.Playlist.User.GoogleId == id).OrderBy(s => s.SongIndex).ToList();
         }
-        public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle)
+        public Dbsong AddSongToPlaylist(string id, APISong song, int listId)
         {
-            return AddSongToPlaylist(id, song, listTitle, false);
+            return AddSongToPlaylist(id, song, listId, false);
         }
-        public Dbsong AddSongToPlaylist(string id, APISong song, string listTitle, bool addDuplicate)
+        public Dbsong AddSongToPlaylist(string id, APISong song, int listId, bool addDuplicate)
         {
-            Playlist playlist = _context.Playlists.FirstOrDefault(p => p.ListTitle == listTitle && p.User.GoogleId == id);
+            Playlist playlist = _context.Playlists.FirstOrDefault(p => p.Id == listId && p.User.GoogleId == id);
+            List<Dbsong> songCount = _context.Dbsongs.Where(s => s.PlaylistId == listId).ToList();
             Dbsong dbSong = new Dbsong()
             {
+                SongIndex = songCount.Count(),
                 PlaylistId = playlist.Id,
                 Title = song.song.title,
                 Apiid = song.song.id,

@@ -7,6 +7,8 @@ public partial class Dbsong
 {
     public int Id { get; set; }
 
+    public int? SongIndex { get; set; }
+
     public int? PlaylistId { get; set; }
 
     public string? Apiid { get; set; }

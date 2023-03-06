@@ -47,8 +47,8 @@ export class FindsongComponent implements OnInit {
     });
   }
 
-  AddToPlaylist(listTitle:string):any {
-    this.playlistService.AddSongToPlaylist(this.song, listTitle).subscribe((response:any)=> {
+  AddToPlaylist(listId:number):any {
+    this.playlistService.AddSongToPlaylist(this.song, listId).subscribe((response:any)=> {
       console.log(response);
     });
     this.ToggleDisplayPlaylistForm();
