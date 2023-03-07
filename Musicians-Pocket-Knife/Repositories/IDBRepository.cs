@@ -11,10 +11,11 @@ namespace Musicians_Pocket_Knife.Repositories
         Dbsong GetDBSongDetails(string id, string songID, string listTitle);
         Playlist GetListTitle(int listId, string id);
         List<Playlist> GetUserPlaylists(string id);
-        Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle);
+        Dbsong RemoveSongFromPlaylist(string id, int songID, int listId);
         Playlist RenamePlaylist(int listId, string newTitle, string id);
         Task SaveTransposeChanges(List<Dbsong> songs);
         void UpdateDateViewed(int listId, string id);
         List<Dbsong> ViewPlaylistDetails(int listId, string id);
+        void UpdateSongIndexes(List<Dbsong> songs);
     }
 }

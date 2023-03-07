@@ -1,6 +1,7 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { DbSong } from './db-song';
 import { Song } from './song';
 import { UserService } from './user.service';
 
@@ -39,8 +40,8 @@ export class PlaylistService {
     return this.http.post(`${this.baseUrl}${this.endpoint}/AddSongToPlaylist?id=${UserService.user.id}&listId=${listId}`, body, {'headers': headers})
   }
 
-  RemoveSongFromPlaylist(songID:number, listTitle:string):any{
-    return this.http.delete(`${this.baseUrl}${this.endpoint}/RemoveSongFromPlaylist?songID=${songID}&id=${UserService.user.id}&listTitle=${listTitle}`)
+  RemoveSongFromPlaylist(songID:number, listId:number):any{
+    return this.http.delete(`${this.baseUrl}${this.endpoint}/RemoveSongFromPlaylist?songID=${songID}&id=${UserService.user.id}&listId=${listId}`)
   }
 
   RenamePlaylist(listId:number, newtitle:string):any{
@@ -49,6 +50,12 @@ export class PlaylistService {
 
   UpdateDateViewed(listId:number):any{
     return this.http.patch(`${this.baseUrl}${this.endpoint}/UpdateDateViewed?listId=${listId}&id=${UserService.user.id}`, {})
+  }
+
+  UpdateSongIndexes(songs:DbSong[]):any{
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(songs);
+    return this.http.patch(`${this.baseUrl}${this.endpoint}/UpdateSongIndexes`, body, {'headers': headers})
   }
 }
 

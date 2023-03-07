@@ -1,6 +1,6 @@
 export interface DbSong {
     id:             number;
-    SongIndex:      number;
+    songIndex:      number;
     playlistId:     number;
     apiid:          string;
     title:          string;

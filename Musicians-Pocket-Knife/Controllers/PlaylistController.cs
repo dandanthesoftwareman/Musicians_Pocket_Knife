@@ -64,14 +64,19 @@ namespace Musicians_Pocket_Knife.Controllers
             
         }
         [HttpDelete("RemoveSongFromPlaylist")]
-        public Dbsong RemoveSongFromPlaylist(string id, int songID, string listTitle)
+        public Dbsong RemoveSongFromPlaylist(string id, int songID, int listId)
         {
-            return _repository.RemoveSongFromPlaylist(id, songID, listTitle);
+            return _repository.RemoveSongFromPlaylist(id, songID, listId);
         }
         [HttpPatch("UpdateDateViewed")]
         public void UpdateDateViewed(int listId, string id)
         {
             _repository.UpdateDateViewed(listId, id);
+        }
+        [HttpPatch("UpdateSongIndexes")]
+        public void UpdateSongIndexes([FromBody]List<Dbsong> songs)
+        {
+            _repository.UpdateSongIndexes(songs);
         }
     }
 }

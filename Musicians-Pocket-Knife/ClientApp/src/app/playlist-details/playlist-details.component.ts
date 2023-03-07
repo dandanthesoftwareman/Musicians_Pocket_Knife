@@ -66,13 +66,22 @@ RenamePlaylist(form:NgForm):any{
   })
 }
 RemoveSongFromPlaylist(songID:number):void{
-  this.playlistService.RemoveSongFromPlaylist(songID, this.listTitle).subscribe((response:any)=>{
+  this.playlistService.RemoveSongFromPlaylist(songID, this.listId).subscribe((response:any)=>{
     this.listSongs = [];
     this.playlistService.ViewPlaylistDetails(this.listId).subscribe((response:any)=>{
       this.listSongs = response;
+      this.UpdateSongIndexes();
     });
   });
   this.changeDetection.detectChanges();
+}
+
+UpdateSongIndexes(){
+  for(let i = 0; i < this.listSongs.length; i++){
+    this.listSongs[i].songIndex = i;
+  }
+  this.playlistService.UpdateSongIndexes(this.listSongs).subscribe((response:any) => {
+  });
 }
 
 //DISPLAY OPTIONS METHODS
@@ -157,11 +166,7 @@ RestoreOriginalKeys(){
 drop(event: CdkDragDrop<string[]>) {
   moveItemInArray(this.listSongs, event.previousIndex, event.currentIndex);
 }
-
-UpdateSongIndexes(){
-  for(let i = 0; i < this.listSongs.length; i++){
-    this.listSongs[i].SongIndex = i;
-  }
+LogSongList(){
+  console.log(this.listSongs);
 }
-
 }
