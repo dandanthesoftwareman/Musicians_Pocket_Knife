@@ -116,9 +116,31 @@ namespace Musicians_Pocket_Knife.Repositories
             _context.Playlists.FirstOrDefault(p => p.Id == listId && p.User.GoogleId == id).LastDateViewed = DateTime.Now;
             _context.SaveChanges();
         }
+
+        //SONG Methods
+        public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
+        {
+            return _context.Dbsongs.FirstOrDefault(s => s.Apiid == songID && s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
+        }
+        public async Task SaveTransposeChanges(List<Dbsong> songs)
+        {
+            //var tasks = songs.Select(s => UpdateDbSong(s));
+            songs.ForEach(s => UpdateDbSong(s));
+            //await Task.WhenAll(tasks);
+            _context.SaveChanges();
+        }
+        private void UpdateDbSong(Dbsong s)
+        {
+            Dbsong dbsong = _context.Dbsongs.FirstOrDefault(x => x.Apiid == s.Apiid && x.PlaylistId == s.PlaylistId);
+            if (dbsong.TransposedKey != s.TransposedKey)
+            {
+                dbsong.TransposedKey = s.TransposedKey;
+                _context.Update(dbsong);
+            }
+        }
         public void UpdateSongIndexes(List<Dbsong> songs)
         {
-            if(songs.Count > 0)
+            if (songs.Count > 0)
             {
                 foreach (Dbsong song in songs)
                 {
@@ -130,36 +152,6 @@ namespace Musicians_Pocket_Knife.Repositories
                         _context.SaveChanges();
                     }
                 }
-            }
-        }
-
-        //SONG Methods
-        public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
-        {
-            return _context.Dbsongs.FirstOrDefault(s => s.Apiid == songID && s.Playlist.ListTitle == listTitle && s.Playlist.User.GoogleId == id);
-        }
-        //public void UpdateSongIndexes(int listId)
-        //{
-        //    List<Dbsong> list = _context.Dbsongs.Where(s => s.PlaylistId == listId).OrderBy(s => s.SongIndex).ToList();
-        //    for(int i = 0; i < list.Count; i++)
-        //    {
-        //        list[i].SongIndex = i;
-        //        _context.Update(list[i]);
-        //    }
-        //}
-        public async Task SaveTransposeChanges(List<Dbsong> songs)
-        {
-            var tasks = songs.Select(s => UpdateDbSong(s));
-            await Task.WhenAll(tasks);
-            _context.SaveChanges();
-        }
-        private async Task UpdateDbSong(Dbsong s)
-        {
-            Dbsong dbsong = await _context.Dbsongs.FirstOrDefaultAsync(x => x.Apiid == s.Apiid && x.PlaylistId == s.PlaylistId);
-            if (dbsong.TransposedKey != s.TransposedKey)
-            {
-                dbsong.TransposedKey = s.TransposedKey;
-                _context.Update(dbsong);
             }
         }
     }

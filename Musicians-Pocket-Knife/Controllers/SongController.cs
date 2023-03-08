@@ -9,11 +9,11 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class SongController : ControllerBase
     {
-        public SongController(DBRepository repository)
+        public SongController(IDBRepository repository)
         {
             _repository = repository;
         }
-        DBRepository _repository;
+        IDBRepository _repository;
 
         [HttpGet("GetDBSongDetails")]
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
