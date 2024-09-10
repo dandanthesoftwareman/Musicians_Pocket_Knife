@@ -12,7 +12,6 @@ namespace Musicians_Pocket_Knife.Repositories
         }
         MpkdbContext _context;
 
-        //PLAYLIST Methods
         public Playlist CreatePlaylist(string listTitle, string id)
         {
             User user = _context.Users.FirstOrDefault(u => u.GoogleId == id);

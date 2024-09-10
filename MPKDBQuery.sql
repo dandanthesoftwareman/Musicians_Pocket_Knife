@@ -18,14 +18,15 @@
 --LastDateViewed DATETIME
 --);
 
-SELECT * FROM Playlists;
+--SELECT * FROM Playlists;
 SELECT * FROM DBSongs;
 
---DELETE FROM DBSongs WHERE PlaylistId = 7;
+--DELETE FROM DBSongs WHERE PlaylistId = 5;
 --DELETE FROM Playlists WHERE Id = 7;
 
 --CREATE TABLE DBSongs(
 --id INT NOT NULL IDENTITY (1,1) PRIMARY KEY,
+--SongIndex INT,
 --PlaylistId INT FOREIGN KEY REFERENCES Playlists(id),
 --APIid NVARCHAR(15),
 --Title NVARCHAR(255),

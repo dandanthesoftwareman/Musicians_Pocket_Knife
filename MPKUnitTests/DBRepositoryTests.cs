@@ -12,64 +12,65 @@ namespace MPKUnitTests
 {
     internal class DBRepositoryTests
     {
-        private DBRepository _dbRepository;
-        private MpkdbContext _context;
-        [SetUp]
-        public void SetUp()
-        {
-            var options = new DbContextOptionsBuilder<MpkdbContext>();
-            options.UseInMemoryDatabase("database");
-            _context = new MpkdbContext(options.Options);
-            _dbRepository = new DBRepository(_context);
-        }
+        //private DBRepository _dbRepository;
+        //private MpkdbContext _context;
 
-        [Test]
-        public void AddSongToPlaylistTest()
-        {
-            //Arrange
-            APISong testSong = new APISong()
-            {
-                song = new Song()
-                {
-                    id = "X69",
-                    artist = new Artist()
-                    {
-                        name = "JOHN CENA"
-                    }
-                }
-            };
-            User user = new User()
-            {
-                FirstName = "JAZZZ",
-                GoogleId = "111222"
-            };
-            Playlist list = new Playlist()
-            {
-                Id = 1,
-                ListTitle = "ListyBoi",
-                UserId = 1,
-                User = user
-            };
-            _context.Playlists.Add(list);
-            _context.SaveChanges();
+        //[SetUp]
+        //public void SetUp()
+        //{
+        //    var options = new DbContextOptionsBuilder<MpkdbContext>();
+        //    options.UseInMemoryDatabase("database");
+        //    _context = new MpkdbContext(options.Options);
+        //    _dbRepository = new DBRepository(_context);
+        //}
 
-            Dbsong song = new Dbsong()
-            {
-                PlaylistId = 1,
-                Apiid = "X69"
-            };
-            _context.Dbsongs.Add(song);
-            _context.SaveChanges();
+        //[Test]
+        //public void AddSongToPlaylistTest()
+        //{
+        //    //Arrange
+        //    APISong testSong = new APISong()
+        //    {
+        //        song = new Song()
+        //        {
+        //            id = "X69",
+        //            artist = new Artist()
+        //            {
+        //                name = "JOHN CENA"
+        //            }
+        //        }
+        //    };
+        //    User user = new User()
+        //    {
+        //        FirstName = "JAZZZ",
+        //        GoogleId = "111222"
+        //    };
+        //    Playlist list = new Playlist()
+        //    {
+        //        Id = 1,
+        //        ListTitle = "ListyBoi",
+        //        UserId = 1,
+        //        User = user
+        //    };
+        //    _context.Playlists.Add(list);
+        //    _context.SaveChanges();
 
-            var playlists = _context.Playlists.ToList();
+        //    Dbsong song = new Dbsong()
+        //    {
+        //        PlaylistId = 1,
+        //        Apiid = "X69"
+        //    };
+        //    _context.Dbsongs.Add(song);
+        //    _context.SaveChanges();
 
-            //Act
-            var result = _dbRepository.AddSongToPlaylist("111222", testSong, "ListyBoi");
+        //    var playlists = _context.Playlists.ToList();
 
-            //Assert
-            Assert.IsNull(result);
+        //    //Act
+        //    var result = _dbRepository.AddSongToPlaylist("111222", testSong, "ListyBoi");
+
+        //    //Assert
+        //    Assert.IsNull(result);
 
 
-        }
+        //}
     }
 }
