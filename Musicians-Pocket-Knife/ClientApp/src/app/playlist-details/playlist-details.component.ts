@@ -23,7 +23,6 @@ export class PlaylistDetailsComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
-  //
   TransposeEnabled:boolean = false;
   toggleRenamePlaylist:boolean = false;
   toggleRemoveSong:boolean = false;
@@ -35,6 +34,7 @@ export class PlaylistDetailsComponent implements OnInit {
   listTitle: string =  "";
   listSongs: DbSong[] = {} as DbSong[];
   sharpKeys: string[] = ["A", "A♯", "B", "C", "C♯", "D", "D♯", "E", "F", "F♯", "G", "G♯"];
+
     //so far the API only uses sharp keys, leaving flat keys array here for later use if need be
     //flatKeys: string[] = ["Ab", "A", "Bb", "B", "C", "Db", "D", "Eb", "E", "F", "Gb", "G"];
 
@@ -44,6 +44,7 @@ export class PlaylistDetailsComponent implements OnInit {
       UserService.user.id = user.id;
       this.loggedIn = (user != null);
   })
+
   let params = this.route.snapshot.paramMap;
       let listId = Number(params.get("listId"));
       this.listId = listId;
@@ -65,6 +66,7 @@ RenamePlaylist(form:NgForm):any{
     this.changeDetection.detectChanges();
   })
 }
+
 RemoveSongFromPlaylist(songID:number):void{
   this.playlistService.RemoveSongFromPlaylist(songID, this.listId).subscribe((response:any)=>{
     this.listSongs = [];
@@ -89,14 +91,17 @@ ToggleRenamePlaylist(){
   this.toggleRenamePlaylist = !this.toggleRenamePlaylist;
   this.hideOptions = !this.hideOptions;
 }
+
 EnableTranspose(){
   this.TransposeEnabled = !this.TransposeEnabled;
   this.hideOptions = !this.hideOptions;
 }
+
 ToggleRemoveSong(){
   this.toggleRemoveSong = !this.toggleRemoveSong;
   this.hideOptions = !this.hideOptions;
 }
+
 ToggleReOrderList(){
   this.toggleReOrderList = !this.toggleReOrderList;
   this.hideOptions = !this.hideOptions;
@@ -125,6 +130,7 @@ TransposeDown(transposedKey:string, apiid:string):void{
   }
   this.listSongs[songIndex].transposedKey = key;
 }
+
 TransposeUp(transposedKey:string, apiid:string):void{
   let key:string = "";
   let keyIndex:number;
@@ -147,15 +153,18 @@ TransposeUp(transposedKey:string, apiid:string):void{
   }
   this.listSongs[songIndex].transposedKey = key;
 }
+
 SaveTransposeChanges(){
   this.songService.SaveTransposeChanges(this.listSongs).subscribe((response:void)=>{
   });
   this.EnableTranspose();
 }
+
 DiscardChanges(){
   this.ngOnInit();
   this.EnableTranspose();
 }
+
 RestoreOriginalKeys(){
   this.listSongs.forEach((song) => {
     song.transposedKey = song.originalKey;
@@ -166,6 +175,7 @@ RestoreOriginalKeys(){
 drop(event: CdkDragDrop<string[]>) {
   moveItemInArray(this.listSongs, event.previousIndex, event.currentIndex);
 }
+
 LogSongList(){
   console.log(this.listSongs);
 }

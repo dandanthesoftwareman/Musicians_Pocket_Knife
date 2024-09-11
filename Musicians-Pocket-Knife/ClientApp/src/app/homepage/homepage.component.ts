@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 
@@ -6,18 +7,22 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
+
 export class HomepageComponent implements OnInit {
+
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
-  constructor(private authService: SocialAuthService) { }
+  constructor(private authService: SocialAuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
+
+      if (this.loggedIn) {
+        this.router.navigate(['/Playlists']);
+      }
     });
   }
-  
-
 }

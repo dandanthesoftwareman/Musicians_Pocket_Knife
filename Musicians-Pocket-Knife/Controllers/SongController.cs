@@ -9,21 +9,23 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class SongController : ControllerBase
     {
-        public SongController(IDBRepository repository)
-        {
-            _repository = repository;
-        }
-        IDBRepository _repository;
+        private readonly ISongRepository songRepository;
 
+        public SongController(ISongRepository songRepository)
+        {
+            this.songRepository = songRepository;
+        }
+        
         [HttpGet("GetDBSongDetails")]
         public Dbsong GetDBSongDetails(string id, string songID, string listTitle)
         {
-            return _repository.GetDBSongDetails(id, songID, listTitle);
+            return songRepository.GetDBSongDetails(id, songID, listTitle);
         }
+
         [HttpPatch("SaveTransposeChanges")]
         public async Task SaveTransposeChanges([FromBody]List<Dbsong> songs)
         {
-            await _repository.SaveTransposeChanges(songs);
+            await songRepository.SaveTransposeChanges(songs);
         }
     }
 }

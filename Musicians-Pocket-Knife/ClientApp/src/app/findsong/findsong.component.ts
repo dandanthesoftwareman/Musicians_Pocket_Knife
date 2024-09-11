@@ -33,6 +33,7 @@ export class FindsongComponent implements OnInit {
       UserService.user.id = user.id;
       this.loggedIn = (user != null);
   })
+  
   this.playlistService.GetUserPlaylists().subscribe((response:any) => {
     this.userPlaylists = response;
     this.userPlaylists.sort((a,b) => (a.lastDateViewed > b.lastDateViewed) ? -1: 1);})
