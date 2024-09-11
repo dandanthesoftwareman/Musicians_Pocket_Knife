@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { SongArray } from '../song-array';
-import { Song } from '../song';
+import { SongArray } from '../interfaces/song-array';
+import { Song } from '../interfaces/song';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { UserService } from '../user.service';
 import { ApiService } from '../api.service';
 import { PlaylistService } from '../playlist.service';
-import { Playlist } from '../playlist';
+import { Playlist } from '../interfaces/playlist';
 
 @Component({
   selector: 'app-findsong',

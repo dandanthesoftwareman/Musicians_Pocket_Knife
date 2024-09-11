@@ -1,7 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Playlist } from '../playlist';
+import { Playlist } from '../interfaces/playlist';
 import { PlaylistService } from '../playlist.service';
 import { UserService } from '../user.service';
 

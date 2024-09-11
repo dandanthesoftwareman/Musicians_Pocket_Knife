@@ -1,8 +1,8 @@
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { DbSong } from './db-song';
-import { Song } from './song';
+import { DbSong } from './interfaces/db-song';
+import { Song } from './interfaces/song';
 import { UserService } from './user.service';
 
 @Injectable({

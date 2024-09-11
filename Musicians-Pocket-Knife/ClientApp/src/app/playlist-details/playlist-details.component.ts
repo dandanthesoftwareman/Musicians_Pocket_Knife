@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { DbSong } from '../db-song';
+import { DbSong } from '../interfaces/db-song';
 import { PlaylistService } from '../playlist.service';
 import { SongService } from '../song.service';
 import { UserService } from '../user.service';

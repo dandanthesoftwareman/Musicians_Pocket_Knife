@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { DbSong } from './db-song';
+import { DbSong } from './interfaces/db-song';
 import { UserService } from './user.service';
 
 
