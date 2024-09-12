@@ -4,6 +4,6 @@ namespace Musicians_Pocket_Knife.Repositories
 {
     public interface IUserRepository
     {
-        public User CreateNewUser(string googleId, string name);
+        Task<User?> CreateNewUserAsync(string googleId, string name);
     }
 }

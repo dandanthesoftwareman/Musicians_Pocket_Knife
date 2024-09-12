@@ -17,9 +17,10 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpPost("CreateNewUser")]
-        public User CreateNewUser(string googleId, string name)
+        public async Task<User?> CreateNewUser(string googleId, string name)
         {
-            return userRepository.CreateNewUser(googleId, name);
+            var user = await userRepository.CreateNewUserAsync(googleId, name);
+            return user;
         }
     }
 }

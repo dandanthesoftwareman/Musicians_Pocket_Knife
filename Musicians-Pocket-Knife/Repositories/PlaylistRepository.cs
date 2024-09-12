@@ -58,6 +58,7 @@ namespace Musicians_Pocket_Knife.Repositories
             _context.Remove(playlist);
             _context.SaveChanges();
         }
+
         public List<Playlist> GetUserPlaylists(string id)
         {
             return _context.Playlists.Where(u => u.User.GoogleId == id).ToList();

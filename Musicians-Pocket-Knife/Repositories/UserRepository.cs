@@ -1,33 +1,50 @@
-﻿using Musicians_Pocket_Knife.Models;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using Musicians_Pocket_Knife.Models;
+using System.Data;
 
 namespace Musicians_Pocket_Knife.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly MpkdbContext _context;
+        private readonly string CreateNewUser = "[MPKDB].[dbo].[CreateNewUser]";
 
-        public UserRepository(MpkdbContext context)
+        private readonly string _connectionString;
+
+        public UserRepository()
         {
-            this._context = context;
+            _connectionString = @"Server=.\\sqlexpress; Database=MPKDB; Trusted_Connection=True;";
         }
 
-        public User CreateNewUser(string googleId, string name)
+        private IDbConnection CreateConnection()
         {
-            if (_context.Users.Any(x => x.GoogleId == googleId))
+            return new SqlConnection(_connectionString);
+        }
+
+        public async Task<User?> CreateNewUserAsync(string googleId, string name)
+        {
+            var firstName = name.Split('_')[0];
+            var lastName = name.Split('_')[1];
+
+            using (var connection = CreateConnection())
             {
-                return null;
-            }
-            else
-            {
-                User newUser = new User()
+                string sql = CreateNewUser;
+
+                var parameters = new { FirstName = firstName, LastName = lastName, GoogleId = googleId };
+                var userId = await connection.QuerySingleAsync<int>(sql, parameters, commandType: CommandType.StoredProcedure);
+
+                if (userId == -1)
                 {
-                    FirstName = name.Split('_')[0].ToString(),
-                    LastName = name.Split('_')[1].ToString(),
+                    return null;
+                }
+
+                return new User
+                {
+                    Id = userId,
+                    FirstName = firstName,
+                    LastName = lastName,
                     GoogleId = googleId
                 };
-                _context.Users.Add(newUser);
-                _context.SaveChanges();
-                return newUser;
             }
         }
     }

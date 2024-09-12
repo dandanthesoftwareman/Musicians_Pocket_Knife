@@ -70,7 +70,6 @@ namespace Musicians_Pocket_Knife.Controllers
                     Title = ex.Message,
                 };
             }
-            
         }
 
         [HttpDelete("RemoveSongFromPlaylist")]
