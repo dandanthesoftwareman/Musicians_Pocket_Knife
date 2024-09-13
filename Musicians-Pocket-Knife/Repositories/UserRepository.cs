@@ -7,13 +7,13 @@ namespace Musicians_Pocket_Knife.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly string CreateNewUser = "[MPKDB].[dbo].[CreateNewUser]";
+        private readonly string CreateNewUserStoredProcedure = "[MPKDB].[dbo].[CreateNewUser]";
 
         private readonly string _connectionString;
 
-        public UserRepository()
+        public UserRepository(string connectionString)
         {
-            _connectionString = @"Server=.\\sqlexpress; Database=MPKDB; Trusted_Connection=True;";
+            _connectionString = connectionString;
         }
 
         private IDbConnection CreateConnection()
@@ -21,17 +21,12 @@ namespace Musicians_Pocket_Knife.Repositories
             return new SqlConnection(_connectionString);
         }
 
-        public async Task<User?> CreateNewUserAsync(string googleId, string name)
+        public async Task<User?> CreateNewUserAsync(User createUserRequest)
         {
-            var firstName = name.Split('_')[0];
-            var lastName = name.Split('_')[1];
-
             using (var connection = CreateConnection())
             {
-                string sql = CreateNewUser;
-
-                var parameters = new { FirstName = firstName, LastName = lastName, GoogleId = googleId };
-                var userId = await connection.QuerySingleAsync<int>(sql, parameters, commandType: CommandType.StoredProcedure);
+                var parameters = new { FirstName = createUserRequest.FirstName, LastName = createUserRequest.LastName, GoogleId = createUserRequest.GoogleId };
+                var userId = await connection.QuerySingleAsync<int>(CreateNewUserStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
 
                 if (userId == -1)
                 {
@@ -41,9 +36,9 @@ namespace Musicians_Pocket_Knife.Repositories
                 return new User
                 {
                     Id = userId,
-                    FirstName = firstName,
-                    LastName = lastName,
-                    GoogleId = googleId
+                    FirstName = createUserRequest.FirstName,
+                    LastName = createUserRequest.LastName,
+                    GoogleId = createUserRequest.GoogleId
                 };
             }
         }

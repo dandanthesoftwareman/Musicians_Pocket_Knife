@@ -13,7 +13,6 @@ export class NavMenuComponent {
   loggedIn: boolean = false;
 
   constructor(private authService: SocialAuthService, private userService: UserService) { }
-
   ngOnInit(): void {
 
     this.authService.authState.subscribe((user) => {
@@ -21,7 +20,7 @@ export class NavMenuComponent {
       UserService.user = user;
       this.loggedIn = (user != null);
       if(this.loggedIn == true){
-        this.userService.CreateNewUser(this.user.id).subscribe((response:any) => {
+        this.userService.CreateNewUser(user).subscribe((response:any) => {
           // do nothing
         })
       }

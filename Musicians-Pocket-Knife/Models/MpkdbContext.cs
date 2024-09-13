@@ -54,9 +54,9 @@ public partial class MpkdbContext : DbContext
             entity.Property(e => e.LastDateViewed).HasColumnType("datetime");
             entity.Property(e => e.ListTitle).HasMaxLength(255);
 
-            entity.HasOne(d => d.User).WithMany(p => p.Playlists)
-                .HasForeignKey(d => d.UserId)
-                .HasConstraintName("FK__Playlists__UserI__160F4887");
+            //entity.HasOne(d => d.User).WithMany(p => p.Playlists)
+            //    .HasForeignKey(d => d.UserId)
+            //    .HasConstraintName("FK__Playlists__UserI__160F4887");
         });
 
         modelBuilder.Entity<User>(entity =>

@@ -11,8 +11,9 @@ export class UserService {
   endpoint:string = "api/Users";
 
   constructor(private http:HttpClient, @Inject("BASE_URL") private baseUrl:string) { }
-
-  CreateNewUser(id:string):any{
-    return this.http.post(`${this.baseUrl}${this.endpoint}/CreateNewUser?googleId=${id}&name=${UserService.user.firstName}_${UserService.user.lastName}`, {})
+  CreateNewUser(user:SocialUser):any{
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(user)
+    return this.http.post(`${this.baseUrl}${this.endpoint}/CreateNewUser`, body, {'headers': headers})
   }
 }

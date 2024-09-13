@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Musicians_Pocket_Knife.Models;
-using Musicians_Pocket_Knife.Repositories;
+using Musicians_Pocket_Knife.Orchestrators;
+using AutoMapper;
 
 namespace Musicians_Pocket_Knife.Controllers
 {
@@ -9,18 +9,30 @@ namespace Musicians_Pocket_Knife.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserOrchestrator userOrchestrator;
+        private readonly IMapper mapper;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserOrchestrator userOrchestrator, IMapper mapper)
         {
-            this.userRepository = userRepository;
+            this.userOrchestrator = userOrchestrator;
+            this.mapper = mapper;
         }
 
         [HttpPost("CreateNewUser")]
-        public async Task<User?> CreateNewUser(string googleId, string name)
+        public async Task<IActionResult> CreateNewUser([FromBody] CreateNewUserRequest createUserRequest)
         {
-            var user = await userRepository.CreateNewUserAsync(googleId, name);
-            return user;
+            try
+            {
+                var newUser = mapper.Map<User>(createUserRequest);
+
+                var user = await userOrchestrator.CreateNewUserAsync(newUser);
+
+                return Ok(user);
+            }
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }
