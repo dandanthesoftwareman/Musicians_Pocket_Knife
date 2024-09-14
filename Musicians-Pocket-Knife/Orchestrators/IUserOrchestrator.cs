@@ -5,5 +5,6 @@ namespace Musicians_Pocket_Knife.Orchestrators
     public interface IUserOrchestrator
     {
         Task<User?> CreateNewUserAsync(User user);
+        bool? VerifyExistingUser(VerifyExistingUserRequest request);
     }
 }

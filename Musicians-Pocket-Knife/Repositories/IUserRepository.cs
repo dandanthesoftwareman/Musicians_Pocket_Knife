@@ -5,5 +5,6 @@ namespace Musicians_Pocket_Knife.Repositories
     public interface IUserRepository
     {
         Task<User?> CreateNewUserAsync(User createUserRequest);
+        bool? VerifyExistingUser(VerifyExistingUserRequest request);
     }
 }

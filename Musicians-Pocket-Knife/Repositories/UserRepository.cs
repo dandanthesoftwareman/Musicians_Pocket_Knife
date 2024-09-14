@@ -8,6 +8,7 @@ namespace Musicians_Pocket_Knife.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly string CreateNewUserStoredProcedure = "[MPKDB].[dbo].[CreateNewUser]";
+        private readonly string VerifyExistingUserStoredProcedure = "[MPKDB].[dbo].[VerifyExistingUser]";
 
         private readonly string _connectionString;
 
@@ -21,11 +22,39 @@ namespace Musicians_Pocket_Knife.Repositories
             return new SqlConnection(_connectionString);
         }
 
+        public bool? VerifyExistingUser(VerifyExistingUserRequest request)
+        {
+            using (var connection = CreateConnection())
+            {
+                var parameters = new 
+                { 
+                    GoogleId = request.GoogleId 
+                };
+
+                try
+                {
+                    return connection.QuerySingle<bool>(VerifyExistingUserStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Add Logger here, error in db request");
+                    return null;
+                }
+                
+            }
+        }
+
         public async Task<User?> CreateNewUserAsync(User createUserRequest)
         {
             using (var connection = CreateConnection())
             {
-                var parameters = new { FirstName = createUserRequest.FirstName, LastName = createUserRequest.LastName, GoogleId = createUserRequest.GoogleId };
+                var parameters = new 
+                { 
+                    FirstName = createUserRequest.FirstName,
+                    LastName = createUserRequest.LastName,
+                    GoogleId = createUserRequest.GoogleId 
+                };
+
                 var userId = await connection.QuerySingleAsync<int>(CreateNewUserStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
 
                 if (userId == -1)

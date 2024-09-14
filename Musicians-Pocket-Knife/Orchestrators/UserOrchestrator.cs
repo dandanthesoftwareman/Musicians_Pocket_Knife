@@ -12,6 +12,16 @@ namespace Musicians_Pocket_Knife.Orchestrators
             this.userRepository = userRepository;
         }
 
+        public bool? VerifyExistingUser(VerifyExistingUserRequest request)
+        {
+            if (request.isActive && request.GoogleId != null)
+            {
+                return userRepository.VerifyExistingUser(request);
+            }
+
+            return false;
+        }
+
         public async Task<User?> CreateNewUserAsync(User newUserRequest)
         {
             var user = await userRepository.CreateNewUserAsync(newUserRequest);
