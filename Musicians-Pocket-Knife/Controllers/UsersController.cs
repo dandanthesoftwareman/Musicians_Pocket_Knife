@@ -19,7 +19,7 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpPost("CreateNewUser")]
-        public async Task<IActionResult> CreateNewUser([FromBody] CreateNewUserRequest createUserRequest)
+        public async Task<IActionResult> CreateNewUser(CreateNewUserRequest createUserRequest)
         {
             try
             {
@@ -29,9 +29,9 @@ namespace Musicians_Pocket_Knife.Controllers
 
                 return Ok(user);
             }
-            catch
+            catch(Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex);
             }
         }
     }

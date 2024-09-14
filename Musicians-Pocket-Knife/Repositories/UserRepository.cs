@@ -35,7 +35,7 @@ namespace Musicians_Pocket_Knife.Repositories
 
                 return new User
                 {
-                    Id = userId,
+                    UserId = userId,
                     FirstName = createUserRequest.FirstName,
                     LastName = createUserRequest.LastName,
                     GoogleId = createUserRequest.GoogleId

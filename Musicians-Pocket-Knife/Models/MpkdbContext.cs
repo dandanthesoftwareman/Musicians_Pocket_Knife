@@ -61,9 +61,9 @@ public partial class MpkdbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3213E83F7264FFE3");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__3213E83F7264FFE3");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.UserId).HasColumnName("id");
             entity.Property(e => e.FirstName).HasMaxLength(100);
             entity.Property(e => e.GoogleId)
                 .HasMaxLength(255)
