@@ -22,6 +22,7 @@ namespace Musicians_Pocket_Knife.Controllers
         public IActionResult CreateNewUser(VerifyExistingUserRequest request)
         {
             var response = userOrchestrator.VerifyExistingUser(request);
+
             return Ok(response);
         }
 

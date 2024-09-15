@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using Musicians_Pocket_Knife.Helpers;
 using Musicians_Pocket_Knife.Models;
 using System.Data;
 
@@ -33,14 +34,14 @@ namespace Musicians_Pocket_Knife.Repositories
 
                 try
                 {
-                    return connection.QuerySingle<bool>(VerifyExistingUserStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+                    var response = connection.QuerySingleOrDefault<int>(VerifyExistingUserStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+                    return RepositoryHelper.ConvertIntToBool(response);
                 }
                 catch(Exception ex)
                 {
                     Console.WriteLine("Add Logger here, error in db request");
                     return null;
                 }
-                
             }
         }
 
@@ -64,10 +65,8 @@ namespace Musicians_Pocket_Knife.Repositories
 
                 return new User
                 {
-                    UserId = userId,
                     FirstName = createUserRequest.FirstName,
-                    LastName = createUserRequest.LastName,
-                    GoogleId = createUserRequest.GoogleId
+                    LastName = createUserRequest.LastName
                 };
             }
         }
