@@ -12,16 +12,26 @@ export class UserService {
   endpoint:string = "api/Users";
 
   constructor(private http:HttpClient, @Inject("BASE_URL") private baseUrl:string) { }
+
+  VerifyExistingUser(userId: string): any {
+    const verifyExistingUserRequest = {
+      id: userId,
+      active: UserService.user != null
+    };
+    
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(verifyExistingUserRequest);
+    return this.http.post(`${this.baseUrl}${this.endpoint}/VerifyExistingUser`, body, { headers });
+  }
+
   CreateNewUser(user: SocialUser): any {
-    // Map SocialUser to NewUserRequest
     const newUserRequest: NewUserRequest = {
       id: user.id,
       email: user.email,
-      photoUrl: user.photoUrl,
       firstName: user.firstName,
       lastName: user.lastName
     };
-  
+
     // Send the mapped object without the extra fields like idToken, authToken, etc.
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(newUserRequest);
