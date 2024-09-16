@@ -2,7 +2,7 @@
 {
     public class VerifyExistingUserRequest
     {
-        public bool isActive { get; set; }
         public string? GoogleId { get; set; } = null;
+        public bool isActive { get; set; }
     }
 }

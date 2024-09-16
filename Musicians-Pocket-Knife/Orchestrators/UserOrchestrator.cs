@@ -19,7 +19,7 @@ namespace Musicians_Pocket_Knife.Orchestrators
                 return userRepository.VerifyExistingUser(request);
             }
 
-            return false;
+            return null;
         }
 
         public async Task<User?> CreateNewUserAsync(User newUserRequest)
