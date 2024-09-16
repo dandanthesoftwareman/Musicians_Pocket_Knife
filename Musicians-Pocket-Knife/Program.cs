@@ -13,6 +13,7 @@ builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddScoped<IUserRepository>(provider => new UserRepository(connectionString));
 builder.Services.AddScoped<IPlaylistRepository>(provider =>
 {
@@ -20,6 +21,7 @@ builder.Services.AddScoped<IPlaylistRepository>(provider =>
     return new PlaylistRepository(context, connectionString);
 });
 builder.Services.AddScoped<ISongRepository, SongRepository>();
+
 builder.Services.AddScoped<IUserOrchestrator, UserOrchestrator>();
 builder.Services.AddScoped<IPlaylistOrchestrator, PlaylistOrchestrator>();
 builder.Services.AddDbContext<MpkdbContext>(x => x.UseSqlServer(connectionString));

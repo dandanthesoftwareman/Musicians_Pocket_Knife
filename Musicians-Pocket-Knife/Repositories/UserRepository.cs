@@ -29,7 +29,7 @@ namespace Musicians_Pocket_Knife.Repositories
             {
                 var parameters = new 
                 { 
-                    GoogleId = request.GoogleId 
+                    GoogleId = request.GoogleId!
                 };
 
                 try

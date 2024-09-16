@@ -23,7 +23,7 @@ namespace Musicians_Pocket_Knife.Controllers
         {
             var response = userOrchestrator.VerifyExistingUser(request);
 
-            return response != null ? Ok(response) : BadRequest(response);
+            return response != null ? Ok(response) : NotFound();
         }
 
         [HttpPost("CreateNewUser")]
