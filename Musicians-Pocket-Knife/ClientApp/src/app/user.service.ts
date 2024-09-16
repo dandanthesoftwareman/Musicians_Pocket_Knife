@@ -15,8 +15,8 @@ export class UserService {
 
   VerifyExistingUser(userId: string): any {
     const verifyExistingUserRequest = {
-      id: userId,
-      active: UserService.user != null
+      googleId: userId,
+      isActive: UserService.user != null
     };
     
     const headers = { 'content-type': 'application/json' };
