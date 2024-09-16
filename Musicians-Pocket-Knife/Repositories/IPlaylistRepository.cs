@@ -4,7 +4,7 @@ namespace Musicians_Pocket_Knife.Repositories
 {
     public interface IPlaylistRepository
     {
-        Playlist CreatePlaylist(string listTitle, string id);
+        Task<bool> CreatePlaylist(CreateNewPlaylistRequest request);
 
         void DeletePlaylist(int listId, string id);
 

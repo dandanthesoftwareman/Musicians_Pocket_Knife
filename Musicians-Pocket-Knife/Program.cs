@@ -14,9 +14,14 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IUserRepository>(provider => new UserRepository(connectionString));
-builder.Services.AddScoped<IUserOrchestrator, UserOrchestrator>();
+builder.Services.AddScoped<IPlaylistRepository>(provider =>
+{
+    var context = provider.GetRequiredService<MpkdbContext>();
+    return new PlaylistRepository(context, connectionString);
+});
 builder.Services.AddScoped<ISongRepository, SongRepository>();
-builder.Services.AddScoped<IPlaylistRepository, PlaylistRepository>();
+builder.Services.AddScoped<IUserOrchestrator, UserOrchestrator>();
+builder.Services.AddScoped<IPlaylistOrchestrator, PlaylistOrchestrator>();
 builder.Services.AddDbContext<MpkdbContext>(x => x.UseSqlServer(connectionString));
 
 

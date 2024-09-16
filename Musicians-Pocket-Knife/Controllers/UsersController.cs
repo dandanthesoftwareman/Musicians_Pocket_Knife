@@ -19,23 +19,22 @@ namespace Musicians_Pocket_Knife.Controllers
         }
 
         [HttpPost("VerifyExistingUser")]
-        public IActionResult CreateNewUser(VerifyExistingUserRequest request)
+        public IActionResult VerifyExistingUser(VerifyExistingUserRequest request)
         {
             var response = userOrchestrator.VerifyExistingUser(request);
 
             return Ok(response);
         }
 
-
         [HttpPost("CreateNewUser")]
-        public async Task<IActionResult> CreateNewUser(CreateNewUserRequest createUserRequest)
+        public async Task<IActionResult> CreateNewUser(CreateNewUserRequest request)
         {
             try
             {
-                var newUser = mapper.Map<User>(createUserRequest);
-                var user = await userOrchestrator.CreateNewUserAsync(newUser);
+                var newUser = mapper.Map<User>(request);
+                var response = await userOrchestrator.CreateNewUserAsync(newUser);
 
-                return Ok(user);
+                return Ok(response);
             }
             catch(Exception ex)
             {

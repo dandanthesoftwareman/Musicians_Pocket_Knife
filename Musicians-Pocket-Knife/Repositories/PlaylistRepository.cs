@@ -1,16 +1,57 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Dapper;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Musicians_Pocket_Knife.Models;
-using Newtonsoft.Json;
+using System.Data;
 
 namespace Musicians_Pocket_Knife.Repositories
 {
     public class PlaylistRepository : IPlaylistRepository
     {
         private readonly MpkdbContext _context;
+        private readonly string CreatePlaylistStoredProcedure = "[MPKDB].[dbo].[CreateNewPlaylist]";
+        private readonly string _connectionString;
 
-        public PlaylistRepository(MpkdbContext context)
+        public PlaylistRepository(MpkdbContext context, string connectionString)
         {
             _context = context;
+            _connectionString = connectionString;
+        }
+
+        private IDbConnection CreateConnection()
+        {
+            return new SqlConnection(_connectionString);
+        }
+
+        public async Task<bool> CreatePlaylist(CreateNewPlaylistRequest request)
+        {
+            using (var connection = CreateConnection())
+            {
+                var parameters = new
+                {
+                    GoogleId = request.UserId,
+                    ListTitle = request.ListTitle
+                };
+
+                try
+                {
+                    await connection.ExecuteAsync(CreatePlaylistStoredProcedure, parameters, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Message.Contains("A playlist with this title already exists"))
+                    {
+                        Console.WriteLine("Playlist already exists for the user.");
+                    }
+                    else if (ex.Message.Contains("User with the provided GoogleId does not exist"))
+                    {
+                        Console.WriteLine("User does not exist.");
+                    }
+
+                    return false;
+                }
+            }
         }
 
         public Playlist CreatePlaylist(string listTitle, string id)
@@ -23,6 +64,7 @@ namespace Musicians_Pocket_Knife.Repositories
                 DateCreated = DateTime.Now,
                 LastDateViewed = DateTime.Now
             };
+
             if (_context.Playlists.Any(x => x.ListTitle == listTitle))
             {
                 return null;

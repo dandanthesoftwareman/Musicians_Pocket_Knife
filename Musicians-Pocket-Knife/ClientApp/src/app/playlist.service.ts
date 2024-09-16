@@ -14,8 +14,15 @@ export class PlaylistService {
 
   endpoint:string = "api/Playlist";
 
-  CreatePlaylist(title:string):any{
-    return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist?listTitle=${title}&id=${UserService.user.id}`,{});
+  CreatePlaylist(title:string): any {
+    const createNewPlaylistRequest = {
+      userId: UserService.user.id,
+      listTitle: title
+    };
+
+    const headers = { 'content-type': 'application/json' };
+    const body = JSON.stringify(createNewPlaylistRequest);
+    return this.http.post(`${this.baseUrl}${this.endpoint}/CreatePlaylist`, body, { headers });
   }
 
   DeletePlaylist(listId:number):any{
